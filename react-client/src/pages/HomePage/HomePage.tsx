@@ -1,7 +1,12 @@
 import React from 'react';
+import PageLayoutWrapper from '../../components/layout/PageLayoutWrapper';
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <PageLayoutWrapper>
+      <div>HomePage</div>
+    </PageLayoutWrapper>
+  );
 };
 
 export default HomePage;

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import HomePage from './HomePage/HomePage';
-import NotFound from './NotFound/NotFound';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
+import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
 import SongPage from './SongPage/SongPage';
 
 export enum Routes {
   HOME = '/',
   SONG = '/song/:id',
+  SEARCH_RESULTS = '/search',
   NOT_FOUND = '/404',
 }
 
@@ -18,7 +20,12 @@ const MainRouter = () => {
     <Switch location={location} key={location.key}>
       <Route exact path={Routes.HOME} component={HomePage} key={location.key} />
       <Route path={Routes.SONG} component={SongPage} key={location.key} />
-      <Route component={NotFound} key={location.key} />
+      <Route
+        path={Routes.SEARCH_RESULTS}
+        component={SearchResultsPage}
+        key={location.key}
+      />
+      <Route component={NotFoundPage} key={location.key} />
     </Switch>
   );
 };
