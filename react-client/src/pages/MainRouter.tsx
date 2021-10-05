@@ -12,6 +12,14 @@ export enum Routes {
   NOT_FOUND = '/404',
 }
 
+export enum RouteFolders {
+  BASE = '/',
+  SONG = '/song/',
+  ALBUM = '/album/',
+  ARTIST = '/artist/',
+  SEARCH = '/search',
+}
+
 const MainRouter = () => {
   // location holds state of what route is active
   const location = useLocation();

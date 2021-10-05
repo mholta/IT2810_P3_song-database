@@ -1,3 +1,7 @@
+:root {
+  color-scheme: dark;
+}
+
 html {
   height: 100%;
 }
@@ -11,6 +15,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   font-size: 16px;
+
+  background-color: #151515;
 }
 
 body > * {

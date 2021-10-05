@@ -1,7 +1,8 @@
 import { styled } from '@mui/system';
 import React from 'react';
 import Div100vh from 'react-div-100vh';
-import SearchBar from './SearchBar/SearchBar';
+import { SectionsWrapper } from '../elements/Section';
+import TopBar from './TopBar/TopBar';
 import SideBar from './SideBar/SideBar';
 
 interface PageLayoutWrapperProps {
@@ -13,8 +14,10 @@ const PageLayoutWrapper = ({ children }: PageLayoutWrapperProps) => {
     <FullPageWrapper>
       <SideBar />
       <MainContentWrapper>
-        <SearchBar />
-        <ChildrenWrapper>{children}</ChildrenWrapper>
+        <TopBar />
+        <ChildrenWrapper>
+          <SectionsWrapper>{children}</SectionsWrapper>
+        </ChildrenWrapper>
       </MainContentWrapper>
     </FullPageWrapper>
   );
@@ -23,8 +26,7 @@ const PageLayoutWrapper = ({ children }: PageLayoutWrapperProps) => {
 const MainContentWrapper = styled('div')`
   display: grid;
   grid-template-rows: auto 1fr;
-  outline: 1px solid green;
-  outline-offset: -5px;
+
   height: 100%;
   max-height: 100%;
   flex-grow: 1;
@@ -39,8 +41,7 @@ const FullPageWrapper = styled(Div100vh)`
   height: 100%;
   width: 100%;
   display: flex;
-  outline: 1px solid red;
-  outline-offset: -1px;
+
   overflow: hidden;
   position: relative;
 `;

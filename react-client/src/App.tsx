@@ -3,15 +3,29 @@ import MainRouter from './pages/MainRouter';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './styles/theme';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import {
+  faHome,
+  faMousePointer,
+  faMusic,
+} from '@fortawesome/free-solid-svg-icons';
+import { Provider as StoreProvider } from 'react-redux';
+import store from './store/store';
 
-function App() {
+/* Add icons from Font Awesome */
+library.add(fab, faMousePointer, faHome, faMusic);
+
+const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <MainRouter></MainRouter>
-      </Router>
-    </ThemeProvider>
+    <StoreProvider store={store}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <MainRouter />
+        </Router>
+      </ThemeProvider>
+    </StoreProvider>
   );
-}
+};
 
 export default App;
