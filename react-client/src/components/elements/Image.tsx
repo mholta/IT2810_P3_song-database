@@ -1,6 +1,8 @@
 import { styled } from '@mui/system';
 import React from 'react';
 
+// Component taken from PU. Written by team member
+
 /**
  * Component for easy styling of a image. Contains functionality for
  * working with loading types, aspect ratio and border radius.

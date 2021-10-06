@@ -16,7 +16,7 @@ const PageLayoutWrapper = ({ children }: PageLayoutWrapperProps) => {
       <MainContentWrapper>
         <TopBar />
         <ChildrenWrapper>
-          <SectionsWrapper>{children}</SectionsWrapper>
+          <ChildrenInnerWrapper>{children}</ChildrenInnerWrapper>
         </ChildrenWrapper>
       </MainContentWrapper>
     </FullPageWrapper>
@@ -31,6 +31,8 @@ const MainContentWrapper = styled('div')`
   max-height: 100%;
   flex-grow: 1;
 `;
+
+const ChildrenInnerWrapper = styled(SectionsWrapper)``;
 
 const ChildrenWrapper = styled('main')`
   overflow: auto;

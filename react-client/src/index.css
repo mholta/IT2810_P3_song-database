@@ -17,8 +17,9 @@ body {
   font-size: 16px;
 
   background-color: #151515;
+  overflow: hidden;
 }
 
-body > * {
+* {
   box-sizing: border-box;
 }

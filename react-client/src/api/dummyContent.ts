@@ -1,4 +1,5 @@
 import { Album, Artist, Song } from './types';
+
 export const dummyArtist: Artist = {
   id: 'acta',
   name: 'Acta',
@@ -51,3 +52,11 @@ export const dummySong: Song = {
   iTunes: 'https://music.apple.com/no/album/møtepunkt-single/1520693028',
   spotify: 'https://open.spotify.com/track/7kXJtTxucwufmP2f32yeJo',
 };
+
+export const dummySongList: Song[] = [
+  dummySong,
+  dummySong,
+  dummySong,
+  dummySong,
+  dummySong,
+];
