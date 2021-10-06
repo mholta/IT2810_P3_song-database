@@ -12,16 +12,21 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Provider as StoreProvider } from 'react-redux';
 import store from './store/store';
+import PageLayoutWrapper from './components/layout/PageLayoutWrapper';
 
 /* Add icons from Font Awesome */
 library.add(fab, faMousePointer, faHome, faMusic);
 
 const App = () => {
+  console.log('hello');
+
   return (
     <StoreProvider store={store}>
       <ThemeProvider theme={theme}>
         <Router>
-          <MainRouter />
+          <PageLayoutWrapper>
+            <MainRouter />
+          </PageLayoutWrapper>
         </Router>
       </ThemeProvider>
     </StoreProvider>

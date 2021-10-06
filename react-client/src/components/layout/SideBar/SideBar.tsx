@@ -22,7 +22,7 @@ const SideBar = () => {
         >
           <FontAwesomeIcon icon={['fas', 'music']} /> <span>Søk på noe</span>
         </LinkWithIconGridRouter>
-        <LinkWithIconGridRouter to={RouteFolders.SONG + 'testsang'}>
+        <LinkWithIconGridRouter to={RouteFolders.SONG + '/testsang'}>
           <FontAwesomeIcon icon={['fas', 'music']} /> <span>Se test-sang</span>
         </LinkWithIconGridRouter>
       </SideBarInnerWrapper>

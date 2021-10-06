@@ -1,30 +1,52 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { styled } from '@mui/system';
 import SearchInputField from './SearchInputField';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { useClickOutside } from '../../../hooks/useClickOutside';
 import SearchOptions from './SearchOptions';
+import { useHistory } from 'react-router';
+import { RouteFolders } from '../../../pages/MainRouter';
+import { getQueryStringFromFormSubmitEvent } from '../../../utils/search';
+import { useDispatch, useSelector } from 'react-redux';
+import { setTopBarOpen } from '../../../store/layout/layout.actions';
+import { RootState } from '../../../store';
 
 const TopBar = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  // Store
+  const topBarOpen: boolean = useSelector(
+    (rootState: RootState) => rootState.layout.topBarOpen
+  );
+  const dispatch = useDispatch();
+
+  const closeTopBar = () => topBarOpen && dispatch(setTopBarOpen(false));
 
   const wrapperRef = useRef<HTMLDivElement>(null);
+  useClickOutside(wrapperRef, closeTopBar);
 
-  const openMenu = () => setOpen(true);
-  const closeMenu = () => setOpen(false);
+  const history = useHistory();
 
-  useClickOutside(wrapperRef, closeMenu);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Get query string
+    const formData = new FormData(e.target as HTMLFormElement);
+    const queryString: string = getQueryStringFromFormSubmitEvent(formData);
+    console.log(queryString);
+
+    history.push(RouteFolders.SEARCH + '?' + queryString);
+    closeTopBar();
+  };
 
   return (
     <MainWrapper ref={wrapperRef}>
       <BarFlexWrapper>
-        <FormTopLayer action="/search" method="GET">
+        <FormTopLayer action="/search" onSubmit={handleSubmit}>
           <TopBarInnerWrapper>
-            <SearchInputField focused={open} setFocused={setOpen} />
+            <SearchInputField />
           </TopBarInnerWrapper>
 
           <AnimatePresence>
-            {open && (
+            {topBarOpen && (
               <ExpandedContentWrapper
                 variants={expandedContentVariants}
                 initial="hide"
@@ -38,7 +60,6 @@ const TopBar = () => {
           </AnimatePresence>
         </FormTopLayer>
       </BarFlexWrapper>
-      {open && <Backdrop onClick={openMenu} />}
     </MainWrapper>
   );
 };
@@ -53,16 +74,6 @@ const expandedContentVariants: Variants = {
 };
 
 const BarFlexWrapper = styled('div')``;
-
-const Backdrop = styled('div')`
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-`;
 
 const FormTopLayer = styled('form')`
   position: relative;

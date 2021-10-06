@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { dummySong } from '../../api/dummyContent';
-import PageLayoutWrapper from '../../components/layout/PageLayoutWrapper';
 import SongPageTemplate from './SongPageTemplate';
 
 const SongPage = () => {
@@ -10,10 +9,10 @@ const SongPage = () => {
   const song = dummySong;
 
   return (
-    <PageLayoutWrapper>
+    <>
       Sang id: {id}
       <SongPageTemplate song={song} />
-    </PageLayoutWrapper>
+    </>
   );
 };
 

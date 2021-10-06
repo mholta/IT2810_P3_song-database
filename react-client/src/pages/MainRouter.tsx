@@ -14,9 +14,9 @@ export enum Routes {
 
 export enum RouteFolders {
   BASE = '/',
-  SONG = '/song/',
-  ALBUM = '/album/',
-  ARTIST = '/artist/',
+  SONG = '/song',
+  ALBUM = '/album',
+  ARTIST = '/artist',
   SEARCH = '/search',
 }
 

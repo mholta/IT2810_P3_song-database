@@ -1,24 +1,29 @@
 import React from 'react';
 import { styled } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
+import { useDispatch, useSelector } from 'react-redux';
+import { setTopBarOpen } from '../../../store/layout/layout.actions';
+import { RootState } from '../../../store';
 
-interface SearchInputFieldProps {
-  focused: boolean;
-  setFocused: Function;
-}
+const SearchInputField = () => {
+  const dispatch = useDispatch();
+  const topBarOpen: boolean = useSelector(
+    (rootState: RootState) => rootState.layout.topBarOpen
+  );
 
-const SearchInputField = ({ focused, setFocused }: SearchInputFieldProps) => {
+  const openTopBar = () => !topBarOpen && dispatch(setTopBarOpen(true));
+
   return (
     <SearchInputFieldWrapper>
-      <SearchIconWrapper focused={focused ? 1 : 0}>
+      <SearchIconWrapper focused={topBarOpen ? 1 : 0}>
         <SearchIcon />
       </SearchIconWrapper>
       <SearchInput
         placeholder="Søk på sang"
         name="query"
         autoComplete="off"
-        onFocus={() => setFocused(true)}
-        open={focused ? 1 : 0}
+        onFocus={openTopBar}
+        open={topBarOpen ? 1 : 0}
       />
     </SearchInputFieldWrapper>
   );

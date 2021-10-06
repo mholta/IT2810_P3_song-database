@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router';
-import PageLayoutWrapper from '../../components/layout/PageLayoutWrapper';
+import { Link } from '../../components/elements/Typography';
+import { RouteFolders } from '../MainRouter';
 
 const SearchResultsPage = () => {
   const queryParams = useQuery();
@@ -8,12 +9,18 @@ const SearchResultsPage = () => {
   const searchTextQuery = queryParams.get('query');
 
   return (
-    <PageLayoutWrapper>
+    <>
       Søker på:{' '}
-      <a href={'/song/' + searchTextQuery?.replaceAll(' ', '-')?.toLowerCase()}>
+      <Link
+        to={
+          RouteFolders.SONG +
+          '/' +
+          searchTextQuery?.replaceAll(' ', '-')?.toLowerCase()
+        }
+      >
         {searchTextQuery}
-      </a>
-    </PageLayoutWrapper>
+      </Link>
+    </>
   );
 };
 
