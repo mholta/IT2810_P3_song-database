@@ -23,16 +23,16 @@ const Image = ({
   src,
   alt = '',
   loading = 'lazy',
-  aspectRatio,
-  borderRadius = 0,
-  borderRadiusUnit = '%',
+  aspectratio: aspectRatio,
+  borderradius: borderRadius = 0,
+  borderradiusunit: borderRadiusUnit = '%',
   style,
 }: ImageProps) => {
   return (
     <ImageWrapper
-      aspectRatio={aspectRatio}
-      borderRadius={borderRadius}
-      borderRadiusUnit={borderRadiusUnit}
+      aspectratio={aspectRatio}
+      borderradius={borderRadius}
+      borderradiusunit={borderRadiusUnit}
       style={style}
     >
       <img src={src} alt={alt} loading={loading} />
@@ -44,7 +44,11 @@ const ImageWrapper = styled('div')<ImageWrapperProps>`
   overflow: hidden;
   align-self: center;
   max-height: fit-content;
-  ${({ aspectRatio, borderRadius, borderRadiusUnit }) => {
+  ${({
+    aspectratio: aspectRatio,
+    borderradius: borderRadius,
+    borderradiusunit: borderRadiusUnit,
+  }) => {
     let paddingBottom: number | undefined;
     /* Calculate padding-bottom in percentage based if aspect rato is given as prop */
     if (aspectRatio) {
@@ -61,7 +65,7 @@ const ImageWrapper = styled('div')<ImageWrapperProps>`
     `;
   }}
   & > img {
-    ${({ aspectRatio }) => {
+    ${({ aspectratio: aspectRatio }) => {
       if (aspectRatio)
         return `
           position: absolute;
@@ -84,9 +88,9 @@ type ImageBorderRadiusUnits = '%' | 'rem' | 'px';
 type ImageAspectRadioTypes = '1:1' | '2:1' | '1:2' | '4:3' | '16:9';
 
 export interface ImageWrapperProps {
-  aspectRatio?: ImageAspectRadioTypes;
-  borderRadius: number;
-  borderRadiusUnit: ImageBorderRadiusUnits;
+  aspectratio?: ImageAspectRadioTypes;
+  borderradius: number;
+  borderradiusunit: ImageBorderRadiusUnits;
   style?: React.CSSProperties;
 }
 

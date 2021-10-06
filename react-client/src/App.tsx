@@ -18,8 +18,6 @@ import PageLayoutWrapper from './components/layout/PageLayoutWrapper';
 library.add(fab, faMousePointer, faHome, faMusic);
 
 const App = () => {
-  console.log('hello');
-
   return (
     <StoreProvider store={store}>
       <ThemeProvider theme={theme}>

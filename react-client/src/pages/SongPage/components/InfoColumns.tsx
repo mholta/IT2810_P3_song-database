@@ -87,6 +87,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
           .map((artist, i) => (
             <LinkWithIcon
               href={artist.webPage}
+              key={'artist-' + i}
               icon={<FontAwesomeIcon icon={['fas', 'mouse-pointer']} />}
             >
               {artist.name}

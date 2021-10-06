@@ -18,9 +18,9 @@ const Header = ({ song }: HeaderProps) => {
       <ImageWrapper>
         <Image
           src={song.album.picture}
-          aspectRatio="1:1"
-          borderRadius={3}
-          borderRadiusUnit="%"
+          aspectratio="1:1"
+          borderradius={3}
+          borderradiusunit="%"
         />
       </ImageWrapper>
       <div>
