@@ -1,5 +1,5 @@
 export interface Artist {
-  id: string;
+  _id: string;
   name: string;
   location: string;
   picture: string;
@@ -13,7 +13,7 @@ export interface Artist {
 }
 
 export interface Album {
-  id: string;
+  _id: string;
   title: string;
   releaseDate: Date;
   artists: Artist[];
@@ -26,7 +26,7 @@ export interface Album {
 }
 
 export interface Song {
-  id: string;
+  _id: string;
   title: string;
   album: Album;
   key: string;
