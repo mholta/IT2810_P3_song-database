@@ -1,15 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { styled } from '@mui/system';
 import SearchInputField from './SearchInputField';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { useClickOutside } from '../../../hooks/useClickOutside';
-import SearchOptions from './SearchOptions';
-import { useHistory } from 'react-router';
-import { RouteFolders } from '../../../pages/MainRouter';
+import { useHistory, useLocation } from 'react-router';
+import { RouteFolders, Routes } from '../../../pages/MainRouter';
 import { getQueryStringFromFormSubmitEvent } from '../../../utils/search';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTopBarOpen } from '../../../store/layout/layout.actions';
 import { RootState } from '../../../store';
+import SearchOptions from '../../SearchFilter/SearchFilter';
+import { outline } from '../../../styles/classes';
 
 const TopBar = () => {
   // Store
@@ -20,10 +21,16 @@ const TopBar = () => {
 
   const closeTopBar = () => topBarOpen && dispatch(setTopBarOpen(false));
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  useClickOutside(wrapperRef, closeTopBar);
-
   const history = useHistory();
+
+  const location = useLocation();
+  const [openOptionsOnClick, setOpenOptionsOnClick] = useState<boolean>(true);
+
+  // Prevent openining options menu on search page
+  useEffect(() => {
+    const isSearchPage = location.pathname.startsWith(Routes.SEARCH_RESULTS);
+    setOpenOptionsOnClick(!isSearchPage);
+  }, [location.pathname]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,22 +38,29 @@ const TopBar = () => {
     // Get query string
     const formData = new FormData(e.target as HTMLFormElement);
     const queryString: string = getQueryStringFromFormSubmitEvent(formData);
-    console.log(queryString);
+    console.log(formData, queryString);
 
     history.push(RouteFolders.SEARCH + '?' + queryString);
+
     closeTopBar();
   };
 
+  console.log('TopBar rendered', topBarOpen);
+
   return (
-    <MainWrapper ref={wrapperRef}>
+    <MainWrapper style={outline}>
       <BarFlexWrapper>
-        <FormTopLayer action="/search" onSubmit={handleSubmit}>
+        <FormTopLayer
+          action="/search"
+          onSubmit={handleSubmit}
+          onChange={() => console.log('Changed')}
+        >
           <TopBarInnerWrapper>
             <SearchInputField />
           </TopBarInnerWrapper>
 
           <AnimatePresence>
-            {topBarOpen && (
+            {openOptionsOnClick && topBarOpen && (
               <ExpandedContentWrapper
                 variants={expandedContentVariants}
                 initial="hide"
@@ -54,15 +68,29 @@ const TopBar = () => {
                 exit="hide"
                 transition={{ duration: 0.1 }}
               >
-                <SearchOptions />
+                <SearchOptions inForm />
               </ExpandedContentWrapper>
             )}
           </AnimatePresence>
         </FormTopLayer>
       </BarFlexWrapper>
+      {openOptionsOnClick && topBarOpen && <Backdrop onClick={closeTopBar} />}
     </MainWrapper>
   );
 };
+
+const Backdrop = styled('div')`
+  background-color: transparent;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+`;
 
 const expandedContentVariants: Variants = {
   show: {

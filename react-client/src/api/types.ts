@@ -41,3 +41,8 @@ export interface Song {
   iTunes?: string;
   spotify?: string;
 }
+
+export interface FilterCategory {
+  id: string;
+  title: string;
+}

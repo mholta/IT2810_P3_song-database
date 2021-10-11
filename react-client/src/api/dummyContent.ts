@@ -1,4 +1,4 @@
-import { Album, Artist, Song } from './types';
+import { Album, Artist, Song, FilterCategory } from './types';
 
 export const dummyArtist: Artist = {
   id: 'acta',
@@ -60,3 +60,13 @@ export const dummySongList: Song[] = [
   dummySong,
   dummySong,
 ];
+
+export const dummyCategories: FilterCategory[] = [
+  'han',
+  'er',
+  'min',
+  'sang',
+  'og',
+  'min',
+  'glede',
+].map((e) => ({ id: e, title: e }));

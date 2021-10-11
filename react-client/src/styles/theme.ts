@@ -12,6 +12,7 @@ declare module '@mui/material/styles/createPalette' {
 export const theme = createTheme({
   palette: {
     mode: 'dark',
+    primary: { main: '#ffbf00', dark: '#493d17' },
     border: {
       main: '#000',
     },
