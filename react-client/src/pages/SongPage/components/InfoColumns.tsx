@@ -21,7 +21,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
             <div>
               {song.writers.map((writer, i, a) => (
                 <span key={'writer-' + i}>
-                  <Link to={RouteFolders.SEARCH + '+?query=' + writer}>
+                  <Link to={RouteFolders.SEARCH + '?query=' + writer}>
                     {writer}
                   </Link>
                   {i === a.length - 1 ? '' : i === a.length - 2 ? ' & ' : ', '}
@@ -36,7 +36,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
             <div>
               {song.producers.map((writer, i, a) => (
                 <Link
-                  to={RouteFolders.SEARCH + '+?query=' + writer}
+                  to={RouteFolders.SEARCH + '?query=' + writer}
                   key={'writer-' + i}
                 >
                   {writer}
