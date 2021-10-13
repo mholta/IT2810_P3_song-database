@@ -1,7 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from '@mui/system';
 import React from 'react';
+import { useHistory } from 'react-router';
 import { Song } from '../../../api/types';
+import { CategoryButton } from '../../../components/elements/Buttons';
 import LinkWithIcon from '../../../components/elements/LinkWithIcon';
 import { H2, Link } from '../../../components/elements/Typography';
 import { RouteFolders } from '../../MainRouter';
@@ -11,12 +13,35 @@ interface InfoColumnProps {
 }
 
 const InfoColumn = ({ song }: InfoColumnProps) => {
+  const history = useHistory();
+
   return (
     <div>
       <InfoSection>
         <H2>Om sangen</H2>
-        {song.writers && (
+        {song.categories && (
           <InfoListItem style={{ paddingTop: 0 }}>
+            <h3>Kategorier:</h3>
+            <div>
+              {song.categories.map((category) => (
+                <span>
+                  <CategoryButton
+                    selected={0}
+                    onClick={() => {
+                      history.push(
+                        RouteFolders.SEARCH + '?theme=' + category.id
+                      );
+                    }}
+                  >
+                    {category.title}
+                  </CategoryButton>
+                </span>
+              ))}
+            </div>
+          </InfoListItem>
+        )}
+        {song.writers && (
+          <InfoListItem>
             <h3>Tekst og melodi:</h3>
             <div>
               {song.writers.map((writer, i, a) => (

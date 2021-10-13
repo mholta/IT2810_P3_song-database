@@ -40,6 +40,7 @@ export interface Song {
   producers?: string[];
   iTunes?: string;
   spotify?: string;
+  categories?: FilterCategory[];
 }
 
 export interface FilterCategory {

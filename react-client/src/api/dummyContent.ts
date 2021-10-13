@@ -51,6 +51,7 @@ export const dummySong: Song = {
   ),
   iTunes: 'https://music.apple.com/no/album/møtepunkt-single/1520693028',
   spotify: 'https://open.spotify.com/track/7kXJtTxucwufmP2f32yeJo',
+  categories: [{id: "han", title: "Han"}, {id: "sang", title: "Sang"}, {id: "glede", title: "Glede"}]
 };
 
 export const dummySongList: Song[] = [
