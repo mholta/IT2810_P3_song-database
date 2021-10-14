@@ -4,6 +4,7 @@ export const resolvers = {
   Query: {
     artists: async () => await Artists.find(),
     songs: async (_, args: SongsInput) => {
+      console.log('hei');
       const limit = args.limit || Math.min(args.limit || 50, 50);
       const filter: Filter = args.filter || { categories: [] };
 
@@ -11,29 +12,33 @@ export const resolvers = {
         sortType: SortType.RELEASE_DATE,
         order: SortOrder.DESC,
       };
-      let search = {};
+      let search: any = {};
+      let setScore: any = 1;
       if (args.searchString) {
         search = { $text: { $search: args.searchString } };
-        // initialSorting.order = SortOrder.BEST;
-        // initialSorting.sortType = SortType.SCORE;
+        setScore = { $meta: 'textScore' };
+        initialSorting.order = SortOrder.BEST;
+        initialSorting.sortType = SortType.SCORE;
       }
-      // const sorting = args.sorting || initialSorting;
-      // console.log('Hei');
-
+      const sorting: Sorting = args.sorting || initialSorting;
+      const sort = { [sorting.sortType]: SortOrderToDB(sorting.order) };
       let categoryFilter = {};
       if (filter.categories.length > 0) {
         categoryFilter = { categories: { $in: filter.categories } };
       }
       const page = args.page - 1 || 0;
+      console.log(search, setScore);
       const songs = await Songs.aggregate([
         // search in songs
         { $match: search },
+        { $set: { score: setScore } },
         // union with artists and search in them too
         {
           $unionWith: {
             coll: 'artists',
             pipeline: [
               { $match: search },
+              { $set: { score: setScore } },
               {
                 $lookup: {
                   from: 'songs',
@@ -43,7 +48,11 @@ export const resolvers = {
                 },
               },
               { $unwind: '$singsIn' },
-              { $replaceRoot: { newRoot: '$singsIn' } },
+              {
+                $replaceRoot: {
+                  newRoot: { $mergeObjects: ['$singsIn', { score: '$score' }] },
+                },
+              },
             ],
           },
         },
@@ -53,6 +62,7 @@ export const resolvers = {
             coll: 'albums',
             pipeline: [
               { $match: search },
+              { $set: { score: setScore } },
               {
                 $lookup: {
                   from: 'songs',
@@ -62,7 +72,11 @@ export const resolvers = {
                 },
               },
               { $unwind: '$singsIn' },
-              { $replaceRoot: { newRoot: '$singsIn' } },
+              {
+                $replaceRoot: {
+                  newRoot: { $mergeObjects: ['$singsIn', { score: '$score' }] },
+                },
+              },
             ],
           },
         },
@@ -104,11 +118,18 @@ export const resolvers = {
         { $unwind: '$album' },
 
         // to keep all data but remove duplicates
-        { $group: { _id: '$_id', song: { $first: '$$ROOT' } } },
+        {
+          $group: {
+            _id: '$_id',
+            song: { $first: '$$ROOT' },
+            // to score results with sum of scores in artist-name, album-title and song-title
+            score: { $sum: '$score' },
+          },
+        },
         { $replaceRoot: { newRoot: '$song' } },
+        { $sort: sort },
         { $skip: limit * page },
         { $limit: limit },
-        // { $sort: {sorting.sortType: sorting["order"]} },
       ]);
       return songs;
     },
@@ -163,7 +184,7 @@ const SortOrderToDB = (order: SortOrder) => {
     case SortOrder.BEST:
       return { $meta: 'textScore' };
     default:
-      return -1;
+      return 1;
   }
 };
 interface Sorting {

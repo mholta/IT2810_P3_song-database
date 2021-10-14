@@ -21,8 +21,8 @@ export const typeDefs = gql`
     categories: [String]
   }
   input Sorting {
-    order: SortOrder
-    sortType: SortType
+    order: SortOrder!
+    sortType: SortType!
   }
 
   enum SortOrder {
