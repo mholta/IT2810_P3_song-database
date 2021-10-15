@@ -26,7 +26,10 @@ export const resolvers = {
         initialSorting.sortType = SortType.SCORE;
       }
       const sorting: Sorting = args.sorting || initialSorting;
-      const sort = { [sorting.sortType]: SortOrderToDB(sorting.order) };
+      const sort = {
+        [sorting.sortType]: SortOrderToDB(sorting.order),
+        _id: 1,
+      };
       let categoryFilter = {};
       if (filter.categories.length > 0) {
         categoryFilter = { categories: { $in: filter.categories } };
