@@ -9,7 +9,7 @@ export const typeDefs = gql`
       filter: Filter
       sorting: Sorting
       page: Int
-    ): [Song!]
+    ): SongResponse
     albums: [Album!]
     song(id: String!): Song
   }
@@ -64,6 +64,11 @@ export const typeDefs = gql`
     time: String
     title: String
     writers: [String]
+  }
+
+  type SongResponse {
+    songs: [Song]
+    pages: Int!
   }
 
   type Album {

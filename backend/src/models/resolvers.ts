@@ -4,7 +4,6 @@ export const resolvers = {
   Query: {
     artists: async () => await Artists.find(),
     songs: async (_, args: SongsInput) => {
-      console.log('hei');
       const limit = args.limit || Math.min(args.limit || 50, 50);
       const filter: Filter = args.filter || { categories: [] };
 
@@ -12,11 +11,17 @@ export const resolvers = {
         sortType: SortType.RELEASE_DATE,
         order: SortOrder.DESC,
       };
-      let search: any = {};
-      let setScore: any = 1;
+      type Search = {} | { $text: { $search: string } };
+      let search: Search = {};
+      enum textScore {
+        textScore = 'textScore',
+      }
+      type Score = 1 | { $meta: textScore };
+
+      let setScore: Score = 1;
       if (args.searchString) {
         search = { $text: { $search: args.searchString } };
-        setScore = { $meta: 'textScore' };
+        setScore = { $meta: textScore.textScore };
         initialSorting.order = SortOrder.BEST;
         initialSorting.sortType = SortType.SCORE;
       }
@@ -27,7 +32,6 @@ export const resolvers = {
         categoryFilter = { categories: { $in: filter.categories } };
       }
       const page = args.page - 1 || 0;
-      console.log(search, setScore);
       const songs = await Songs.aggregate([
         // search in songs
         { $match: search },
@@ -127,11 +131,20 @@ export const resolvers = {
           },
         },
         { $replaceRoot: { newRoot: '$song' } },
-        { $sort: sort },
-        { $skip: limit * page },
-        { $limit: limit },
+        // to get number of pages in the search
+        {
+          $facet: {
+            songs: [
+              { $sort: sort },
+              { $skip: limit * page },
+              { $limit: limit },
+            ],
+            count: [{ $group: { _id: null, count: { $sum: 1 } } }],
+          },
+        },
       ]);
-      return songs;
+      songs[0].pages = Math.ceil(songs[0].count[0].count / limit);
+      return songs[0];
     },
     albums: async () => await Albums.find().populate('artists'),
     song: async (_, args: { id: String }) =>
