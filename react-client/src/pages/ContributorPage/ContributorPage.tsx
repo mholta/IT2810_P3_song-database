@@ -1,12 +1,10 @@
 import React from 'react';
-import { useParams } from 'react-router';
-import { dummySong } from '../../api/dummyContent';
-import { QueryParam, useQuery } from '../../hooks/useQuery';
+import { QueryParam, useQueryParams } from '../../hooks/useQueryParams';
 
 const ContributorPage = () => {
-  const query = useQuery();
+  const queryParams = useQueryParams();
 
-  return <>Contributor: {query.get(QueryParam.CONTRIBUTOR)}</>;
+  return <>Contributor: {queryParams.get(QueryParam.CONTRIBUTOR)}</>;
 };
 
 export default ContributorPage;

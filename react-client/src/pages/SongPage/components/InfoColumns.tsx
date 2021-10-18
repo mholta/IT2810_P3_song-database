@@ -21,10 +21,10 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
         <H2>Om sangen</H2>
         {song.categories && (
           <InfoListItem style={{ paddingTop: 0 }}>
-            <h3>Kategorier:</h3>
+            <h3>Tema:</h3>
             <div>
-              {song.categories.map((category) => (
-                <span>
+              {song.categories.map((category, index) => (
+                <span key={'category-' + index}>
                   <CategoryButton
                     selected={0}
                     onClick={() => {

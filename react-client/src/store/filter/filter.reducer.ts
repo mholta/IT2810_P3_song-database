@@ -1,12 +1,12 @@
 import { dummyCategories } from './../../api/dummyContent';
 import { FilterCategory } from './../../api/types';
-import { SET_ALL_CATEGORIES } from './filter.actionTypes';
+import { SET_ALL_THEMES } from './filter.actionTypes';
 export interface FilterState {
-  allCategories: FilterCategory[];
+  allThemes: FilterCategory[];
 }
 
 const initialFilterState: FilterState = {
-  allCategories: dummyCategories,
+  allThemes: [],
 };
 
 export const filterReducer = (
@@ -14,10 +14,10 @@ export const filterReducer = (
   action: any
 ): FilterState => {
   switch (action.type) {
-    case SET_ALL_CATEGORIES:
+    case SET_ALL_THEMES:
       return {
         ...state,
-        allCategories: action.payload.categories,
+        allThemes: action.payload.themes,
       };
 
     default:

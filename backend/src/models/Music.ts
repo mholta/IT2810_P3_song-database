@@ -41,8 +41,14 @@ const SongSchema = new Schema({
   time: String,
   title: String,
   writers: [String],
+  categories: [{ type: String, ref: 'Categories' }],
 });
 SongSchema.index({ title: 'text' });
+
+const CategorySchema = new Schema({
+  _id: String,
+  title: String,
+});
 
 export interface Album extends Document {
   _id: string;
@@ -86,6 +92,15 @@ export interface Song extends Document {
   writers: string[];
 }
 
-export const Songs: Model<Song> = model<Song>('Songs', SongSchema);
-export const Artists: Model<Artist> = model<Artist>('Artists', ArtistSchema);
+export interface Category extends Document {
+  _id: string;
+  title: string;
+}
+
 export const Albums: Model<Album> = model<Album>('Albums', AlbumSchema);
+export const Artists: Model<Artist> = model<Artist>('Artists', ArtistSchema);
+export const Songs: Model<Song> = model<Song>('Songs', SongSchema);
+export const Categories: Model<Category> = model<Category>(
+  'Categories',
+  CategorySchema
+);

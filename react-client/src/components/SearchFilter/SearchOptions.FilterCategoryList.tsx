@@ -1,35 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/system';
-import { useDispatch, useSelector } from 'react-redux';
 import { FilterCategory } from '../../api/types';
-import { RootState } from '../../store';
-
 import { CategoryButton } from '../elements/Buttons';
-import { QueryParam, useQuery } from '../../hooks/useQuery';
+import { QueryParam, useQueryParams } from '../../hooks/useQueryParams';
+import '../../styles/hideScrollbars.css';
 
 interface FilterCategoryListProps {
   queryParam: QueryParam;
   categories: FilterCategory[];
+  horizontalScroll?: boolean;
 }
 
 const FilterCategoryList = ({
   queryParam,
   categories: allCategories,
+  horizontalScroll = false,
 }: FilterCategoryListProps) => {
-  const query = useQuery();
+  const queryParams = useQueryParams();
 
   const [selectedCategories, setSelectedCategories] = useState<
     FilterCategory[]
   >([]);
 
   useEffect(() => {
-    const categoryStringsFromQuery = query.getAll(queryParam);
+    const categoryStringsFromQuery = queryParams.getAll(queryParam);
     const categoryObjects = allCategories.filter((theme) =>
-      categoryStringsFromQuery.includes(theme.title)
+      categoryStringsFromQuery.includes(theme._id)
     );
 
     setSelectedCategories(categoryObjects);
-  }, []);
+    // eslint-disable-next-line
+  }, [allCategories, queryParam]);
 
   const categoriesInOrder = [
     ...selectedCategories,
@@ -37,17 +38,20 @@ const FilterCategoryList = ({
   ];
 
   const addSelectedCategory = (filterCategory: FilterCategory) => {
-    query.set(queryParam, filterCategory.title, true);
+    queryParams.set(queryParam, filterCategory._id, true);
   };
 
   const removeSelectedCategory = (filterCategory: FilterCategory) => {
-    query.deleteParamWithValue(queryParam, filterCategory.title);
+    queryParams.deleteParamWithValue(queryParam, filterCategory._id);
   };
 
   return (
-    <FilterCategoryListWrapper>
+    <FilterCategoryListWrapper
+      horizontalScroll={horizontalScroll}
+      className={horizontalScroll ? 'hide-scrollbars' : ''}
+    >
       {categoriesInOrder.map((category, index) => {
-        const isSelected = query.hasValue(queryParam, category.title);
+        const isSelected = queryParams.hasValue(queryParam, category._id);
 
         return (
           <FilterCategoryListItem
@@ -60,24 +64,44 @@ const FilterCategoryList = ({
                   ? removeSelectedCategory(category)
                   : addSelectedCategory(category);
               }}
+              nomargin="true"
             >
               {category.title}
             </CategoryButton>
           </FilterCategoryListItem>
         );
       })}
+      {horizontalScroll && <li style={{ listStyle: 'none', width: 1 }}></li>}
     </FilterCategoryListWrapper>
   );
 };
 
-const FilterCategoryListItem = styled('li')``;
+const FilterCategoryListItem = styled('li')`
+  flex-shrink: 0;
+`;
 
-const FilterCategoryListWrapper = styled('ul')`
+const FilterCategoryListWrapper = styled('ul')<{ horizontalScroll: boolean }>`
   list-style: none;
   padding: 0;
+  --horiz-margin: 0.3rem;
+
+  margin: 0 calc(-1 * var(--horiz-margin));
+
+  & > li {
+    margin: var(--horiz-margin);
+  }
 
   display: flex;
-  flex-wrap: wrap;
+  ${({ horizontalScroll }) =>
+    horizontalScroll
+      ? `
+      flex-wrap: no-wrap;
+      overflow: auto;
+      padding: 0 4rem;
+    `
+      : `
+      flex-wrap: wrap;
+      `}
 `;
 
 export default FilterCategoryList;

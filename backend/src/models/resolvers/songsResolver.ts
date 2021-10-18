@@ -155,6 +155,18 @@ export const songsResolver = async (_, args: SongsInput) => {
       },
     },
     { $replaceRoot: { newRoot: '$song' } },
+
+    // populate categories
+    {
+      $lookup: {
+        from: 'categories',
+        localField: 'categories',
+        foreignField: '_id',
+
+        as: 'categories',
+      },
+    },
+
     // to get number of pages in the search
     {
       $facet: {

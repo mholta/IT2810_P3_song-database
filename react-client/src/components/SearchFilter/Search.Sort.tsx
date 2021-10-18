@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FormControl as MuiFormControl,
   MenuItem,
@@ -6,19 +6,34 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import { styled } from '@mui/system';
-import { QueryParam, useQuery } from '../../hooks/useQuery';
+import { QueryParam, useQueryParams } from '../../hooks/useQueryParams';
 
-interface SearchSortProps {}
+enum SortType {
+  RELEASE_DATE = 'release_date',
+  TITLE = 'title',
+}
 
-const SearchSort = ({}: SearchSortProps) => {
-  const query = useQuery();
+interface SortOption {
+  displayName: string;
+  graphqlName: string;
+  sortType: SortType;
+  sortOrder: SortOrder;
+}
 
-  const selectedSortType = query.has(QueryParam.SORT)
-    ? (query.get(QueryParam.SORT) as SortType)
+enum SortOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+
+const SearchSort = () => {
+  const queryParams = useQueryParams();
+
+  const selectedSortType = queryParams.has(QueryParam.SORT)
+    ? (queryParams.get(QueryParam.SORT) as SortType)
     : SortType.RELEASE_DATE;
 
-  const selectedSortOrder = query.has(QueryParam.ORDER)
-    ? (query.get(QueryParam.ORDER) as SortOrder)
+  const selectedSortOrder = queryParams.has(QueryParam.ORDER)
+    ? (queryParams.get(QueryParam.ORDER) as SortOrder)
     : SortOrder.DESC;
 
   const selectedSortObjectString = sortOptionObjectToString(
@@ -29,8 +44,8 @@ const SearchSort = ({}: SearchSortProps) => {
     const { sortType, sortOrder } = typeAndOrderFromSortOptionString(
       event.target.value
     );
-    query.set(QueryParam.SORT, sortType);
-    query.set(QueryParam.ORDER, sortOrder);
+    queryParams.set(QueryParam.SORT, sortType);
+    queryParams.set(QueryParam.ORDER, sortOrder);
   };
 
   return (
@@ -66,23 +81,6 @@ const SelectWrapper = styled('div')`
     border: none;
   }
 `;
-
-enum SortOrder {
-  ASC = 'asc',
-  DESC = 'desc',
-}
-
-enum SortType {
-  RELEASE_DATE = 'release_date',
-  TITLE = 'title',
-}
-
-export interface SortOption {
-  displayName: string;
-  graphqlName: string;
-  sortType: SortType;
-  sortOrder: SortOrder;
-}
 
 export const getSortOptionFromTypeAndOrder = (
   sortType: SortType,

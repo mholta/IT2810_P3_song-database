@@ -1,8 +1,7 @@
+import React from 'react';
 import { Button as MuiButton } from '@mui/material';
 import { styled } from '@mui/system';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useQuery } from '../../hooks/useQuery';
+import { useQueryParams } from '../../hooks/useQueryParams';
 
 type ButtonType = 'reset' | 'search';
 interface ResetButtonProps {
@@ -10,12 +9,12 @@ interface ResetButtonProps {
 }
 
 const ResetButton = ({ type }: ResetButtonProps) => {
-  const query = useQuery();
+  const queryParams = useQueryParams();
 
   return (
     <>
       {type === 'reset' && (
-        <Button variant="outlined" onClick={() => query.reset()}>
+        <Button variant="outlined" onClick={() => queryParams.reset()}>
           Nullstill
         </Button>
       )}

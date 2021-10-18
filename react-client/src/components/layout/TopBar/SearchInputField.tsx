@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTopBarOpen } from '../../../store/layout/layout.actions';
 import { RootState } from '../../../store';
-import { QueryParam, useQuery } from '../../../hooks/useQuery';
+import { QueryParam, useQueryParams } from '../../../hooks/useQueryParams';
+import { useLocation } from 'react-router';
+import { RouteFolders } from '../../../pages/MainRouter';
 
 const SearchInputField = () => {
   const dispatch = useDispatch();
@@ -12,15 +14,58 @@ const SearchInputField = () => {
     (rootState: RootState) => rootState.layout.topBarOpen
   );
 
-  const query = useQuery();
-  const [initialValue, setInitialValue] = useState<string>(
-    query.get(QueryParam.QUERY) ?? ''
+  const queryParams = useQueryParams();
+  const [value, setValue] = useState<string>(
+    queryParams.get(QueryParam.QUERY) ?? ''
   );
+
+  const location = useLocation();
+  const isSearchPage = location.pathname.startsWith(RouteFolders.SEARCH);
+
+  useEffect(() => {
+    isSearchPage && setValue(queryParams.get(QueryParam.QUERY) ?? '');
+  }, [location.pathname]);
 
   const openTopBar = () => !topBarOpen && dispatch(setTopBarOpen(true));
 
+  const triggerSubmit = () => {
+    if (value) queryParams.set(QueryParam.QUERY, value);
+    else queryParams.delete(QueryParam.QUERY);
+  };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInitialValue(event.target.value);
+    setValue(event.target.value);
+  };
+
+  const [isInitialRender, setIsInitialRender] = useState<boolean>(true);
+  const [bypassTimeout, setBypassTimeout] = useState<boolean>(false);
+  const [enterCount, setEnterCount] = useState<number>(1);
+
+  useEffect(() => {
+    if (isSearchPage) {
+      if (bypassTimeout) {
+        setBypassTimeout(false);
+      } else {
+        if (!isInitialRender) {
+          const timeoutId = setTimeout(triggerSubmit, 500);
+          return () => clearTimeout(timeoutId);
+        } else {
+          setIsInitialRender(false);
+        }
+      }
+    }
+  }, [value, enterCount]);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    switch (event.key) {
+      case 'Enter':
+        setBypassTimeout(true);
+        setEnterCount(enterCount + 1);
+        triggerSubmit();
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -31,11 +76,13 @@ const SearchInputField = () => {
       <SearchInput
         placeholder="Søk på sang"
         name="query"
+        type="search"
         autoComplete="off"
         onFocus={openTopBar}
         open={topBarOpen ? 1 : 0}
-        value={initialValue}
+        value={value}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
     </SearchInputFieldWrapper>
   );
@@ -46,6 +93,7 @@ const SearchInput = styled('input')<{ open: number }>`
   display: block;
   padding: 1.4rem;
   padding-left: 4rem;
+  width: 100%;
 
   color: ${({ theme }) => theme.palette.text.primary};
 

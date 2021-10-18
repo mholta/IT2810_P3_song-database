@@ -1,5 +1,6 @@
 import { albumsResolver } from './resolvers/albumsResolver';
 import { artistResolver } from './resolvers/artistResolver';
+import { categoriesResolver } from './resolvers/categoriesResolver';
 import { createSongResolver } from './resolvers/createSongResolver';
 import { songResolver } from './resolvers/songResolver';
 import { songsResolver } from './resolvers/songsResolver';
@@ -10,6 +11,7 @@ export const resolvers = {
     songs: songsResolver,
     albums: albumsResolver,
     song: songResolver,
+    categories: categoriesResolver,
   },
   Mutation: {
     createSong: createSongResolver,

@@ -1,7 +1,7 @@
 import { useLocation, useHistory } from 'react-router-dom';
 import { RouteFolders } from '../pages/MainRouter';
 
-export const useQuery = () => {
+export const useQueryParams = () => {
   const query = new URLSearchParams(useLocation().search);
 
   const history = useHistory();
@@ -37,13 +37,18 @@ export const useQuery = () => {
 
   const has = (name: string) => query.has(name);
   const get = (name: string) => query.get(name);
+  const deleteParam = (name: string) => {
+    query.delete(name);
+    pushState();
+  };
+
   return {
     set,
     has,
     hasValue,
     get,
     getAll,
-    delete: query.delete,
+    delete: deleteParam,
     deleteParamWithValue,
     reset,
     query,

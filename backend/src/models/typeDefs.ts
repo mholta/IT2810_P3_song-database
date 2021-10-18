@@ -12,6 +12,7 @@ export const typeDefs = gql`
     ): SongResponse
     albums(limit: Int, id: String, name: String): [Album!]
     song(id: String!): Song
+    categories: [Category!]
   }
 
   type Mutation {
@@ -78,6 +79,7 @@ export const typeDefs = gql`
     time: String
     title: String
     writers: [String]
+    categories: [Category!]
   }
 
   type SongResponse {
@@ -95,5 +97,10 @@ export const typeDefs = gql`
     publisher: String
     releaseDate: String
     spotify: String
+  }
+
+  type Category {
+    _id: String!
+    title: String!
   }
 `;

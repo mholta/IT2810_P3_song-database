@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { Tab as MuiTab, Tabs as MuiTabs } from '@mui/material';
+import React from 'react';
 import { styled } from '@mui/system';
-import FilterTabPanel from './SearchOptions.FilterTab';
-import FilterCategoryList from './SearchOptions.FilterCategoryList';
 import SearchSort from './Search.Sort';
 import CategoryTabs from './CategoryTabs';
 import ResetButton from './SearchOptions.Reset';

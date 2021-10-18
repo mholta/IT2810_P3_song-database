@@ -9,14 +9,11 @@ interface SongListProps {
 
 const SongList = ({ songs }: SongListProps) => {
   return (
-    <div>
-      SongList
-      <Ul>
-        {songs.map((song, i) => (
-          <SongListItem key={'song-' + i} song={song} />
-        ))}
-      </Ul>
-    </div>
+    <Ul>
+      {songs.map((song, i) => (
+        <SongListItem key={'song-' + i} song={song} />
+      ))}
+    </Ul>
   );
 };
 

@@ -4,12 +4,16 @@ import Div100vh from 'react-div-100vh';
 import { SectionsWrapper } from '../elements/Section';
 import TopBar from './TopBar/TopBar';
 import SideBar from './SideBar/SideBar';
+import { useStaticContent } from '../../hooks/useStaticContent';
 
 interface PageLayoutWrapperProps {
   children: React.ReactNode;
 }
 
 const PageLayoutWrapper = ({ children }: PageLayoutWrapperProps) => {
+  // Hook for fetching categories and adding to redux. Only on initial page load
+  useStaticContent();
+
   return (
     <FullPageWrapper>
       <SideBar />

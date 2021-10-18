@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { IconButton, Tab as MuiTab, Tabs as MuiTabs } from '@mui/material';
+import { Tab as MuiTab, Tabs as MuiTabs } from '@mui/material';
 import { styled } from '@mui/system';
 import FilterTabPanel from './SearchOptions.FilterTab';
 import FilterCategoryList from './SearchOptions.FilterCategoryList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { QueryParam } from '../../hooks/useQuery';
+import { QueryParam } from '../../hooks/useQueryParams';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import MainContentAnimationWrapper from '../../animations/MainContentAnimationWrapper';
 
 const CategoryTabs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
@@ -29,7 +30,7 @@ const CategoryTabs = () => {
   });
 
   const themes = useSelector(
-    (rootState: RootState) => rootState.filter.allCategories
+    (rootState: RootState) => rootState.filter.allThemes
   );
 
   return (
@@ -94,6 +95,7 @@ const Tab = styled(MuiTab)`
 
 const Tabs = styled(MuiTabs)<{ showindicator: number }>`
   min-height: 0;
+  margin-bottom: 1rem;
   & .MuiTabs-indicator {
     background-color: ${({ theme }) => theme.palette.text.primary};
     opacity: ${({ showindicator }) => (showindicator ? 1 : 0)};
