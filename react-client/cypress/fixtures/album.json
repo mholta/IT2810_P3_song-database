@@ -1,0 +1,12 @@
+{
+  "_id": "motepunkt-acta-lovsang",
+  "title": "Møtepunkt",
+  "artists": ["acta"],
+  "picture":
+    "https://uploads-ssl.webflow.com/5ed95215f8138049de460b43/604374cdc48ec430aa6d4894_M%C3%B8tepunkt%20-%20cover.jpeg",
+  "releaseDate": "Fri Jul 10 2020 00:00:00 GMT+0000 (Coordinated Universal Time)",
+  "publisher": "IMI-kirken",
+  "producers": ["Tore Kulleseid"],
+  "iTunes": "https://music.apple.com/no/album/møtepunkt-single/1520693028",
+  "spotify": "https://open.spotify.com/album/6WzBmm9l5zp1HnfKRVCAKx"
+}

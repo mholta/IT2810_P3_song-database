@@ -1,0 +1,31 @@
+{
+  "_id": "all-pris-acta-lovsang",
+  "title": "All pris",
+  "album": "motepunkt-acta-lovsang",
+  "tempo": "68",
+  "key": "F#",
+  "time": "4/4",
+  "artists": ["acta"],
+  "writers": ["Eline Walderhaug", "Thomas Wilhelmsen", "Tore Kulleseid"],
+  "contributors": [
+    "Tobias Valdal Høssung (trommer)",
+    "Ruben Strømme (bass)",
+    "Anders Kjøllesdal Hansen (keys)",
+    "Vemund Aasemoen Aardal (keys)",
+    "Samuel Hilleren (keys)",
+    "Aleksander Øvergaard (gitar)",
+    "Mads Even Vold (gitar)",
+    "Mathilde Eriksen (vokal)",
+    "Eline Walderhaug (kor)",
+    "Vemund Aasemoen Aardal (kor)"
+  ],
+  "producers": ["Tore Kulleseid"],
+  "releaseDate": "Fri Jul 10 2020 00:00:00 GMT+0000 (Coordinated Universal Time)",
+  "iTunes": "https://music.apple.com/no/album/møtepunkt-single/1520693028",
+  "spotify": "https://open.spotify.com/track/7kXJtTxucwufmP2f32yeJo",
+  "categories": [
+    { "_id": "han", "title": "Han" },
+    { "_id": "sang", "title": "Sang" },
+    { "_id": "glede", "title": "Glede" }
+  ]
+}
