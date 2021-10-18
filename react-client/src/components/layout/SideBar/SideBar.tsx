@@ -20,6 +20,11 @@ const SideBar = () => {
         <LinkWithIconGridRouter
           to={RouteFolders.SEARCH + '?query=søker på dette'}
         >
+          <FontAwesomeIcon icon={['fas', 'music']} /> <span>Sanger</span>
+        </LinkWithIconGridRouter>
+        <LinkWithIconGridRouter
+          to={RouteFolders.SEARCH + '?query=søker på dette'}
+        >
           <FontAwesomeIcon icon={['fas', 'music']} /> <span>Søk på noe</span>
         </LinkWithIconGridRouter>
         <LinkWithIconGridRouter to={RouteFolders.SONG + '/testsang'}>

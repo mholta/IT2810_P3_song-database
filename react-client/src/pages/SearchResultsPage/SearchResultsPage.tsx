@@ -10,9 +10,9 @@ import SearchOptions from '../../components/SearchFilter/SearchFilter';
 import { useQuery } from '../../hooks/useQuery';
 
 const SearchResultsPage = () => {
-  const [queryParams, push] = useQuery();
+  const { query } = useQuery();
 
-  const searchTextQuery = queryParams.get('query');
+  const searchTextQuery = query.get('query');
 
   const songs: Song[] = dummySongList;
 

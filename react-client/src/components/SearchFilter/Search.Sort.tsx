@@ -1,24 +1,36 @@
 import React, { useState } from 'react';
 import {
   FormControl as MuiFormControl,
-  InputLabel,
   MenuItem,
   Select as MuiSelect,
   SelectChangeEvent,
 } from '@mui/material';
 import { styled } from '@mui/system';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { QueryParam, useQuery } from '../../hooks/useQuery';
 
 interface SearchSortProps {}
 
 const SearchSort = ({}: SearchSortProps) => {
-  const selectedSortingMethod = sortOptions[0].graphqlName;
+  const query = useQuery();
 
-  const dispatch = useDispatch();
+  const selectedSortType = query.has(QueryParam.SORT)
+    ? (query.get(QueryParam.SORT) as SortType)
+    : SortType.RELEASE_DATE;
+
+  const selectedSortOrder = query.has(QueryParam.ORDER)
+    ? (query.get(QueryParam.ORDER) as SortOrder)
+    : SortOrder.DESC;
+
+  const selectedSortObjectString = sortOptionObjectToString(
+    getSortOptionFromTypeAndOrder(selectedSortType, selectedSortOrder)
+  );
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log('dispatch(setSortMethod(event.target.value));');
+    const { sortType, sortOrder } = typeAndOrderFromSortOptionString(
+      event.target.value
+    );
+    query.set(QueryParam.SORT, sortType);
+    query.set(QueryParam.ORDER, sortOrder);
   };
 
   return (
@@ -28,12 +40,12 @@ const SearchSort = ({}: SearchSortProps) => {
           labelId="sort-select-label"
           name="sort"
           id="sort-select"
-          value={selectedSortingMethod ?? sortOptions[0].graphqlName}
+          value={selectedSortObjectString}
           onChange={handleChange}
         >
-          {sortOptions.map((e) => (
+          {sortOptions.map((e: SortOption) => (
             <MenuItem
-              value={e.graphqlName}
+              value={sortOptionObjectToString(e)}
               key={'sort-option-' + e.graphqlName}
             >
               Sorter på {e.displayName}
@@ -55,18 +67,76 @@ const SelectWrapper = styled('div')`
   }
 `;
 
+enum SortOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+
+enum SortType {
+  RELEASE_DATE = 'release_date',
+  TITLE = 'title',
+}
+
 export interface SortOption {
   displayName: string;
   graphqlName: string;
-  value: string;
+  sortType: SortType;
+  sortOrder: SortOrder;
 }
 
-export const sortOptions: SortOption[] = [
-  { displayName: 'nylig lagt til', graphqlName: '1', value: 'nylige' },
-  { displayName: 'nyeste', graphqlName: '2', value: 'nyeste' },
-  { displayName: 'eldste', graphqlName: '3', value: 'eldste' },
-  { displayName: 'A-Å', graphqlName: '4', value: 'title_asc' },
-  { displayName: 'Å-A', graphqlName: '5', value: 'title_desc' },
+export const getSortOptionFromTypeAndOrder = (
+  sortType: SortType,
+  sortOrder: SortOrder
+): SortOption => {
+  switch (sortType) {
+    case SortType.RELEASE_DATE:
+      return sortOrder === SortOrder.DESC ? sortOptions[0] : sortOptions[1];
+
+    case SortType.TITLE:
+      return sortOrder === SortOrder.ASC ? sortOptions[2] : sortOptions[3];
+
+    default:
+      return sortOptions[0];
+  }
+};
+
+const sortOptionObjectToString = (sortOption: SortOption): string => {
+  return sortOption.sortType + '--' + sortOption.sortOrder;
+};
+
+const typeAndOrderFromSortOptionString = (sortOptionString: string) => {
+  const strings: string[] = sortOptionString.split('--');
+  const sortType = strings[0] as SortType;
+  const sortOrder = strings[1] as SortOrder;
+
+  return { sortType, sortOrder };
+};
+
+const sortOptions: SortOption[] = [
+  {
+    displayName: 'nyeste',
+    graphqlName: '2',
+    sortType: SortType.RELEASE_DATE,
+    sortOrder: SortOrder.DESC,
+  },
+  {
+    displayName: 'eldste',
+    graphqlName: '3',
+    sortType: SortType.RELEASE_DATE,
+    sortOrder: SortOrder.ASC,
+  },
+  {
+    displayName: 'A-Å',
+    graphqlName: '4',
+    sortType: SortType.TITLE,
+    sortOrder: SortOrder.ASC,
+  },
+  {
+    displayName: 'Å-A',
+    graphqlName: '5',
+    sortType: SortType.TITLE,
+    sortOrder: SortOrder.DESC,
+  },
 ];
 
 export default SearchSort;

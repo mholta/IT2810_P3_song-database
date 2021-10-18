@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import { FilterCategory } from '../../api/types';
@@ -7,17 +7,29 @@ import { RootState } from '../../store';
 import { CategoryButton } from '../elements/Buttons';
 import { QueryParam, useQuery } from '../../hooks/useQuery';
 
-const FilterCategoryList = () => {
-  const dispatch = useDispatch();
-  const [query, pushQuery] = useQuery();
+interface FilterCategoryListProps {
+  queryParam: QueryParam;
+  categories: FilterCategory[];
+}
 
-  const allCategories: FilterCategory[] = useSelector(
-    (rootState: RootState) => rootState.filter.allCategories
-  );
+const FilterCategoryList = ({
+  queryParam,
+  categories: allCategories,
+}: FilterCategoryListProps) => {
+  const query = useQuery();
 
   const [selectedCategories, setSelectedCategories] = useState<
     FilterCategory[]
   >([]);
+
+  useEffect(() => {
+    const categoryStringsFromQuery = query.getAll(queryParam);
+    const categoryObjects = allCategories.filter((theme) =>
+      categoryStringsFromQuery.includes(theme.title)
+    );
+
+    setSelectedCategories(categoryObjects);
+  }, []);
 
   const categoriesInOrder = [
     ...selectedCategories,
@@ -25,26 +37,22 @@ const FilterCategoryList = () => {
   ];
 
   const addSelectedCategory = (filterCategory: FilterCategory) => {
-    setSelectedCategories([...selectedCategories, filterCategory]);
-
-    // Set query param
-    query.set(QueryParam.THEME, filterCategory.title);
-    pushQuery();
+    query.set(queryParam, filterCategory.title, true);
   };
 
   const removeSelectedCategory = (filterCategory: FilterCategory) => {
-    setSelectedCategories(
-      selectedCategories.filter((c) => c !== filterCategory)
-    );
+    query.deleteParamWithValue(queryParam, filterCategory.title);
   };
 
   return (
     <FilterCategoryListWrapper>
       {categoriesInOrder.map((category, index) => {
-        const isSelected = selectedCategories.includes(category);
+        const isSelected = query.hasValue(queryParam, category.title);
 
         return (
-          <FilterCategoryListItem key={'filter-item-' + category.id + index}>
+          <FilterCategoryListItem
+            key={'filter-item-' + queryParam + category.id + index}
+          >
             <CategoryButton
               selected={isSelected ? 1 : 0}
               onClick={() => {

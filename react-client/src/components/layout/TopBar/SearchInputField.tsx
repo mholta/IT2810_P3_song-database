@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTopBarOpen } from '../../../store/layout/layout.actions';
 import { RootState } from '../../../store';
+import { QueryParam, useQuery } from '../../../hooks/useQuery';
 
 const SearchInputField = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,16 @@ const SearchInputField = () => {
     (rootState: RootState) => rootState.layout.topBarOpen
   );
 
+  const query = useQuery();
+  const [initialValue, setInitialValue] = useState<string>(
+    query.get(QueryParam.QUERY) ?? ''
+  );
+
   const openTopBar = () => !topBarOpen && dispatch(setTopBarOpen(true));
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInitialValue(event.target.value);
+  };
 
   return (
     <SearchInputFieldWrapper>
@@ -24,6 +34,8 @@ const SearchInputField = () => {
         autoComplete="off"
         onFocus={openTopBar}
         open={topBarOpen ? 1 : 0}
+        value={initialValue}
+        onChange={handleChange}
       />
     </SearchInputFieldWrapper>
   );

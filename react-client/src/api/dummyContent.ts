@@ -67,6 +67,6 @@ export const dummyCategories: FilterCategory[] = [
   'min',
   'sang',
   'og',
-  'min',
+  'ein',
   'glede',
 ].map((e) => ({ id: e, title: e }));

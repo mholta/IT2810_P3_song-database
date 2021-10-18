@@ -1,4 +1,3 @@
-import { sortOptions } from './../../components/SearchFilter/Search.Sort';
 import { dummyCategories } from './../../api/dummyContent';
 import { FilterCategory } from './../../api/types';
 import { SET_ALL_CATEGORIES } from './filter.actionTypes';

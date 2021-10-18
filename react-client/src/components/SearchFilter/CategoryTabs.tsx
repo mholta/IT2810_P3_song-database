@@ -4,6 +4,9 @@ import { styled } from '@mui/system';
 import FilterTabPanel from './SearchOptions.FilterTab';
 import FilterCategoryList from './SearchOptions.FilterCategoryList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { QueryParam } from '../../hooks/useQuery';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 const CategoryTabs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
@@ -24,6 +27,10 @@ const CategoryTabs = () => {
       handleClick(index);
     },
   });
+
+  const themes = useSelector(
+    (rootState: RootState) => rootState.filter.allCategories
+  );
 
   return (
     <CategoryTabsWrapper>
@@ -46,7 +53,7 @@ const CategoryTabs = () => {
       </Tabs>
 
       <FilterTabPanel activeTab={activeTab} index={1}>
-        <FilterCategoryList />
+        <FilterCategoryList queryParam={QueryParam.THEME} categories={themes} />
       </FilterTabPanel>
     </CategoryTabsWrapper>
   );

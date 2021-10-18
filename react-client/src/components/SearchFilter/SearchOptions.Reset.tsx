@@ -2,6 +2,7 @@ import { Button as MuiButton } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useQuery } from '../../hooks/useQuery';
 
 type ButtonType = 'reset' | 'search';
 interface ResetButtonProps {
@@ -9,15 +10,12 @@ interface ResetButtonProps {
 }
 
 const ResetButton = ({ type }: ResetButtonProps) => {
-  const dispatch = useDispatch();
+  const query = useQuery();
 
   return (
     <>
       {type === 'reset' && (
-        <Button
-          variant="outlined"
-          onClick={() => console.log('dispatch(resetFilter())')}
-        >
+        <Button variant="outlined" onClick={() => query.reset()}>
           Nullstill
         </Button>
       )}
