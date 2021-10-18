@@ -42,7 +42,7 @@ const SongSchema = new Schema({
   title: String,
   writers: [String],
 });
-SongSchema.index({ title: 'text', album: 'text', artists: 'text' });
+SongSchema.index({ title: 'text' });
 
 export interface Album extends Document {
   _id: string;
