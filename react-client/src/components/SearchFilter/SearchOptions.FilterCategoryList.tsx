@@ -51,7 +51,7 @@ const FilterCategoryList = ({
 
         return (
           <FilterCategoryListItem
-            key={'filter-item-' + queryParam + category.id + index}
+            key={'filter-item-' + queryParam + category._id + index}
           >
             <CategoryButton
               selected={isSelected ? 1 : 0}

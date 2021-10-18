@@ -29,7 +29,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
                     selected={0}
                     onClick={() => {
                       history.push(
-                        RouteFolders.SEARCH + '?theme=' + category.id
+                        RouteFolders.SEARCH + '?theme=' + category._id
                       );
                     }}
                   >

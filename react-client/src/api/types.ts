@@ -44,6 +44,6 @@ export interface Song {
 }
 
 export interface FilterCategory {
-  id: string;
+  _id: string;
   title: string;
 }

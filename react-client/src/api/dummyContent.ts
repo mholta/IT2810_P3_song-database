@@ -1,7 +1,7 @@
 import { Album, Artist, Song, FilterCategory } from './types';
 
 export const dummyArtist: Artist = {
-  id: 'acta',
+  _id: 'acta',
   name: 'Acta',
   location: 'Stavanger',
   webPage: 'actabibelskole.no',
@@ -10,7 +10,7 @@ export const dummyArtist: Artist = {
 };
 
 export const dummyAlbum: Album = {
-  id: 'motepunkt-acta-lovsang',
+  _id: 'motepunkt-acta-lovsang',
   title: 'Møtepunkt',
   artists: [dummyArtist],
   picture:
@@ -25,7 +25,7 @@ export const dummyAlbum: Album = {
 };
 
 export const dummySong: Song = {
-  id: 'all-pris-acta-lovsang',
+  _id: 'all-pris-acta-lovsang',
   title: 'All pris',
   album: dummyAlbum,
   tempo: '68',
@@ -51,7 +51,11 @@ export const dummySong: Song = {
   ),
   iTunes: 'https://music.apple.com/no/album/møtepunkt-single/1520693028',
   spotify: 'https://open.spotify.com/track/7kXJtTxucwufmP2f32yeJo',
-  categories: [{id: "han", title: "Han"}, {id: "sang", title: "Sang"}, {id: "glede", title: "Glede"}]
+  categories: [
+    { _id: 'han', title: 'Han' },
+    { _id: 'sang', title: 'Sang' },
+    { _id: 'glede', title: 'Glede' },
+  ],
 };
 
 export const dummySongList: Song[] = [
@@ -70,4 +74,4 @@ export const dummyCategories: FilterCategory[] = [
   'og',
   'ein',
   'glede',
-].map((e) => ({ id: e, title: e }));
+].map((e) => ({ _id: e, title: e }));

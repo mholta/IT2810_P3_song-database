@@ -13,7 +13,7 @@ interface SongListItemProps {
 const SongListItem = ({ song }: SongListItemProps) => {
   return (
     <ListItemWrapper>
-      <LinkWrapper to={RouteFolders.SONG + '/' + song.id}>
+      <LinkWrapper to={RouteFolders.SONG + '/' + song._id}>
         <CoverImageWrapper>
           <Image src={song.album.picture} />
         </CoverImageWrapper>
