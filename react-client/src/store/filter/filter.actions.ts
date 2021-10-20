@@ -1,4 +1,3 @@
-import store from '../store';
 import { FilterCategory } from './../../api/types';
 import { SET_ALL_THEMES } from './filter.actionTypes';
 

@@ -8,8 +8,6 @@ interface SongPageTemplateProps {
 }
 
 const SongPageTemplate = ({ song }: SongPageTemplateProps) => {
-  console.log(song);
-
   return (
     <div>
       <Header song={song} />

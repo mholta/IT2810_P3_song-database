@@ -1,4 +1,3 @@
-import { dummyCategories } from './../../api/dummyContent';
 import { FilterCategory } from './../../api/types';
 import { SET_ALL_THEMES } from './filter.actionTypes';
 export interface FilterState {

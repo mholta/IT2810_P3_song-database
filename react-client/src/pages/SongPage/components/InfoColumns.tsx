@@ -6,6 +6,7 @@ import { Song } from '../../../api/types';
 import { CategoryButton } from '../../../components/elements/Buttons';
 import LinkWithIcon from '../../../components/elements/LinkWithIcon';
 import { H2, Link } from '../../../components/elements/Typography';
+import { QueryParam } from '../../../hooks/useQueryParams';
 import { RouteFolders } from '../../MainRouter';
 
 interface InfoColumnProps {
@@ -46,7 +47,13 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
             <div>
               {song.writers.map((writer, i, a) => (
                 <span key={'writer-' + i}>
-                  <Link to={RouteFolders.SEARCH + '?query=' + writer}>
+                  <Link
+                    to={
+                      RouteFolders.CONTRIBUTOR +
+                      `?${QueryParam.CONTRIBUTOR}=` +
+                      writer
+                    }
+                  >
                     {writer}
                   </Link>
                   {i === a.length - 1 ? '' : i === a.length - 2 ? ' & ' : ', '}
@@ -61,7 +68,11 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
             <div>
               {song.producers.map((writer, i, a) => (
                 <Link
-                  to={RouteFolders.SEARCH + '?query=' + writer}
+                  to={
+                    RouteFolders.CONTRIBUTOR +
+                    `?${QueryParam.CONTRIBUTOR}=` +
+                    writer
+                  }
                   key={'writer-' + i}
                 >
                   {writer}

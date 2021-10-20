@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { QueryParam } from '../../hooks/useQueryParams';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import MainContentAnimationWrapper from '../../animations/MainContentAnimationWrapper';
 
 const CategoryTabs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);

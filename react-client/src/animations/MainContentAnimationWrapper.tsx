@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 
 interface MainContentAnimationWrapperProps {

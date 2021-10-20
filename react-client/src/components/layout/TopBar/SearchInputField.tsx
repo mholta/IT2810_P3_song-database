@@ -24,6 +24,7 @@ const SearchInputField = () => {
 
   useEffect(() => {
     isSearchPage && setValue(queryParams.get(QueryParam.QUERY) ?? '');
+    // eslint-disable-next-line
   }, [location.pathname]);
 
   const openTopBar = () => !topBarOpen && dispatch(setTopBarOpen(true));
@@ -54,6 +55,7 @@ const SearchInputField = () => {
         }
       }
     }
+    // eslint-disable-next-line
   }, [value, enterCount]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

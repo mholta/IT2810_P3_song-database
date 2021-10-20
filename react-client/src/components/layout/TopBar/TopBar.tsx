@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/system';
 import SearchInputField from './SearchInputField';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
-import { useHistory, useLocation } from 'react-router';
-import { RouteFolders, Routes } from '../../../pages/MainRouter';
-import { getQueryStringFromFormSubmitEvent } from '../../../utils/search';
+import { useLocation } from 'react-router';
+import { Routes } from '../../../pages/MainRouter';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTopBarOpen } from '../../../store/layout/layout.actions';
 import { RootState } from '../../../store';
-import SearchOptions from '../../SearchFilter/SearchFilter';
 import FilterCategoryList from '../../SearchFilter/SearchOptions.FilterCategoryList';
 import { QueryParam } from '../../../hooks/useQueryParams';
 
@@ -21,8 +19,6 @@ const TopBar = () => {
   const dispatch = useDispatch();
 
   const closeTopBar = () => topBarOpen && dispatch(setTopBarOpen(false));
-
-  const history = useHistory();
 
   const location = useLocation();
   const [isSearchPage, setIsSearchPage] = useState<boolean>(false);

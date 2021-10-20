@@ -20,6 +20,7 @@ export enum RouteFolders {
   ALBUM = '/album',
   ARTIST = '/artist',
   SEARCH = '/search',
+  CONTRIBUTOR = '/contributor',
 }
 
 const MainRouter = () => {

@@ -53,6 +53,8 @@ export const songsResolver = async (_, args: SongsInput) => {
   if (categories.length > 0) {
     categoryFilter = { categories: { $in: categories } };
   }
+  console.log(args);
+
   const page = args.page - 1 || 0;
   const songs = await Songs.aggregate([
     // search in songs
@@ -166,7 +168,6 @@ export const songsResolver = async (_, args: SongsInput) => {
         as: 'categories',
       },
     },
-
     // to get number of pages in the search
     {
       $facet: {

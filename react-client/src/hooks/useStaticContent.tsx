@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import { setAllThemes } from '../store/filter/filter.actions';
@@ -11,7 +11,7 @@ export const useStaticContent = () => {
     if (!loading && themesData?.categories) {
       dispatch(setAllThemes(themesData.categories));
     }
-  }, [loading]);
+  }, [loading, themesData, dispatch]);
 };
 
 const GET_THEMES = gql`

@@ -1,9 +1,9 @@
 import React from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import SongPageTemplate from './SongPageTemplate';
-import { AnimatePresence, motion } from 'framer-motion';
 import MainContentAnimationWrapper from '../../animations/MainContentAnimationWrapper';
+import { Routes } from '../MainRouter';
 
 const SongPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,6 +11,9 @@ const SongPage = () => {
   const { data, loading, error } = useQuery(GET_SONG_DATA, {
     variables: { id },
   });
+
+  const history = useHistory();
+  if (!error && !loading && !data?.song) history.push(Routes.NOT_FOUND);
 
   return (
     <MainContentAnimationWrapper condition={!loading && data?.song}>
