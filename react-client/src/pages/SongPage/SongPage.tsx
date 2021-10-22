@@ -34,7 +34,7 @@ const SongPage = () => {
   );
 };
 
-const GET_SONG_DATA = gql`
+export const GET_SONG_DATA = gql`
   query GetSong($id: String!) {
     song(id: $id) {
       _id

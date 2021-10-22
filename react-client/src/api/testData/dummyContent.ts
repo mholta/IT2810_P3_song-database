@@ -1,4 +1,4 @@
-import { Album, Artist, Song, FilterCategory } from './types';
+import { Album, Artist, Song, FilterCategory } from '../types';
 
 export const dummyArtist: Artist = {
   _id: 'acta',

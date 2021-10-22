@@ -1,19 +1,30 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import SongPage from './SongPage';
-import routerMock from 'react-router-dom';
-import { MemoryRouter } from 'react-router';
-import { theme } from '../../styles/theme';
-import { ThemeProvider } from '@mui/material';
+import { render, screen } from '../../utils/test-utils';
+import SongPage, { GET_SONG_DATA } from './SongPage';
+import { dummySong } from '../../api/testData/dummyContent';
 
-test('renders page', () => {
-  render(
-    <ThemeProvider theme={theme}>
-      <MemoryRouter initialEntries={['/song/all-pris']} initialIndex={0}>
-        <SongPage />
-      </MemoryRouter>
-    </ThemeProvider>
-  );
-  const linkElement = screen.getByText('All pris');
+const mocks = [
+  {
+    request: {
+      query: GET_SONG_DATA,
+      variables: { id: 'all-pris-acta-lovsang' },
+    },
+    result: {
+      data: { song: dummySong },
+    },
+  },
+  {
+    request: {
+      query: GET_SONG_DATA,
+      variables: { id: 'all-pris-acta-lovsan' },
+    },
+    error: new Error('Something went wrong'),
+  },
+];
+
+test('renders page', async () => {
+  render(<SongPage />, mocks, '/song/:id', { id: 'all-pris-acta-lovsang' });
+
+  const linkElement = await screen.findByText('All pris');
   expect(linkElement).toBeInTheDocument();
 });
