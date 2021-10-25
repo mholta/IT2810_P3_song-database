@@ -1,3 +1,4 @@
+import { SortOrder, SortType } from '../components/SearchFilter/Search.Sort';
 import { QueryParam, useQueryParams } from './useQueryParams';
 
 export interface FilterOptions {
@@ -20,4 +21,22 @@ export const useFilterParams = (): FilterOptions => {
   };
 
   return filterOptionsObject;
+};
+export interface SortOptions {
+  sortType: string;
+  sortOrder: string;
+}
+
+export const useSortParams = (): SortOptions => {
+  const params = useQueryParams();
+
+  const sortType: string = params.get(QueryParam.SORT) ?? SortType.RELEASE_DATE;
+  const sortOrder: string = params.get(QueryParam.ORDER) ?? SortOrder.DESC;
+
+  const sortOptionsObject: SortOptions = {
+    sortOrder,
+    sortType,
+  };
+
+  return sortOptionsObject;
 };

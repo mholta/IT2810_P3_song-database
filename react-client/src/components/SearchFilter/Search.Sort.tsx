@@ -7,20 +7,20 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/system';
 import { QueryParam, useQueryParams } from '../../hooks/useQueryParams';
+import { SortOptions } from '../../hooks/useSearchParams';
 
-enum SortType {
-  RELEASE_DATE = 'release_date',
+export enum SortType {
+  RELEASE_DATE = 'releaseDate',
   TITLE = 'title',
+  ARTISTS = 'artists',
+  RELEVANCE = 'relevance',
 }
 
-interface SortOption {
+interface SortOption extends SortOptions {
   displayName: string;
-  graphqlName: string;
-  sortType: SortType;
-  sortOrder: SortOrder;
 }
 
-enum SortOrder {
+export enum SortOrder {
   ASC = 'asc',
   DESC = 'desc',
 }
@@ -28,11 +28,15 @@ enum SortOrder {
 const SearchSort = () => {
   const queryParams = useQueryParams();
 
-  const selectedSortType = queryParams.has(QueryParam.SORT)
+  const hasSearchString = queryParams.has(QueryParam.QUERY);
+
+  const selectedSortType: SortType = queryParams.has(QueryParam.SORT)
     ? (queryParams.get(QueryParam.SORT) as SortType)
+    : hasSearchString
+    ? SortType.RELEVANCE
     : SortType.RELEASE_DATE;
 
-  const selectedSortOrder = queryParams.has(QueryParam.ORDER)
+  const selectedSortOrder: SortOrder = queryParams.has(QueryParam.ORDER)
     ? (queryParams.get(QueryParam.ORDER) as SortOrder)
     : SortOrder.DESC;
 
@@ -44,9 +48,20 @@ const SearchSort = () => {
     const { sortType, sortOrder } = typeAndOrderFromSortOptionString(
       event.target.value
     );
+
+    if (sortType === SortType.RELEVANCE) {
+      queryParams.delete(QueryParam.SORT);
+      queryParams.delete(QueryParam.ORDER);
+      return;
+    }
+
     queryParams.set(QueryParam.SORT, sortType);
     queryParams.set(QueryParam.ORDER, sortOrder);
   };
+
+  const options: SortOption[] = hasSearchString
+    ? [relevanceSortOption, ...sortOptions]
+    : sortOptions;
 
   return (
     <FormControl fullWidth>
@@ -58,10 +73,10 @@ const SearchSort = () => {
           value={selectedSortObjectString}
           onChange={handleChange}
         >
-          {sortOptions.map((e: SortOption) => (
+          {options.map((e: SortOption, i: number) => (
             <MenuItem
               value={sortOptionObjectToString(e)}
-              key={'sort-option-' + e.graphqlName}
+              key={'sort-option-' + i + e.displayName}
             >
               Sorter på {e.displayName}
             </MenuItem>
@@ -93,6 +108,12 @@ export const getSortOptionFromTypeAndOrder = (
     case SortType.TITLE:
       return sortOrder === SortOrder.ASC ? sortOptions[2] : sortOptions[3];
 
+    case SortType.ARTISTS:
+      return sortOrder === SortOrder.ASC ? sortOptions[4] : sortOptions[5];
+
+    case SortType.RELEVANCE:
+      return relevanceSortOption;
+
     default:
       return sortOptions[0];
   }
@@ -110,29 +131,41 @@ const typeAndOrderFromSortOptionString = (sortOptionString: string) => {
   return { sortType, sortOrder };
 };
 
+const relevanceSortOption: SortOption = {
+  displayName: 'relevanse',
+  sortType: SortType.RELEVANCE,
+  sortOrder: SortOrder.DESC,
+};
+
 const sortOptions: SortOption[] = [
   {
     displayName: 'nyeste',
-    graphqlName: '2',
     sortType: SortType.RELEASE_DATE,
     sortOrder: SortOrder.DESC,
   },
   {
     displayName: 'eldste',
-    graphqlName: '3',
     sortType: SortType.RELEASE_DATE,
     sortOrder: SortOrder.ASC,
   },
   {
-    displayName: 'A-Å',
-    graphqlName: '4',
+    displayName: 'Tittel A-Å',
     sortType: SortType.TITLE,
     sortOrder: SortOrder.ASC,
   },
   {
-    displayName: 'Å-A',
-    graphqlName: '5',
+    displayName: 'Tittel Å-A',
     sortType: SortType.TITLE,
+    sortOrder: SortOrder.DESC,
+  },
+  {
+    displayName: 'Artist A-Å',
+    sortType: SortType.ARTISTS,
+    sortOrder: SortOrder.ASC,
+  },
+  {
+    displayName: 'Artist Å-A',
+    sortType: SortType.ARTISTS,
     sortOrder: SortOrder.DESC,
   },
 ];

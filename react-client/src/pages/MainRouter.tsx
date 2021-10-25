@@ -3,7 +3,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import ContributorPage from './ContributorPage/ContributorPage';
 import HomePage from './HomePage/HomePage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
-import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
+import SearchResultsPage from './SongsPage/SongsPage';
 import SongPage from './SongPage/SongPage';
 
 export enum Routes {

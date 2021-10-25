@@ -58,7 +58,7 @@ export interface SongsInput {
 export enum SortType {
   RELEASE_DATE = 'releaseDate',
   TITLE = 'title',
-  ARTIST = 'artist',
+  ARTIST = 'artists',
   ALBUM = 'album',
   SCORE = 'score',
 }

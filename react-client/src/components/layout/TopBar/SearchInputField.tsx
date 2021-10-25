@@ -30,6 +30,9 @@ const SearchInputField = () => {
   const openTopBar = () => !topBarOpen && dispatch(setTopBarOpen(true));
 
   const triggerSubmit = () => {
+    queryParams.delete(QueryParam.SORT);
+    queryParams.delete(QueryParam.ORDER);
+
     if (value) queryParams.set(QueryParam.QUERY, value);
     else queryParams.delete(QueryParam.QUERY);
   };

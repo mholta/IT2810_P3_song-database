@@ -48,7 +48,7 @@ export const typeDefs = gql`
   enum SortType {
     releaseDate
     title
-    artist
+    artists
     album
   }
 

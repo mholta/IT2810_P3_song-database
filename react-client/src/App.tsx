@@ -19,20 +19,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
-  cache: new InMemoryCache({
-    typePolicies: {
-      Songs: {
-        fields: {
-          songs: {
-            keyArgs: false,
-            merge: () => {
-              console.log('hello');
-            },
-          },
-        },
-      },
-    },
-  }),
+  cache: new InMemoryCache(),
   headers: {
     mode: 'no-cors',
   },
