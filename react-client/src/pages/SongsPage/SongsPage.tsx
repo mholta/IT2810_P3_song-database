@@ -35,7 +35,7 @@ const SearchResultsPageWrapper = styled('div')`
   padding-top: 4rem;
 `;
 
-const GET_SEARCH_RESULTS = gql`
+export const GET_SEARCH_RESULTS = gql`
   query Songs(
     $searchString: String
     $themes: [String!]

@@ -1,0 +1,636 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rendered successfully 1`] = `
+<div
+  className="css-185wnrw"
+  style={
+    Object {
+      "height": "768px",
+    }
+  }
+>
+  <nav
+    className="css-1ebp07k"
+    open={false}
+  >
+    <div
+      className="css-ydsbw5"
+    >
+      <a
+        className="css-1yg7sek"
+        href="/"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Hjem
+        </span>
+      </a>
+      <a
+        className="css-1yg7sek"
+        href="/search"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Sanger
+        </span>
+      </a>
+      <a
+        className="css-1yg7sek"
+        href="/search?query=søker på dette"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Søk på noe
+        </span>
+      </a>
+      <a
+        className="css-1yg7sek"
+        href="/song/testsang"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Se test-sang
+        </span>
+      </a>
+    </div>
+  </nav>
+  <div
+    className="css-9c3fle"
+  >
+    <div
+      className="css-cssveg"
+    >
+      <div
+        className="css-0"
+      >
+        <form
+          action="/search"
+          className="css-ofpocj"
+          onChange={[Function]}
+          onSubmit={[Function]}
+        >
+          <div
+            className="css-1rmzhqg"
+          >
+            <div
+              className="css-1f7apd6"
+            >
+              <div
+                className="css-18a5p6x"
+                focused={0}
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="SearchIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                  />
+                </svg>
+              </div>
+              <input
+                autoComplete="off"
+                className="css-psh2zg"
+                name="query"
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                open={0}
+                placeholder="Søk på sang"
+                type="search"
+                value=""
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <main
+      className="css-1tbz3yy"
+    >
+      <div
+        className="css-2x3ewd"
+      >
+        <div
+          className="css-1nqoz7o"
+        >
+          <div
+            className="css-cssveg"
+          >
+            <div
+              className="css-cssveg"
+            >
+              <div
+                className="css-c8mo9m"
+                onClick={[Function]}
+              />
+              <div
+                className="MuiTabs-root css-bgtre9-MuiTabs-root"
+                showindicator={1}
+              >
+                <div
+                  className="MuiTabs-scroller MuiTabs-fixed css-jpln7h-MuiTabs-scroller"
+                  onScroll={[Function]}
+                  style={
+                    Object {
+                      "marginBottom": -0,
+                      "overflow": "hidden",
+                    }
+                  }
+                >
+                  <div
+                    aria-label="filter tabs"
+                    aria-orientation={null}
+                    className="MuiTabs-flexContainer css-heg063-MuiTabs-flexContainer"
+                    onKeyDown={[Function]}
+                    role="tablist"
+                  >
+                    <button
+                      aria-controls="filter-tabpanel-0"
+                      aria-selected={false}
+                      className="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-rflsc5-MuiButtonBase-root-MuiTab-root"
+                      disabled={false}
+                      id="filter-tab-0"
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      role="tab"
+                      style={
+                        Object {
+                          "marginLeft": "1rem",
+                        }
+                      }
+                      tabIndex={-1}
+                      type="button"
+                    >
+                      
+                    </button>
+                    <button
+                      aria-controls="filter-tabpanel-1"
+                      aria-selected={true}
+                      className="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-rflsc5-MuiButtonBase-root-MuiTab-root"
+                      disabled={false}
+                      id="filter-tab-1"
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      role="tab"
+                      tabIndex={0}
+                      type="button"
+                    >
+                      Tema
+                    </button>
+                  </div>
+                  <span
+                    className="MuiTabs-indicator css-yihvlh-MuiTabs-indicator"
+                    style={
+                      Object {
+                        "left": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                aria-labelledby="filter-tab-1"
+                hidden={false}
+                id="filter-tabpanel-1"
+                role="tabpanel"
+              >
+                <ul
+                  className=" css-1bjoovq"
+                  horizontalScroll={false}
+                />
+              </div>
+            </div>
+            <div
+              className="css-1lydpzv"
+            >
+              <div
+                className="MuiFormControl-root MuiFormControl-fullWidth css-15zqp5e-MuiFormControl-root"
+              >
+                <div
+                  className="css-1y76fht"
+                >
+                  <div
+                    className="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiSelect-root css-tjat9u-MuiInputBase-root-MuiOutlinedInput-root"
+                    onClick={[Function]}
+                  >
+                    <div
+                      aria-expanded="false"
+                      aria-haspopup="listbox"
+                      aria-labelledby="sort-select-label sort-select"
+                      className="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-1jz9ynx-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                      id="sort-select"
+                      onBlur={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onMouseDown={[Function]}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      Sorter på 
+                      nyeste
+                    </div>
+                    <input
+                      aria-hidden={true}
+                      className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+                      disabled={false}
+                      name="sort"
+                      onAnimationStart={[Function]}
+                      onChange={[Function]}
+                      required={false}
+                      tabIndex={-1}
+                      value="releaseDate--desc"
+                    />
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1wu7ecg-MuiSvgIcon-root-MuiSelect-icon"
+                      data-testid="ArrowDropDownIcon"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M7 10l5 5 5-5z"
+                      />
+                    </svg>
+                    <fieldset
+                      aria-hidden={true}
+                      className="MuiOutlinedInput-notchedOutline css-9425fu-MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        className="css-1a1ihhj"
+                      >
+                        <span
+                          className="notranslate"
+                          dangerouslySetInnerHTML={
+                            Object {
+                              "__html": "&#8203;",
+                            }
+                          }
+                        />
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <button
+                className="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root css-9fezxy-MuiButtonBase-root-MuiButton-root"
+                disabled={false}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                Nullstill
+                <span
+                  className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "position": "relative",
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "opacity": 0,
+                }
+              }
+            >
+              <div
+                className="css-inmhno"
+              >
+                <span
+                  className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1arrlox-MuiCircularProgress-root"
+                  role="progressbar"
+                  style={
+                    Object {
+                      "height": 40,
+                      "width": 40,
+                    }
+                  }
+                >
+                  <svg
+                    className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                      cx={44}
+                      cy={44}
+                      fill="none"
+                      r={20.2}
+                      strokeWidth={3.6}
+                      style={Object {}}
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div
+              style={
+                Object {
+                  "opacity": 0,
+                }
+              }
+            >
+              <div />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+`;
+
+exports[`rendered successfully with query 1`] = `
+<div
+  className="css-185wnrw"
+  style={
+    Object {
+      "height": "100vh",
+    }
+  }
+>
+  <nav
+    className="css-1ebp07k"
+    open={false}
+  >
+    <div
+      className="css-ydsbw5"
+    >
+      <a
+        className="css-1yg7sek"
+        href="/"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Hjem
+        </span>
+      </a>
+      <a
+        className="css-1yg7sek"
+        href="/search"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Sanger
+        </span>
+      </a>
+      <a
+        className="css-1yg7sek"
+        href="/search?query=søker på dette"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Søk på noe
+        </span>
+      </a>
+      <a
+        className="css-1yg7sek"
+        href="/song/testsang"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Se test-sang
+        </span>
+      </a>
+    </div>
+  </nav>
+  <div
+    className="css-9c3fle"
+  >
+    <div
+      className="css-cssveg"
+    >
+      <div
+        className="css-0"
+      >
+        <form
+          action="/search"
+          className="css-ofpocj"
+          onChange={[Function]}
+          onSubmit={[Function]}
+        >
+          <div
+            className="css-1rmzhqg"
+          >
+            <div
+              className="css-1f7apd6"
+            >
+              <div
+                className="css-18a5p6x"
+                focused={0}
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="SearchIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                  />
+                </svg>
+              </div>
+              <input
+                autoComplete="off"
+                className="css-psh2zg"
+                name="query"
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                open={0}
+                placeholder="Søk på sang"
+                type="search"
+                value="all pris"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <main
+      className="css-1tbz3yy"
+    >
+      <div
+        className="css-2x3ewd"
+      />
+    </main>
+  </div>
+</div>
+`;
+
+exports[`rendered successfully without results 1`] = `
+<div
+  className="css-185wnrw"
+  style={
+    Object {
+      "height": "768px",
+    }
+  }
+>
+  <nav
+    className="css-1ebp07k"
+    open={false}
+  >
+    <div
+      className="css-ydsbw5"
+    >
+      <a
+        className="css-1yg7sek"
+        href="/"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Hjem
+        </span>
+      </a>
+      <a
+        className="css-1yg7sek"
+        href="/search"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Sanger
+        </span>
+      </a>
+      <a
+        className="css-1yg7sek"
+        href="/search?query=søker på dette"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Søk på noe
+        </span>
+      </a>
+      <a
+        className="css-1yg7sek"
+        href="/song/testsang"
+        onClick={[Function]}
+      >
+         
+        <span>
+          Se test-sang
+        </span>
+      </a>
+    </div>
+  </nav>
+  <div
+    className="css-9c3fle"
+  >
+    <div
+      className="css-cssveg"
+    >
+      <div
+        className="css-0"
+      >
+        <form
+          action="/search"
+          className="css-ofpocj"
+          onChange={[Function]}
+          onSubmit={[Function]}
+        >
+          <div
+            className="css-1rmzhqg"
+          >
+            <div
+              className="css-1f7apd6"
+            >
+              <div
+                className="css-18a5p6x"
+                focused={0}
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="SearchIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                  />
+                </svg>
+              </div>
+              <input
+                autoComplete="off"
+                className="css-psh2zg"
+                name="query"
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                open={0}
+                placeholder="Søk på sang"
+                type="search"
+                value="songnotfound"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <main
+      className="css-1tbz3yy"
+    >
+      <div
+        className="css-2x3ewd"
+      />
+    </main>
+  </div>
+</div>
+`;

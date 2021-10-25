@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, screen } from '../../utils/test-utils';
+import { TestProvider } from '../../utils/test-utils';
 import SongPage, { GET_SONG_DATA } from './SongPage';
 import { dummySong } from '../../api/testData/dummyContent';
+import renderer from 'react-test-renderer';
 
-const mocks = [
+const mockData = [
   {
     request: {
       query: GET_SONG_DATA,
@@ -22,9 +23,34 @@ const mocks = [
   },
 ];
 
-test('renders page', async () => {
-  render(<SongPage />, mocks, '/song/:id', { id: 'all-pris-acta-lovsang' });
+test('rendered successfully', () => {
+  const tree = renderer
+    .create(
+      <TestProvider
+        gqlMocks={mockData}
+        url="/song/:id"
+        params={{ id: 'all-pris-acta-lovsang' }}
+      >
+        <SongPage />
+      </TestProvider>
+    )
+    .toJSON();
 
-  const linkElement = await screen.findByText('All pris');
-  expect(linkElement).toBeInTheDocument();
+  expect(tree).toMatchSnapshot();
+});
+
+test('should show "song not found"', () => {
+  const tree = renderer
+    .create(
+      <TestProvider
+        gqlMocks={mockData}
+        url="/song/:id"
+        params={{ id: 'all-pris-acta-lovsan' }}
+      >
+        <SongPage />
+      </TestProvider>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
