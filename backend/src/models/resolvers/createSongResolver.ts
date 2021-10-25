@@ -35,7 +35,7 @@ export const createSongResolver = async (_, args: MutationSongsInput) => {
       '-' +
       makeSlug(args.artists[0]) +
       '-' +
-      args.releaseDate.substring(0, 4);
+      args.releaseDate.getFullYear();
     stream = createReadStream();
     pathNameSmall = `/var/www/html/project3/public/images/${
       fileEndpointName + '-small' + ext

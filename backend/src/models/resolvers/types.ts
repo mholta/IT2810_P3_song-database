@@ -19,7 +19,7 @@ export interface MutationSongsInput {
   iTunes?: string;
   key?: string;
   producers?: string[];
-  releaseDate: string;
+  releaseDate: Date;
   spotify?: string;
   tempo?: string;
   time?: string;
@@ -46,7 +46,7 @@ export interface ArtistsInput {
 export type AlbumsSearch = {
   _id?: string;
   title?: RegExp;
-  artist?: string;
+  artists?: string;
 };
 export type ArtistsSearch = {
   _id?: string;

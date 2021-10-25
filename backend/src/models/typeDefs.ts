@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server-core';
 
 export const typeDefs = gql`
+  scalar Date
+
   type Query {
     artists(limit: Int, id: String, name: String): [Artist!]
     songs(
@@ -24,7 +26,7 @@ export const typeDefs = gql`
       iTunes: String
       key: String
       producers: [String!]
-      releaseDate: String!
+      releaseDate: Date!
       spotify: String
       tempo: String
       time: String
@@ -75,7 +77,7 @@ export const typeDefs = gql`
     iTunes: String
     key: String
     producers: [String]
-    releaseDate: String
+    releaseDate: Date
     spotify: String
     tempo: String
     time: String
@@ -97,7 +99,7 @@ export const typeDefs = gql`
     picture: String
     producers: [String]
     publisher: String
-    releaseDate: String
+    releaseDate: Date
     spotify: String
   }
 

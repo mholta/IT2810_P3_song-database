@@ -2,7 +2,7 @@ import React from 'react';
 import { styled } from '@mui/system';
 import { LinkWithIconGridRouter } from '../../elements/LinkWithIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { RouteFolders } from '../../../pages/MainRouter';
+import { RouteFolders, Routes } from '../../../pages/MainRouter';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 
@@ -17,16 +17,13 @@ const SideBar = () => {
         <LinkWithIconGridRouter to={RouteFolders.BASE}>
           <FontAwesomeIcon icon={['fas', 'home']} /> <span>Hjem</span>
         </LinkWithIconGridRouter>
+
         <LinkWithIconGridRouter to={RouteFolders.SEARCH}>
           <FontAwesomeIcon icon={['fas', 'music']} /> <span>Sanger</span>
         </LinkWithIconGridRouter>
-        <LinkWithIconGridRouter
-          to={RouteFolders.SEARCH + '?query=søker på dette'}
-        >
-          <FontAwesomeIcon icon={['fas', 'music']} /> <span>Søk på noe</span>
-        </LinkWithIconGridRouter>
-        <LinkWithIconGridRouter to={RouteFolders.SONG + '/testsang'}>
-          <FontAwesomeIcon icon={['fas', 'music']} /> <span>Se test-sang</span>
+
+        <LinkWithIconGridRouter to={Routes.SUBMIT_SONG}>
+          <FontAwesomeIcon icon={['fas', 'music']} /> <span>Send inn sang</span>
         </LinkWithIconGridRouter>
       </SideBarInnerWrapper>
     </SideBarOuterWrapper>

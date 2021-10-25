@@ -16,7 +16,10 @@ const SearchResultsPage = () => {
 
   return (
     <SearchResultsPageWrapper>
-      <SearchOptions />
+      {!filterParams.contributor && <SearchOptions />}
+      {filterParams.contributor && (
+        <h1>Sanger {filterParams.contributor} bidrar på</h1>
+      )}
       <SearchResults
         query={GET_SEARCH_RESULTS}
         limit={20}
@@ -39,6 +42,7 @@ export const GET_SEARCH_RESULTS = gql`
   query Songs(
     $searchString: String
     $themes: [String!]
+    $contributor: String
     $sortOrder: SortOrder!
     $sortType: SortType!
     $page: Int!
@@ -46,7 +50,7 @@ export const GET_SEARCH_RESULTS = gql`
   ) {
     songs(
       searchString: $searchString
-      filter: { categories: $themes }
+      filter: { categories: $themes, contributor: $contributor }
       limit: $limit
       page: $page
       sorting: { order: $sortOrder, sortType: $sortType }

@@ -14,7 +14,7 @@ export const albumsResolver = async (_, args: AlbumsInput) => {
     };
   }
   if (args.artist) {
-    search = { ...search, artist: args.artist };
+    search = { ...search, artists: args.artist };
   }
   return await Albums.find(search).limit(limit).populate('artists');
 };

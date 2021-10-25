@@ -86,7 +86,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
           <h3>Toneart:</h3>
           <div>{song.key}</div>
         </InfoListItem>
-        {song.tempo && (
+        {song.tempo && song.time && (
           <InfoListItem>
             <h3>Tempo:</h3>
             <div>

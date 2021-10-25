@@ -5,6 +5,7 @@ import HomePage from './HomePage/HomePage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import SearchResultsPage from './SongsPage/SongsPage';
 import SongPage from './SongPage/SongPage';
+import SubmitSongPage from './SubmitSong/SubmitSongPage';
 
 export enum Routes {
   HOME = '/',
@@ -12,6 +13,7 @@ export enum Routes {
   SEARCH_RESULTS = '/search',
   NOT_FOUND = '/404',
   CONTRIBUTOR = '/contributor',
+  SUBMIT_SONG = '/submit-song',
 }
 
 export enum RouteFolders {
@@ -39,6 +41,11 @@ const MainRouter = () => {
       <Route
         path={Routes.CONTRIBUTOR}
         component={ContributorPage}
+        key={location.key}
+      />
+      <Route
+        path={Routes.SUBMIT_SONG}
+        component={SubmitSongPage}
         key={location.key}
       />
       <Route component={NotFoundPage} key={location.key} />

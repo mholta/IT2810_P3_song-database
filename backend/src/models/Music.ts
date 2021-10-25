@@ -22,7 +22,7 @@ const AlbumSchema = new Schema({
   picture: String,
   producers: { type: [String], default: undefined },
   publisher: String,
-  releaseDate: String,
+  releaseDate: Date,
   spotify: String,
 });
 AlbumSchema.index({ title: 'text' });
@@ -35,7 +35,7 @@ const SongSchema = new Schema({
   iTunes: String,
   key: String,
   producers: { type: [String], default: undefined },
-  releaseDate: String,
+  releaseDate: Date,
   spotify: String,
   tempo: String,
   time: String,
@@ -53,12 +53,12 @@ const CategorySchema = new Schema({
 export interface Album extends Document {
   _id: string;
   title: string;
-  artists: String[];
+  artists: string[];
   iTunes: string;
   picture: string;
   producers: string[];
   publisher: string;
-  releaseDate: String;
+  releaseDate: Date;
   spotify: string;
 }
 
@@ -84,7 +84,7 @@ export interface Song extends Document {
   iTunes: string;
   key: string;
   producers: string[];
-  releaseDate: String;
+  releaseDate: Date;
   spotify: string;
   tempo: string;
   time: string;

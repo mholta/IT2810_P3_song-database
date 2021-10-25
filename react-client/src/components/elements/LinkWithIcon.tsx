@@ -23,6 +23,11 @@ export const LinkWithIconGridRouter = styled(Link)`
   grid-template-columns: 1em auto;
   gap: 0.6em;
   line-height: 1;
+  text-decoration: none;
+
+  :hover {
+    text-decoration: underline;
+  }
 
   margin: 0.6em 0;
 

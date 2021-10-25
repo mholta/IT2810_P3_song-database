@@ -43,11 +43,7 @@ const TopBar = () => {
   return (
     <MainWrapper>
       <BarFlexWrapper>
-        <FormTopLayer
-          action="/search"
-          onSubmit={handleSubmit}
-          onChange={() => console.log('Changed')}
-        >
+        <FormTopLayer action="/search" onSubmit={handleSubmit}>
           <TopBarInnerWrapper>
             <SearchInputField />
           </TopBarInnerWrapper>
