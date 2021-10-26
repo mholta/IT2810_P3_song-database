@@ -1,0 +1,17 @@
+[
+  {
+      "_id": "overgivelse",
+      "title": "Overgivelse",
+      "__typename": "Category"
+  },
+  {
+      "_id": "nade-og-kross",
+      "title": "Nåde og kross",
+      "__typename": "Category"
+  },
+  {
+      "_id": "tro-og-tillit",
+      "title": "Tro og tillit",
+      "__typename": "Category"
+  }
+]
