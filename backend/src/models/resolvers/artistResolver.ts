@@ -13,6 +13,5 @@ export const artistResolver = async (_, args: ArtistsInput) => {
       name: RegExp(args.name, 'i'),
     };
   }
-  console.log(search);
   return await Artists.find(search).limit(limit);
 };

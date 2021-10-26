@@ -13,7 +13,7 @@ export const makeSlug = (title: string): string => {
 export interface MutationSongsInput {
   _id?: string;
   title: string;
-  artists: string;
+  artists: string[];
   album: string;
   contributors?: string[];
   iTunes?: string;
