@@ -20,6 +20,7 @@ const startServer = async () => {
       dbName: process.env.DB_NAME,
     }
   );
+
   app.listen({ port: 4000 }, () => {
     console.log(`http://localhost:4000${server.graphqlPath}`);
   });

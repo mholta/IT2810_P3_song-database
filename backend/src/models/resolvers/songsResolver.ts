@@ -49,6 +49,7 @@ export const songsResolver = async (_, args: SongsInput) => {
     [sorting.sortType]: SortOrderToDB(sorting.order),
     _id: 1,
   };
+  console.log(sort);
   let categoryFilter = {};
   if (categories.length > 0) {
     categoryFilter = { categories: { $in: categories } };

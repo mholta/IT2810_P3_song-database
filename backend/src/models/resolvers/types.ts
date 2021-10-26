@@ -1,3 +1,5 @@
+import { ReadStream } from 'fs';
+
 export const makeSlug = (title: string): string => {
   return title
     .split(new RegExp('\\s+'))
@@ -22,14 +24,34 @@ export interface MutationSongsInput {
   tempo?: string;
   time?: string;
   writers?: string[];
+  file: Promise<{
+    createReadStream(): ReadStream;
+    filename: string;
+    mimetype: string;
+    encoding: string;
+  }>;
 }
-export interface ArtistAlbumInput {
+export interface AlbumsInput {
+  id?: string;
+  title?: string;
+  limit?: number;
+  artist?: string;
+}
+export interface ArtistsInput {
   id?: string;
   name?: string;
   limit?: number;
 }
 
-export type ArtistSearch = { _id?: string; name?: string };
+export type AlbumsSearch = {
+  _id?: string;
+  title?: RegExp;
+  artist?: string;
+};
+export type ArtistsSearch = {
+  _id?: string;
+  name?: RegExp;
+};
 
 export interface SongsSearch {
   $text?: { $search: string };

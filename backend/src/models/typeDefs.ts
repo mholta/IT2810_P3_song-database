@@ -10,7 +10,7 @@ export const typeDefs = gql`
       sorting: Sorting
       page: Int
     ): SongResponse
-    albums(limit: Int, id: String, name: String): [Album!]
+    albums(limit: Int, id: String, title: String, artist: String): [Album!]
     song(id: String!): Song
     categories: [Category!]
   }
@@ -18,17 +18,19 @@ export const typeDefs = gql`
   type Mutation {
     createSong(
       album: String!
-      artists: [String]!
-      contributors: [String]
+      artists: [String!]!
+      categories: [String!]
+      contributors: [String!]
       iTunes: String
       key: String
-      producers: [String]
-      releaseDate: String
+      producers: [String!]
+      releaseDate: String!
       spotify: String
       tempo: String
       time: String
       title: String!
-      writers: [String]
+      writers: [String!]
+      file: Upload
     ): Song!
   }
   input Filter {
