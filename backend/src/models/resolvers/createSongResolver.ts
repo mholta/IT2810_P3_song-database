@@ -4,14 +4,30 @@ import path from 'path';
 import fs from 'fs';
 import sharp from 'sharp';
 import isImage from 'is-image';
+import { UserInputError } from 'apollo-server-errors';
 
 export const createSongResolver = async (_, args: MutationSongsInput) => {
+  // to throw error if artist doesnt exist
+  const artistsInDB = await Artists.countDocuments({
+    _id: { $in: args.artists },
+  });
+  if (artistsInDB !== args.artists.length) {
+    throw new UserInputError(
+      'Some or one of the artists not referencing an arist'
+    );
+  }
   const albumSlug = makeSlug(args.album);
-  let stream, pathNameBig, pathNameSmall, smallImg, biggerImg;
-  if (args.file) {
+  let stream: fs.ReadStream,
+    pathNameBig: string,
+    pathNameSmall: string,
+    smallImg: sharp.Sharp,
+    biggerImg: sharp.Sharp;
+  let addFile = false;
+  if (args.file && args.album !== albumSlug) {
+    addFile = true;
     const { createReadStream, filename } = await args.file;
     if (!isImage(filename)) {
-      throw Error('File is not an image');
+      throw new UserInputError('File is not an image');
     }
     const { ext } = path.parse(filename);
     const fileEndpointName =
@@ -30,40 +46,39 @@ export const createSongResolver = async (_, args: MutationSongsInput) => {
     smallImg = sharp().resize({ width: 200, height: 200, fit: 'cover' });
     biggerImg = sharp().resize({ width: 600, height: 600, fit: 'cover' });
 
-    if (args.album !== albumSlug) {
-      const album = new Albums({
-        _id: albumSlug,
-        title: args.album,
-        artists: args.artists,
-        releaseDate: args.releaseDate,
-        picture:
-          'http://it2810-21.idi.ntnu.no/project3/public/images/' +
-          fileEndpointName +
-          ext,
-      });
-      args.album = albumSlug;
-      await album.save();
-    } else {
-      await Albums.findById(args.album);
-    }
-  } else {
-    try {
-      await Albums.findById(args.album);
-    } catch {
-      throw Error('A new album must have an image');
-    }
+    const album = new Albums({
+      _id: albumSlug,
+      title: args.album,
+      artists: args.artists,
+      releaseDate: args.releaseDate,
+      picture:
+        'http://it2810-21.idi.ntnu.no/project3/public/images/' +
+        fileEndpointName +
+        ext,
+    });
+    args.album = albumSlug;
+    await album.save();
+  } else if ((await Albums.findById(args.album)) === null) {
+    throw new UserInputError('A new album must have an image');
   }
-  // to throw error if artist doesnt exist
-  args.artists.forEach(async (artist) => {
-    await Artists.findById(artist);
-  });
+
   const slug = makeSlug(args.title) + '-' + args.artists[0];
   args._id = slug;
-
+  if (!args.contributors) {
+    delete args.contributors;
+  }
+  if (!args.writers) {
+    delete args.writers;
+  }
+  if (!args.producers) {
+    delete args.writers;
+  }
   const song = new Songs(args);
   const songToBePopulated = await song.save();
-  // await stream.pipe(smallImg).pipe(fs.createWriteStream(pathNameSmall));
-  await stream.pipe(biggerImg).pipe(fs.createWriteStream(pathNameBig));
+  if (addFile) {
+    stream.pipe(smallImg).pipe(fs.createWriteStream(pathNameSmall));
+    stream.pipe(biggerImg).pipe(fs.createWriteStream(pathNameBig));
+  }
   return await songToBePopulated.populate([
     {
       path: 'album',
