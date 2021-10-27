@@ -14,7 +14,7 @@ export const useStaticContent = () => {
   }, [loading, themesData, dispatch]);
 };
 
-const GET_THEMES = gql`
+export const GET_THEMES = gql`
   query GetThemes {
     categories {
       _id
