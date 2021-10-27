@@ -8,6 +8,7 @@ import { UserInputError } from 'apollo-server-errors';
 
 export const createSongResolver = async (_, args: MutationSongsInput) => {
   // to throw error if artist doesnt exist
+  const releaseDate = new Date(args.releaseDate);
   const artistsInDB = await Artists.countDocuments({
     _id: { $in: args.artists },
   });
@@ -43,7 +44,7 @@ export const createSongResolver = async (_, args: MutationSongsInput) => {
       '-' +
       makeSlug(args.artists[0]) +
       '-' +
-      args.releaseDate.getFullYear();
+      releaseDate.getFullYear();
     stream = createReadStream();
     pathNameSmall = `/var/www/html/project3/public/images/${
       fileEndpointName + '-small' + ext

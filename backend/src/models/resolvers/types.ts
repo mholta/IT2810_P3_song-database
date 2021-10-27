@@ -20,7 +20,7 @@ export interface MutationSongsInput {
   iTunes?: string;
   key?: string;
   producers?: string[];
-  releaseDate: Date;
+  releaseDate: string;
   spotify?: string;
   tempo?: string;
   time?: string;

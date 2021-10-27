@@ -18,7 +18,7 @@ import PageLayoutWrapper from './components/layout/PageLayoutWrapper';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'http://it2810-21.idi.ntnu.no:4000/graphql',
   cache: new InMemoryCache(),
   headers: {
     mode: 'no-cors',
