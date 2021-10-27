@@ -15,6 +15,7 @@ export interface MutationSongsInput {
   title: string;
   artists: string[];
   album: string;
+  categories?: string[];
   contributors?: string[];
   iTunes?: string;
   key?: string;

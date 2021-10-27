@@ -1,4 +1,4 @@
-import { Albums, Artists, Songs } from '../Music';
+import { Albums, Artists, Categories, Songs } from '../Music';
 import { makeSlug, MutationSongsInput } from './types';
 import path from 'path';
 import fs from 'fs';
@@ -14,6 +14,14 @@ export const createSongResolver = async (_, args: MutationSongsInput) => {
   if (artistsInDB !== args.artists.length) {
     throw new UserInputError(
       'Some or one of the artists not referencing an arist'
+    );
+  }
+  const categoriesInDB = await Categories.countDocuments({
+    _id: { $in: args.categories || [] },
+  });
+  if (args.categories && categoriesInDB !== args.categories.length) {
+    throw new UserInputError(
+      'Some or one of the categories not referencing a category'
     );
   }
   const albumSlug = makeSlug(args.album);
