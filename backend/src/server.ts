@@ -1,14 +1,12 @@
 import { ApolloServer } from 'apollo-server-express';
-import express from 'express';
 import mongoose from 'mongoose';
 import { resolvers } from './models/resolvers';
 import { typeDefs } from './models/typeDefs';
+import { app } from './app';
 
 require('dotenv').config();
 
 const startServer = async () => {
-  const app = express();
-
   const server = new ApolloServer({ typeDefs, resolvers });
 
   server.applyMiddleware({ app });
