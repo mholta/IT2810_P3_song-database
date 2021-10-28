@@ -2,7 +2,8 @@
   color-scheme: dark;
 }
 
-html {
+html,
+body {
   height: 100%;
 }
 
@@ -13,11 +14,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
   font-size: 16px;
-
-  background-color: #151515;
   overflow: hidden;
+  background-color: #151515;
 }
 
 * {

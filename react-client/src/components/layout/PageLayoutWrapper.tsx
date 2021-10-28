@@ -1,10 +1,11 @@
 import { styled } from '@mui/system';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Div100vh from 'react-div-100vh';
 import { SectionsWrapper } from '../elements/Section';
 import TopBar from './TopBar/TopBar';
 import SideBar from './SideBar/SideBar';
 import { useStaticContent } from '../../hooks/useStaticContent';
+import { outline } from '../../styles/classes';
 
 interface PageLayoutWrapperProps {
   children: React.ReactNode;
@@ -14,41 +15,40 @@ const PageLayoutWrapper = ({ children }: PageLayoutWrapperProps) => {
   // Hook for fetching categories and adding to redux. Only on initial page load
   useStaticContent();
 
+  // Use effect for setting height values on resize
+  useEffect(() => {
+    const handleResize = () => {
+      document.body.setAttribute('style', `--100vh: ${window.innerHeight}px;`);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Trigger on initial load
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <FullPageWrapper>
       <SideBar />
-      <MainContentWrapper>
+      <div>
         <TopBar />
-        <ChildrenWrapper>
+        <main>
           <ChildrenInnerWrapper>{children}</ChildrenInnerWrapper>
-        </ChildrenWrapper>
-      </MainContentWrapper>
+        </main>
+      </div>
     </FullPageWrapper>
   );
 };
 
-const MainContentWrapper = styled('div')`
-  display: grid;
-  grid-template-rows: auto 1fr;
-
-  height: 100%;
-  max-height: 100%;
-  flex-grow: 1;
-`;
-
 const ChildrenInnerWrapper = styled(SectionsWrapper)``;
 
-const ChildrenWrapper = styled('main')`
-  overflow: auto;
-  max-height: 100%;
-`;
-
-const FullPageWrapper = styled(Div100vh)`
-  height: 100%;
+const FullPageWrapper = styled('div')`
+  height: var(--100vh);
   width: 100%;
   display: flex;
 
-  overflow: hidden;
+  overflow: auto;
   position: relative;
 `;
 

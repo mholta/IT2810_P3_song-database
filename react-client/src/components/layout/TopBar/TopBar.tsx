@@ -9,6 +9,7 @@ import { setTopBarOpen } from '../../../store/layout/layout.actions';
 import { RootState } from '../../../store';
 import FilterCategoryList from '../../SearchFilter/SearchOptions.FilterCategoryList';
 import { QueryParam } from '../../../hooks/useQueryParams';
+import Hamburger from './Hamburger';
 
 const TopBar = () => {
   // Store
@@ -46,6 +47,7 @@ const TopBar = () => {
         <FormTopLayer action="/search" onSubmit={handleSubmit}>
           <TopBarInnerWrapper>
             <SearchInputField />
+            <Hamburger />
           </TopBarInnerWrapper>
 
           <AnimatePresence>
@@ -119,7 +121,8 @@ const TopBarInnerWrapper = styled('div')`
 `;
 
 const MainWrapper = styled('div')`
-  position: relative;
+  position: sticky;
+  top: 0;
 `;
 
 export default TopBar;
