@@ -1,7 +1,7 @@
 import { useMutation, gql } from '@apollo/client';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 import { styled } from '@mui/system';
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import {
@@ -30,6 +30,8 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
   const allThemes = useSelector(
     (rootState: RootState) => rootState.filter.allThemes
   );
+  const [createNewAlbumModalOpen, setCreateNewAlbumModalOpen] =
+    useState<boolean>(false);
 
   // Mutation
   const [createSong, { data, loading, error }] =
@@ -82,6 +84,7 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
         <AlbumSelect
           artistId={state.mainArtistId}
           setValueCallback={(value: string) => dispatch(setAlbumId(value))}
+          setNewAlbumModalOpenCallback={() => setCreateNewAlbumModalOpen(true)}
         />
       )}
 
@@ -96,6 +99,7 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
         value={state.title}
       />
 
+      {createNewAlbumModalOpen ? 'nytt alv' : 'ikke nytt alb'}
       {/* Aditional artists */}
 
       {/* Themes */}

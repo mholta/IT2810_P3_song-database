@@ -1,13 +1,19 @@
 import React from 'react';
 import { gql } from '@apollo/client';
 import DropdownSearch from './DropdownSearch';
+import { Button } from '@mui/material';
 
 interface AlbumSelect {
   setValueCallback: (value: string) => void;
+  setNewAlbumModalOpenCallback: (value: boolean) => void;
   artistId: string;
 }
 
-const AlbumSelect = ({ setValueCallback, artistId }: AlbumSelect) => {
+const AlbumSelect = ({
+  setValueCallback,
+  setNewAlbumModalOpenCallback,
+  artistId,
+}: AlbumSelect) => {
   return (
     <DropdownSearch
       required
@@ -22,6 +28,17 @@ const AlbumSelect = ({ setValueCallback, artistId }: AlbumSelect) => {
       }}
       searchKey="title"
       setValueCallback={setValueCallback}
+      noOptionsComponent={
+        <div>
+          Ingen resultat.
+          <Button
+            onClick={() => setNewAlbumModalOpenCallback(true)}
+            variant="contained"
+          >
+            Opprett nytt album
+          </Button>
+        </div>
+      }
     />
   );
 };

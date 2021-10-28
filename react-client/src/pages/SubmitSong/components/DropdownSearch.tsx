@@ -21,6 +21,7 @@ interface DropdownSearchProps {
   dataKey: string;
   id: string;
   required: boolean;
+  noOptionsComponent?: React.ReactNode;
 }
 
 const DropdownSearch = ({
@@ -32,6 +33,7 @@ const DropdownSearch = ({
   dataKey,
   id,
   required,
+  noOptionsComponent,
 }: DropdownSearchProps) => {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<readonly Artist[]>([]);
@@ -80,6 +82,7 @@ const DropdownSearch = ({
       loading={loading}
       onInputChange={(e, newInputValue) => setInputValue(newInputValue)}
       onChange={(e, newValue) => setValueCallback(newValue?._id ?? '')}
+      noOptionsText={noOptionsComponent ?? 'Ingen resultat'}
       renderInput={(params) => (
         <TextField
           {...params}
