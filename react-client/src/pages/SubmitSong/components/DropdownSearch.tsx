@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useQuery, gql, DocumentNode } from '@apollo/client';
+import { useQuery, DocumentNode } from '@apollo/client';
 
 type SearchKey = 'name' | 'title';
 
@@ -101,14 +101,5 @@ const DropdownSearch = ({
     />
   );
 };
-
-export const GET_ARTIST_QUERY = gql`
-  query GetArtists($name: String, $limit: Int!) {
-    artists(name: $name, limit: $limit) {
-      _id
-      name
-    }
-  }
-`;
 
 export default DropdownSearch;

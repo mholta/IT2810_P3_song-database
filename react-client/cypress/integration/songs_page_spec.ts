@@ -1,4 +1,4 @@
-import { aliasQuery, hasOperationName } from '../utils/graphql-test-utils';
+import { aliasQuery } from '../utils/graphql-test-utils';
 
 describe('The Songs Page', () => {
   beforeEach(() => {

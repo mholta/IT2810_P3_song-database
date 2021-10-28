@@ -31,8 +31,6 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
     (rootState: RootState) => rootState.filter.allThemes
   );
 
-  console.log(state);
-
   // Mutation
   const [createSong, { data, loading, error }] =
     useMutation(CREATE_SONG_MUTATION);
@@ -194,7 +192,7 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
       {/* Contributors */}
       <ContributorsWithPreview
         label="Bidragsytere"
-        id="contributers"
+        id="contributors"
         placeholder="Ola (gitar), Kari (vokal)"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           dispatch(setContributorsString(e.target.value))
