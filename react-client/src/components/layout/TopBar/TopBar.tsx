@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import { styled } from '@mui/system';
 import SearchInputField from './SearchInputField';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
@@ -10,6 +10,7 @@ import { RootState } from '../../../store';
 import FilterCategoryList from '../../SearchFilter/SearchOptions.FilterCategoryList';
 import { QueryParam } from '../../../hooks/useQueryParams';
 import Hamburger from './Hamburger';
+import { useClickOutside } from '../../../hooks/useClickOutside';
 
 const TopBar = () => {
   // Store
@@ -19,10 +20,16 @@ const TopBar = () => {
 
   const dispatch = useDispatch();
 
+  const ref = createRef<HTMLDivElement>();
+
   const closeTopBar = () => topBarOpen && dispatch(setTopBarOpen(false));
+
+  // Close top bar on click outside
+  useClickOutside(ref, closeTopBar);
 
   const location = useLocation();
   const [isSearchPage, setIsSearchPage] = useState<boolean>(false);
+
   const themes = useSelector(
     (rootState: RootState) => rootState.filter.allThemes
   );
@@ -42,7 +49,7 @@ const TopBar = () => {
   console.log('TopBar rendered', topBarOpen);
 
   return (
-    <MainWrapper>
+    <MainWrapper ref={ref}>
       <BarFlexWrapper>
         <FormTopLayer action="/search" onSubmit={handleSubmit}>
           <TopBarInnerWrapper>
@@ -69,23 +76,9 @@ const TopBar = () => {
           </AnimatePresence>
         </FormTopLayer>
       </BarFlexWrapper>
-      {!isSearchPage && topBarOpen && <Backdrop onClick={closeTopBar} />}
     </MainWrapper>
   );
 };
-
-const Backdrop = styled('div')`
-  background-color: transparent;
-
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-`;
 
 const expandedContentVariants: Variants = {
   show: {

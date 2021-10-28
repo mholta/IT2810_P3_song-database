@@ -40,7 +40,7 @@ const SideBar = () => {
 
 const MainWrapper = styled('div')`
   position: relative;
-  z-index: 100;
+  z-index: 150;
 `;
 
 const Backdrop = styled('div')`
@@ -81,7 +81,7 @@ const SideBarOuterWrapper = styled('nav')<{ open: boolean }>`
   transition: transform 200ms ease;
   word-break: break-all;
 
-  ${({ theme }) => theme.breakpoints.down('sm')} {
+  ${({ theme }) => theme.breakpoints.down('md')} {
     transform: translateX(0);
     margin-left: calc(-1 * var(--sidebar-width));
     z-index: 100;

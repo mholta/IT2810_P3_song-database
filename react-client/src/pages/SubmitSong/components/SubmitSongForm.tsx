@@ -273,10 +273,6 @@ const CREATE_SONG_MUTATION = gql`
 const SubmitSongFormWrapper = styled('form')`
   display: grid;
   gap: 1rem;
-
-  ${({ theme }) => theme.breakpoints.up('md')} {
-    background-color: red;
-  }
 `;
 
 export default SubmitSongForm;

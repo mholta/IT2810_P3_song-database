@@ -5,7 +5,6 @@ import { SectionsWrapper } from '../elements/Section';
 import TopBar from './TopBar/TopBar';
 import SideBar from './SideBar/SideBar';
 import { useStaticContent } from '../../hooks/useStaticContent';
-import { outline } from '../../styles/classes';
 
 interface PageLayoutWrapperProps {
   children: React.ReactNode;
@@ -31,7 +30,7 @@ const PageLayoutWrapper = ({ children }: PageLayoutWrapperProps) => {
   return (
     <FullPageWrapper>
       <SideBar />
-      <div>
+      <div style={{ flexGrow: 1 }}>
         <TopBar />
         <main>
           <ChildrenInnerWrapper>{children}</ChildrenInnerWrapper>

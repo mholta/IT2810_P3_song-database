@@ -27,15 +27,11 @@ const Hamburger = ({}: HamburgerProps) => {
 const HamburgerWrapper = styled('div')<{ open: boolean }>`
   font-size: 2rem;
 
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    font-size: 1.8rem;
-  }
-
   position: ${({ open }) => (open ? 'fixed' : 'fixed')};
   z-index: 150;
 
-  top: 2rem;
-  right: 2rem;
+  top: 1.1rem;
+  right: 1.6rem;
   width: 1.4em;
   height: 1em;
   display: flex;
@@ -75,7 +71,7 @@ const HamburgerWrapper = styled('div')<{ open: boolean }>`
   `}
 
   // Hide on large screens
-  ${({ theme }) => theme.breakpoints.up('sm')} {
+  ${({ theme }) => theme.breakpoints.up('md')} {
     display: none;
   }
 `;
