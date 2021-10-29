@@ -15,6 +15,8 @@ const Hamburger = ({}: HamburgerProps) => {
     <HamburgerWrapper
       open={menuOpen}
       onClick={() => dispatch(setMenuOpen(!menuOpen))}
+      aria-label="hamburger menu button"
+      data-testid="hamburger-button"
     >
       <span />
       <span />

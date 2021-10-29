@@ -136,7 +136,6 @@ describe('GraphQL API', () => {
       expect.anything(),
       expect.anything()
     );
-    console.log(res.body);
     expect(res.body.data.albums).toEqual(dummyAlbums);
   });
 

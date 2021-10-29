@@ -37,38 +37,40 @@ const mockData = [
   },
 ];
 
-test('rendered successfully', () => {
-  const tree = renderer
-    .create(
-      <TestProvider gqlMocks={mockData} url="/search">
-        <SongsPage />
-      </TestProvider>
-    )
-    .toJSON();
+describe('SongsPage', () => {
+  test('rendered successfully', () => {
+    const tree = renderer
+      .create(
+        <TestProvider gqlMocks={mockData} url="/search">
+          <SongsPage />
+        </TestProvider>
+      )
+      .toJSON();
 
-  expect(tree).toMatchSnapshot();
-});
+    expect(tree).toMatchSnapshot();
+  });
 
-test('rendered successfully with query', () => {
-  const tree = renderer
-    .create(
-      <TestProvider gqlMocks={mockData} url="/search?query=all+pris">
-        <SongsPage />
-      </TestProvider>
-    )
-    .toJSON();
+  test('rendered successfully with query', () => {
+    const tree = renderer
+      .create(
+        <TestProvider gqlMocks={mockData} url="/search?query=all+pris">
+          <SongsPage />
+        </TestProvider>
+      )
+      .toJSON();
 
-  expect(tree).toMatchSnapshot();
-});
+    expect(tree).toMatchSnapshot();
+  });
 
-test('rendered successfully without results', () => {
-  const tree = renderer
-    .create(
-      <TestProvider gqlMocks={mockData} url="/search?query=songnotfound">
-        <SongsPage />
-      </TestProvider>
-    )
-    .toJSON();
+  test('rendered successfully without results', () => {
+    const tree = renderer
+      .create(
+        <TestProvider gqlMocks={mockData} url="/search?query=songnotfound">
+          <SongsPage />
+        </TestProvider>
+      )
+      .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
 });

@@ -1,68 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rendered successfully 1`] = `
+exports[`SongsPage rendered successfully 1`] = `
 <div
-  className="css-185wnrw"
-  style={
-    Object {
-      "height": "768px",
-    }
-  }
+  className="css-q8cb76"
 >
-  <nav
-    className="css-1ebp07k"
-    open={false}
-  >
-    <div
-      className="css-ydsbw5"
-    >
-      <a
-        className="css-1yg7sek"
-        href="/"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Hjem
-        </span>
-      </a>
-      <a
-        className="css-1yg7sek"
-        href="/search"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Sanger
-        </span>
-      </a>
-      <a
-        className="css-1yg7sek"
-        href="/search?query=søker på dette"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Søk på noe
-        </span>
-      </a>
-      <a
-        className="css-1yg7sek"
-        href="/song/testsang"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Se test-sang
-        </span>
-      </a>
-    </div>
-  </nav>
   <div
-    className="css-9c3fle"
+    className="css-15uhz30"
+  >
+    <nav
+      className="css-ag1rcq"
+      open={false}
+    >
+      <div
+        className="css-ydsbw5"
+      >
+        <a
+          className="css-136ox9k"
+          href="/"
+          onClick={[Function]}
+        >
+           
+          <span>
+            Hjem
+          </span>
+        </a>
+        <a
+          className="css-136ox9k"
+          href="/search"
+          onClick={[Function]}
+        >
+           
+          <span>
+            Sanger
+          </span>
+        </a>
+        <a
+          className="css-136ox9k"
+          href="/submit-song"
+          onClick={[Function]}
+        >
+           
+          <span>
+            Send inn sang
+          </span>
+        </a>
+      </div>
+    </nav>
+  </div>
+  <div
+    style={
+      Object {
+        "flexGrow": 1,
+      }
+    }
   >
     <div
-      className="css-cssveg"
+      className="css-keuofv"
     >
       <div
         className="css-0"
@@ -70,7 +63,6 @@ exports[`rendered successfully 1`] = `
         <form
           action="/search"
           className="css-ofpocj"
-          onChange={[Function]}
           onSubmit={[Function]}
         >
           <div
@@ -108,13 +100,23 @@ exports[`rendered successfully 1`] = `
                 value=""
               />
             </div>
+            <div
+              aria-label="hamburger menu button"
+              className="css-macrnf"
+              data-testid="hamburger-button"
+              onClick={[Function]}
+              open={false}
+            >
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
           </div>
         </form>
       </div>
     </div>
-    <main
-      className="css-1tbz3yy"
-    >
+    <main>
       <div
         className="css-2x3ewd"
       >
@@ -389,69 +391,62 @@ exports[`rendered successfully 1`] = `
 </div>
 `;
 
-exports[`rendered successfully with query 1`] = `
+exports[`SongsPage rendered successfully with query 1`] = `
 <div
-  className="css-185wnrw"
-  style={
-    Object {
-      "height": "100vh",
-    }
-  }
+  className="css-q8cb76"
 >
-  <nav
-    className="css-1ebp07k"
-    open={false}
-  >
-    <div
-      className="css-ydsbw5"
-    >
-      <a
-        className="css-1yg7sek"
-        href="/"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Hjem
-        </span>
-      </a>
-      <a
-        className="css-1yg7sek"
-        href="/search"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Sanger
-        </span>
-      </a>
-      <a
-        className="css-1yg7sek"
-        href="/search?query=søker på dette"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Søk på noe
-        </span>
-      </a>
-      <a
-        className="css-1yg7sek"
-        href="/song/testsang"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Se test-sang
-        </span>
-      </a>
-    </div>
-  </nav>
   <div
-    className="css-9c3fle"
+    className="css-15uhz30"
+  >
+    <nav
+      className="css-ag1rcq"
+      open={false}
+    >
+      <div
+        className="css-ydsbw5"
+      >
+        <a
+          className="css-136ox9k"
+          href="/"
+          onClick={[Function]}
+        >
+           
+          <span>
+            Hjem
+          </span>
+        </a>
+        <a
+          className="css-136ox9k"
+          href="/search"
+          onClick={[Function]}
+        >
+           
+          <span>
+            Sanger
+          </span>
+        </a>
+        <a
+          className="css-136ox9k"
+          href="/submit-song"
+          onClick={[Function]}
+        >
+           
+          <span>
+            Send inn sang
+          </span>
+        </a>
+      </div>
+    </nav>
+  </div>
+  <div
+    style={
+      Object {
+        "flexGrow": 1,
+      }
+    }
   >
     <div
-      className="css-cssveg"
+      className="css-keuofv"
     >
       <div
         className="css-0"
@@ -459,7 +454,6 @@ exports[`rendered successfully with query 1`] = `
         <form
           action="/search"
           className="css-ofpocj"
-          onChange={[Function]}
           onSubmit={[Function]}
         >
           <div
@@ -497,13 +491,23 @@ exports[`rendered successfully with query 1`] = `
                 value="all pris"
               />
             </div>
+            <div
+              aria-label="hamburger menu button"
+              className="css-macrnf"
+              data-testid="hamburger-button"
+              onClick={[Function]}
+              open={false}
+            >
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
           </div>
         </form>
       </div>
     </div>
-    <main
-      className="css-1tbz3yy"
-    >
+    <main>
       <div
         className="css-2x3ewd"
       />
@@ -512,69 +516,62 @@ exports[`rendered successfully with query 1`] = `
 </div>
 `;
 
-exports[`rendered successfully without results 1`] = `
+exports[`SongsPage rendered successfully without results 1`] = `
 <div
-  className="css-185wnrw"
-  style={
-    Object {
-      "height": "768px",
-    }
-  }
+  className="css-q8cb76"
 >
-  <nav
-    className="css-1ebp07k"
-    open={false}
-  >
-    <div
-      className="css-ydsbw5"
-    >
-      <a
-        className="css-1yg7sek"
-        href="/"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Hjem
-        </span>
-      </a>
-      <a
-        className="css-1yg7sek"
-        href="/search"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Sanger
-        </span>
-      </a>
-      <a
-        className="css-1yg7sek"
-        href="/search?query=søker på dette"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Søk på noe
-        </span>
-      </a>
-      <a
-        className="css-1yg7sek"
-        href="/song/testsang"
-        onClick={[Function]}
-      >
-         
-        <span>
-          Se test-sang
-        </span>
-      </a>
-    </div>
-  </nav>
   <div
-    className="css-9c3fle"
+    className="css-15uhz30"
+  >
+    <nav
+      className="css-ag1rcq"
+      open={false}
+    >
+      <div
+        className="css-ydsbw5"
+      >
+        <a
+          className="css-136ox9k"
+          href="/"
+          onClick={[Function]}
+        >
+           
+          <span>
+            Hjem
+          </span>
+        </a>
+        <a
+          className="css-136ox9k"
+          href="/search"
+          onClick={[Function]}
+        >
+           
+          <span>
+            Sanger
+          </span>
+        </a>
+        <a
+          className="css-136ox9k"
+          href="/submit-song"
+          onClick={[Function]}
+        >
+           
+          <span>
+            Send inn sang
+          </span>
+        </a>
+      </div>
+    </nav>
+  </div>
+  <div
+    style={
+      Object {
+        "flexGrow": 1,
+      }
+    }
   >
     <div
-      className="css-cssveg"
+      className="css-keuofv"
     >
       <div
         className="css-0"
@@ -582,7 +579,6 @@ exports[`rendered successfully without results 1`] = `
         <form
           action="/search"
           className="css-ofpocj"
-          onChange={[Function]}
           onSubmit={[Function]}
         >
           <div
@@ -620,13 +616,23 @@ exports[`rendered successfully without results 1`] = `
                 value="songnotfound"
               />
             </div>
+            <div
+              aria-label="hamburger menu button"
+              className="css-macrnf"
+              data-testid="hamburger-button"
+              onClick={[Function]}
+              open={false}
+            >
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
           </div>
         </form>
       </div>
     </div>
-    <main
-      className="css-1tbz3yy"
-    >
+    <main>
       <div
         className="css-2x3ewd"
       />

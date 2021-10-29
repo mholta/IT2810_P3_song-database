@@ -46,8 +46,6 @@ const TopBar = () => {
     e.preventDefault();
   };
 
-  console.log('TopBar rendered', topBarOpen);
-
   return (
     <MainWrapper ref={ref}>
       <BarFlexWrapper>

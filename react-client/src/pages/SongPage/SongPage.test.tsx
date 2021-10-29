@@ -23,34 +23,36 @@ const mockData = [
   },
 ];
 
-test('rendered successfully', () => {
-  const tree = renderer
-    .create(
-      <TestProvider
-        gqlMocks={mockData}
-        url="/song/:id"
-        params={{ id: 'all-pris-acta-lovsang' }}
-      >
-        <SongPage />
-      </TestProvider>
-    )
-    .toJSON();
+describe('SongPage', () => {
+  test('rendered successfully', () => {
+    const tree = renderer
+      .create(
+        <TestProvider
+          gqlMocks={mockData}
+          url="/song/:id"
+          params={{ id: 'all-pris-acta-lovsang' }}
+        >
+          <SongPage />
+        </TestProvider>
+      )
+      .toJSON();
 
-  expect(tree).toMatchSnapshot();
-});
+    expect(tree).toMatchSnapshot();
+  });
 
-test('should show "song not found"', () => {
-  const tree = renderer
-    .create(
-      <TestProvider
-        gqlMocks={mockData}
-        url="/song/:id"
-        params={{ id: 'all-pris-acta-lovsan' }}
-      >
-        <SongPage />
-      </TestProvider>
-    )
-    .toJSON();
+  test('should show "song not found"', () => {
+    const tree = renderer
+      .create(
+        <TestProvider
+          gqlMocks={mockData}
+          url="/song/:id"
+          params={{ id: 'all-pris-acta-lovsan' }}
+        >
+          <SongPage />
+        </TestProvider>
+      )
+      .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
 });
