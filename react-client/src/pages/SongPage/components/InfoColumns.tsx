@@ -49,7 +49,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
                 <span key={'writer-' + i}>
                   <Link
                     to={
-                      RouteFolders.CONTRIBUTOR +
+                      RouteFolders.SEARCH +
                       `?${QueryParam.CONTRIBUTOR}=` +
                       writer
                     }
@@ -69,9 +69,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
               {song.producers.map((writer, i, a) => (
                 <Link
                   to={
-                    RouteFolders.CONTRIBUTOR +
-                    `?${QueryParam.CONTRIBUTOR}=` +
-                    writer
+                    RouteFolders.SEARCH + `?${QueryParam.CONTRIBUTOR}=` + writer
                   }
                   key={'writer-' + i}
                 >

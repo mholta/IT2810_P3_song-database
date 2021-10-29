@@ -19,14 +19,9 @@ const SideBar = () => {
     <MainWrapper>
       <SideBarOuterWrapper open={menuOpen}>
         <SideBarInnerWrapper>
-          <LinkWithIconGridRouter to={RouteFolders.BASE}>
-            <FontAwesomeIcon icon={['fas', 'home']} /> <span>Hjem</span>
-          </LinkWithIconGridRouter>
-
           <LinkWithIconGridRouter to={RouteFolders.SEARCH}>
             <FontAwesomeIcon icon={['fas', 'music']} /> <span>Sanger</span>
           </LinkWithIconGridRouter>
-
           <LinkWithIconGridRouter to={Routes.SUBMIT_SONG}>
             <FontAwesomeIcon icon={['fas', 'music']} />{' '}
             <span>Send inn sang</span>
@@ -39,7 +34,8 @@ const SideBar = () => {
 };
 
 const MainWrapper = styled('div')`
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 150;
 `;
 
@@ -54,7 +50,7 @@ const Backdrop = styled('div')`
 
 const SideBarInnerWrapper = styled('div')`
   padding: 2rem;
-  background-color: ${({ theme }) => theme.palette.background.default};
+  background-color: ${({ theme }) => theme.palette.background.paper};
   flex-grow: 1;
   border-right: 1px solid ${({ theme }) => theme.palette.border.main};
   font-size: 1.2rem;

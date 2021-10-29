@@ -106,7 +106,7 @@ const ExpandedContentWrapper = styled(motion.div)`
   & > * {
     margin: 0;
   }
-  background-color: ${({ theme }) => theme.palette.background.default};
+  background-color: ${({ theme }) => theme.palette.background.paper};
 `;
 
 const TopBarInnerWrapper = styled('div')`
@@ -116,6 +116,8 @@ const TopBarInnerWrapper = styled('div')`
 const MainWrapper = styled('div')`
   position: sticky;
   top: 0;
+  z-index: 90;
+  background-color: ${({ theme }) => theme.palette.background.default};
 `;
 
 export default TopBar;

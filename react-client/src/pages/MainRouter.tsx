@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
-import ContributorPage from './ContributorPage/ContributorPage';
 import HomePage from './HomePage/HomePage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import SearchResultsPage from './SongsPage/SongsPage';
@@ -12,7 +11,6 @@ export enum Routes {
   SONG = '/song/:id',
   SEARCH_RESULTS = '/search',
   NOT_FOUND = '/404',
-  CONTRIBUTOR = '/contributor',
   SUBMIT_SONG = '/submit-song',
 }
 
@@ -22,7 +20,6 @@ export enum RouteFolders {
   ALBUM = '/album',
   ARTIST = '/artist',
   SEARCH = '/search',
-  CONTRIBUTOR = '/contributor',
 }
 
 const MainRouter = () => {
@@ -36,11 +33,6 @@ const MainRouter = () => {
       <Route
         path={Routes.SEARCH_RESULTS}
         component={SearchResultsPage}
-        key={location.key}
-      />
-      <Route
-        path={Routes.CONTRIBUTOR}
-        component={ContributorPage}
         key={location.key}
       />
       <Route

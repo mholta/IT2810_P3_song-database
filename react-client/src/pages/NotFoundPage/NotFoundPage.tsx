@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
+import { SectionsWrapper } from '../../components/elements/Section';
 import { Routes } from '../MainRouter';
 
 const NotFoundPage = () => {
@@ -8,7 +9,9 @@ const NotFoundPage = () => {
 
   if (location.pathname !== Routes.NOT_FOUND) history.replace(Routes.NOT_FOUND);
 
-  return <>404</>;
+  return (
+    <SectionsWrapper>Side ikke funnet. Prøv å søk på noe.</SectionsWrapper>
+  );
 };
 
 export default NotFoundPage;
