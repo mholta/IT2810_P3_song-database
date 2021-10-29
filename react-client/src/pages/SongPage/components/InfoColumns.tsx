@@ -15,12 +15,12 @@ interface InfoColumnProps {
 
 const InfoColumn = ({ song }: InfoColumnProps) => {
   const history = useHistory();
-
+  console.log(song.categories);
   return (
     <div>
       <InfoSection>
         <H2>Om sangen</H2>
-        {song.categories && song.categories.length && (
+        {song.categories && song.categories.length > 0 && (
           <InfoListItem style={{ paddingTop: 0 }}>
             <h3>Tema:</h3>
             <div>
@@ -99,7 +99,6 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
       </InfoSection>
 
       <InfoSection>
-        <H2>Om sangen</H2>
         {song.iTunes && (
           <LinkWithIcon
             href={song.iTunes}

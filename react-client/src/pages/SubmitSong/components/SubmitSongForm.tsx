@@ -26,6 +26,7 @@ import ContributorsWithPreview from './ContributorsWithPreview';
 import CreateNewAlbum from './CreateNewAlbum';
 import DatePicker from '@mui/lab/DatePicker';
 import { setReleaseDate } from '../song/song.actions';
+import { isLegalTime, formatTime, formatKey, isKeyArt } from './inputCheck';
 
 interface SubmitSongFormProps {}
 
@@ -35,6 +36,7 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
     albumReducer,
     initialAlbumState
   );
+  const [inputError, setInputError] = useState('');
 
   const allThemes = useSelector(
     (rootState: RootState) => rootState.filter.allThemes
@@ -50,7 +52,17 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    console.log(albumState.coverImage);
+    try {
+      dispatch(setTempo(formatKey(state.key)));
+      dispatch(setTime(formatTime(state.time)));
+    } catch (err) {
+      // console.log(err.message);
+      if (err instanceof Error) setInputError(err.message);
+      else {
+        setInputError('Unknown error');
+      }
+      return;
+    }
 
     // Create song
     createSong({
@@ -83,6 +95,7 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
       <SubmitSongFormWrapper
         action="/"
         onSubmit={handleSubmit}
+        onChange={() => setInputError('')}
         onKeyPress={(e: any) => {
           // Prevent for submission when clicking enter, but allow
           // default behaviour on textareas
@@ -173,6 +186,8 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
             required
             label="Toneart"
             id="key"
+            error={inputError === 'key'}
+            helperText={inputError === 'key' ? 'Feil format' : undefined}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               dispatch(setKey(e.target.value))
             }
@@ -190,6 +205,8 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
           <TextField
             label="Time"
             id="time"
+            error={inputError === 'time'}
+            helperText={inputError === 'time' ? 'Feil format' : undefined}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               dispatch(setTime(e.target.value))
             }

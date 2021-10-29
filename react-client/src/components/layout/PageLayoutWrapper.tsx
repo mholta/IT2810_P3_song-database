@@ -5,6 +5,7 @@ import { SectionsWrapper } from '../elements/Section';
 import TopBar from './TopBar/TopBar';
 import SideBar from './SideBar/SideBar';
 import { useStaticContent } from '../../hooks/useStaticContent';
+import Hamburger from './TopBar/Hamburger';
 
 interface PageLayoutWrapperProps {
   children: React.ReactNode;
@@ -36,6 +37,7 @@ const PageLayoutWrapper = ({ children }: PageLayoutWrapperProps) => {
           <ChildrenInnerWrapper>{children}</ChildrenInnerWrapper>
         </main>
       </div>
+      <Hamburger />
     </FullPageWrapper>
   );
 };

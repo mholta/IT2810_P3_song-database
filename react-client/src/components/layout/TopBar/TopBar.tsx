@@ -9,7 +9,6 @@ import { setTopBarOpen } from '../../../store/layout/layout.actions';
 import { RootState } from '../../../store';
 import FilterCategoryList from '../../SearchFilter/SearchOptions.FilterCategoryList';
 import { QueryParam } from '../../../hooks/useQueryParams';
-import Hamburger from './Hamburger';
 import { useClickOutside } from '../../../hooks/useClickOutside';
 
 const TopBar = () => {
@@ -52,7 +51,6 @@ const TopBar = () => {
         <FormTopLayer action="/search" onSubmit={handleSubmit}>
           <TopBarInnerWrapper>
             <SearchInputField />
-            <Hamburger />
           </TopBarInnerWrapper>
 
           <AnimatePresence>

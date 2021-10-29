@@ -29,7 +29,7 @@ const Hamburger = ({}: HamburgerProps) => {
 const HamburgerWrapper = styled('div')<{ open: boolean }>`
   font-size: 2rem;
 
-  position: ${({ open }) => (open ? 'fixed' : 'fixed')};
+  position: fixed;
   z-index: 150;
 
   top: 1.1rem;
@@ -40,6 +40,9 @@ const HamburgerWrapper = styled('div')<{ open: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   transition: transform 200ms ease;
+  &:hover {
+    cursor: pointer;
+  }
 
   & > span {
     height: 2px;
@@ -47,7 +50,7 @@ const HamburgerWrapper = styled('div')<{ open: boolean }>`
     background-color: #fff;
     transition: transform 200ms ease, opacity 200ms ease;
   }
-  & > span:nth-child(2) {
+  & > span:nth-of-type(2) {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -56,17 +59,17 @@ const HamburgerWrapper = styled('div')<{ open: boolean }>`
   ${(props) =>
     props.open &&
     `
-  & > span:nth-child(3) {
+  & > span:nth-of-type(3) {
     transform: rotateZ(-45deg);
   }
-  & > span:nth-child(2) {
+  & > span:nth-of-type(2) {
     transform: rotateZ(45deg);
   }
-  & > span:nth-child(1) {
+  & > span:nth-of-type(1) {
     opacity: 0;
     transform: translateY(1000%) scaleX(0.2);
   }
-  & > span:nth-child(4) {
+  & > span:nth-of-type(4) {
     opacity: 0;
     transform: translateY(-1000%) scaleX(0.2);
   }
