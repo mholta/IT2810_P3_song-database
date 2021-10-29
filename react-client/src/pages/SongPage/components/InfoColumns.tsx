@@ -17,7 +17,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
   const history = useHistory();
   console.log(song.categories);
   return (
-    <div>
+    <Wrapper>
       <InfoSection>
         <H2>Om sangen</H2>
         {song.categories && song.categories.length > 0 && (
@@ -67,15 +67,18 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
             <h3>Produsent{song.producers.length > 1 ? 'er' : ''}:</h3>
             <div>
               {song.producers.map((writer, i, a) => (
-                <Link
-                  to={
-                    RouteFolders.SEARCH + `?${QueryParam.CONTRIBUTOR}=` + writer
-                  }
-                  key={'writer-' + i}
-                >
-                  {writer}
+                <span key={'writer-' + i}>
+                  <Link
+                    to={
+                      RouteFolders.SEARCH +
+                      `?${QueryParam.CONTRIBUTOR}=` +
+                      writer
+                    }
+                  >
+                    {writer}
+                  </Link>
                   {i === a.length - 1 ? '' : i === a.length - 2 ? ' & ' : ' , '}
-                </Link>
+                </span>
               ))}
             </div>
           </InfoListItem>
@@ -126,8 +129,27 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
               {artist.name}
             </LinkWithIcon>
           ))}
+        Andre sanger som:{' '}
+        {song.artists.map((artist, i, a) => (
+          /* If we want to link to pages */
+          /* <Link to={RouteFolders.ARTIST + artist.id}>{artist.name}</Link> */
+
+          <span key={'info-artist-' + i}>
+            <Link
+              to={
+                RouteFolders.SEARCH +
+                `?${QueryParam.CONTRIBUTOR}=` +
+                artist.name
+              }
+            >
+              {artist.name}
+            </Link>
+            {i === a.length - 1 ? ' ' : i === a.length - 2 ? ' eller ' : ' , '}
+          </span>
+        ))}
+        bidrar på.
       </InfoSection>
-    </div>
+    </Wrapper>
   );
 };
 
@@ -148,6 +170,10 @@ const InfoListItem = styled('div')`
     font-weight: inherit;
     margin: 0;
   }
+`;
+
+const Wrapper = styled('div')`
+  padding-bottom: 2rem;
 `;
 
 export default InfoColumn;
