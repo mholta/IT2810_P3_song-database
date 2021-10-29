@@ -1,22 +1,22 @@
 import {
   SET_TITLE,
-  SET_ARTISTS,
   SET_MAIN_ARTIST,
   SET_RELEASE_DATE,
+  SET_COVER_IMAGE,
 } from './album.actionTypes';
 
 export interface AlbumState {
   title: string;
   releaseDate: Date | null;
   mainArtistId: string; // id of main artist
-  artists: string[]; // list of artist ids
+  coverImage: any;
 }
 
 export const initialAlbumState: AlbumState = {
   title: '',
   releaseDate: null,
   mainArtistId: '',
-  artists: [],
+  coverImage: undefined,
 };
 
 export const albumReducer = (
@@ -34,19 +34,18 @@ export const albumReducer = (
       return {
         ...state,
         mainArtistId: action.payload.artistId,
-        artists: action.payload.artistId ? [action.payload.artistId] : [],
-      };
-
-    case SET_ARTISTS:
-      return {
-        ...state,
-        artists: action.payload.artists,
       };
 
     case SET_RELEASE_DATE:
       return {
         ...state,
         releaseDate: action.payload.releaseDate,
+      };
+
+    case SET_COVER_IMAGE:
+      return {
+        ...state,
+        coverImage: action.payload.coverImage,
       };
 
     default:

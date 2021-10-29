@@ -11,3 +11,4 @@ export const SET_TEMPO = 'SET_TEMPO';
 export const SET_TIME = 'SET_TIME';
 export const SET_SPOTIFY_LINK = 'SET_SPOTIFY_LINK';
 export const SET_APPLE_MUSIC_LINK = 'SET_APPLE_MUSIC_LINK';
+export const SET_RELEASE_DATE = 'SET_RELEASE_DATE';

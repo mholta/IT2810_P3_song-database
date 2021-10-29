@@ -12,6 +12,7 @@ import {
   SET_APPLE_MUSIC_LINK,
   SET_SPOTIFY_LINK,
   SET_MAIN_ARTIST,
+  SET_RELEASE_DATE,
 } from './song.actionTypes';
 import { FilterCategory } from '../../../api/types';
 
@@ -151,6 +152,12 @@ export const songReducer = (
       return {
         ...state,
         spotifyLink: action.payload.spotifyLink,
+      };
+
+    case SET_RELEASE_DATE:
+      return {
+        ...state,
+        releaseDate: action.payload.releaseDate,
       };
 
     default:

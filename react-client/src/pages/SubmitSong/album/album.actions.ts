@@ -1,8 +1,8 @@
 import {
   SET_TITLE,
-  SET_ARTISTS,
   SET_RELEASE_DATE,
   SET_MAIN_ARTIST,
+  SET_COVER_IMAGE,
 } from './album.actionTypes';
 
 export const setTitle = (title: string) => ({
@@ -15,15 +15,12 @@ export const setMainArtist = (artistId: string) => ({
   payload: { artistId },
 });
 
-/**
- * @param artists list of id of artists
- */
-export const setArtists = (artists: string[]) => ({
-  type: SET_ARTISTS,
-  payload: { artists },
-});
-
-export const setReleaseDate = (releaseDate: Date) => ({
+export const setReleaseDate = (releaseDate: Date | null) => ({
   type: SET_RELEASE_DATE,
   payload: { releaseDate },
+});
+
+export const setCoverImage = (coverImage: any) => ({
+  type: SET_COVER_IMAGE,
+  payload: { coverImage },
 });

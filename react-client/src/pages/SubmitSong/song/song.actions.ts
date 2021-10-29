@@ -13,6 +13,7 @@ import {
   SET_SPOTIFY_LINK,
   SET_APPLE_MUSIC_LINK,
   SET_MAIN_ARTIST,
+  SET_RELEASE_DATE,
 } from './song.actionTypes';
 
 export const setTitle = (title: string) => ({
@@ -97,4 +98,9 @@ export const setAppleMusicLink = (appleMusicLink: string) => ({
   payload: {
     appleMusicLink,
   },
+});
+
+export const setReleaseDate = (releaseDate: Date | null) => ({
+  type: SET_RELEASE_DATE,
+  payload: { releaseDate },
 });

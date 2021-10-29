@@ -16,6 +16,8 @@ import { Provider as StoreProvider } from 'react-redux';
 import store from './store/store';
 import PageLayoutWrapper from './components/layout/PageLayoutWrapper';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 const client = new ApolloClient({
   uri: 'http://it2810-21.idi.ntnu.no:4000/graphql',
@@ -44,11 +46,13 @@ const App = () => {
     <ApolloProvider client={client}>
       <StoreProvider store={store}>
         <ThemeProvider theme={theme}>
-          <Router>
-            <PageLayoutWrapper>
-              <MainRouter />
-            </PageLayoutWrapper>
-          </Router>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Router>
+              <PageLayoutWrapper>
+                <MainRouter />
+              </PageLayoutWrapper>
+            </Router>
+          </LocalizationProvider>
         </ThemeProvider>
       </StoreProvider>
     </ApolloProvider>

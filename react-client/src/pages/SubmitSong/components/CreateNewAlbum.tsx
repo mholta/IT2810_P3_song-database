@@ -1,12 +1,84 @@
-import React, { useReducer } from 'react';
-import { albumReducer, initialAlbumState } from '../album/album.reducer';
+import { Button, TextField } from '@mui/material';
+import { styled } from '@mui/system';
+import React from 'react';
+import {
+  setCoverImage,
+  setReleaseDate,
+  setTitle,
+} from '../album/album.actions';
+import { AlbumState } from '../album/album.reducer';
+import DatePicker from '@mui/lab/DatePicker';
 
-interface CreateNewAlbumProps {}
+interface CreateNewAlbumProps {
+  state: AlbumState;
+  dispatch: React.Dispatch<any>;
+}
 
-const CreateNewAlbum = ({}: CreateNewAlbumProps) => {
-  const [state, dispatch] = useReducer(albumReducer, initialAlbumState);
+const CreateNewAlbum = ({ state, dispatch }: CreateNewAlbumProps) => {
+  console.log(state.coverImage);
 
-  return <div>CreateNewAlbum</div>;
+  return (
+    <SubmitSongFormWrapper>
+      <Title>Opprett nytt album</Title>
+
+      {/* Title */}
+      <TextField
+        required
+        label="Tittel"
+        id="album-title"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch(setTitle(e.target.value))
+        }
+        value={state.title}
+      />
+
+      {/* Release date */}
+      <DatePicker
+        label="Utgivelsesdato"
+        value={state.releaseDate}
+        onChange={(newValue) => dispatch(setReleaseDate(newValue))}
+        renderInput={(params) => <TextField {...params} />}
+      />
+
+      {/* Cover image upload */}
+      <input
+        accept="image/*"
+        style={{ display: 'none' }}
+        id="raised-button-file"
+        type="file"
+        onChange={({
+          target: { validity, files },
+        }: React.ChangeEvent<HTMLInputElement>) => {
+          validity.valid && dispatch(setCoverImage(files?.length && files[0]));
+        }}
+      />
+      <label htmlFor="raised-button-file">
+        <Button variant="outlined" component="span">
+          Last opp coverbilde
+        </Button>
+      </label>
+      <div>
+        {state.coverImage ? (
+          <img
+            src={URL.createObjectURL(state.coverImage)}
+            alt="preview"
+            style={{ maxWidth: '6rem' }}
+          ></img>
+        ) : (
+          <div>Trykk på knappen for å laste opp bilde</div>
+        )}
+      </div>
+    </SubmitSongFormWrapper>
+  );
 };
+
+const Title = styled('h2')`
+  margin: 0;
+`;
+
+const SubmitSongFormWrapper = styled('div')`
+  display: grid;
+  gap: 1rem;
+`;
 
 export default CreateNewAlbum;
