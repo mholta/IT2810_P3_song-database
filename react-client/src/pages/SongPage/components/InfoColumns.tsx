@@ -20,7 +20,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
     <div>
       <InfoSection>
         <H2>Om sangen</H2>
-        {song.categories && (
+        {song.categories && song.categories.length && (
           <InfoListItem style={{ paddingTop: 0 }}>
             <h3>Tema:</h3>
             <div>
@@ -41,7 +41,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
             </div>
           </InfoListItem>
         )}
-        {song.writers && (
+        {song.writers && song.writers.length > 0 && (
           <InfoListItem>
             <h3>Tekst og melodi:</h3>
             <div>
@@ -62,7 +62,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
             </div>
           </InfoListItem>
         )}
-        {song.producers && (
+        {song.producers && song.producers.length > 0 && (
           <InfoListItem>
             <h3>Produsent{song.producers.length > 1 ? 'er' : ''}:</h3>
             <div>
