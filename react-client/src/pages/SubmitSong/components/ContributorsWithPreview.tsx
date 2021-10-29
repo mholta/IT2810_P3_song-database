@@ -11,6 +11,10 @@ interface ContributorsWithPreviewProps {
   helperText?: string;
 }
 
+/**
+ * A text field for writing contributors separated by new line or comma.
+ * Added contributors will be displayed on the right.
+ */
 const ContributorsWithPreview = ({
   onChange,
   id,

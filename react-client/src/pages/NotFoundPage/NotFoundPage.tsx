@@ -3,6 +3,9 @@ import { useHistory, useLocation } from 'react-router';
 import { SectionsWrapper } from '../../components/elements/Section';
 import { Routes } from '../MainRouter';
 
+/**
+ * Page for when we enter a route that does not lead to any other page.
+ */
 const NotFoundPage = () => {
   const location = useLocation();
   const history = useHistory();

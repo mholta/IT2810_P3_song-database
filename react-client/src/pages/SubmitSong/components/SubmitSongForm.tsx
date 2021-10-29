@@ -50,6 +50,9 @@ import { useApolloClient } from '@apollo/client';
 
 interface SubmitSongFormProps {}
 
+/**
+ * A form for adding a new song to the database.
+ */
 const SubmitSongForm = ({}: SubmitSongFormProps) => {
   const [state, dispatch] = useReducer(songReducer, initialSongState);
   const [albumState, albumDispatch] = useReducer(

@@ -26,6 +26,9 @@ interface DropdownSearchProps {
   noOptionsComponent?: React.ReactNode;
 }
 
+/**
+ * A dropdown with possibility to write and search.
+ */
 const DropdownSearch = ({
   setValueCallback,
   setDateCallback,

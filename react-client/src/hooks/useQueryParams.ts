@@ -1,6 +1,9 @@
 import { useLocation, useHistory } from 'react-router-dom';
 import { RouteFolders } from '../pages/MainRouter';
 
+/**
+ * Custom hook for getting query parameters in URL.
+ */
 export const useQueryParams = () => {
   const query = new URLSearchParams(useLocation().search);
 
@@ -55,6 +58,9 @@ export const useQueryParams = () => {
   };
 };
 
+/**
+ * Enum of the different query parameters we use.
+ */
 export enum QueryParam {
   QUERY = 'query',
   CONTRIBUTOR = 'contributor',

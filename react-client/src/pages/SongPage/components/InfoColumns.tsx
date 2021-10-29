@@ -13,6 +13,9 @@ interface InfoColumnProps {
   song: Song;
 }
 
+/**
+ * Displays various information about the song.
+ */
 const InfoColumn = ({ song }: InfoColumnProps) => {
   const history = useHistory();
   return (

@@ -24,6 +24,10 @@ export const createTestStore = () => {
   return createStore(rootReducer, composeWithDevTools());
 };
 
+/**
+ * Provider used in testing that contains all other providers necessary to run the application.
+ * Mocks the Apollo Server and Router.
+ */
 export const TestProvider = ({
   children,
   gqlMocks = [],

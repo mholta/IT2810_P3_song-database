@@ -7,6 +7,9 @@ interface SongListProps {
   songs: Song[];
 }
 
+/**
+ * List of songs.
+ */
 const SongList = ({ songs }: SongListProps) => {
   return (
     <Ul>

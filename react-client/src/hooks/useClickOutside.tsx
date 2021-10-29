@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+/**
+ * Custom hook for checking if we clicked outside of an element.
+ */
 export const useClickOutside = (
   ref: React.RefObject<HTMLElement>,
   callback: Function

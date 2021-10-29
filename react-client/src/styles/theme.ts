@@ -9,6 +9,9 @@ declare module '@mui/material/styles/createPalette' {
   }
 }
 
+/**
+ * A style theme used throughout the application.
+ */
 export const theme = createTheme({
   palette: {
     mode: 'dark',

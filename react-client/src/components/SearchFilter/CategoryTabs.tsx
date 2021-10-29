@@ -8,6 +8,9 @@ import { QueryParam } from '../../hooks/useQueryParams';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
+/**
+ * Closeable tab for filtering by categories.
+ */
 const CategoryTabs = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
 

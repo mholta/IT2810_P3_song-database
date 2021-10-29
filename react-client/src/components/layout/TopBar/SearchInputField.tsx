@@ -8,6 +8,9 @@ import { QueryParam, useQueryParams } from '../../../hooks/useQueryParams';
 import { useLocation } from 'react-router';
 import { RouteFolders } from '../../../pages/MainRouter';
 
+/**
+ * Text field for searching for songs.
+ */
 const SearchInputField = () => {
   const dispatch = useDispatch();
   const topBarOpen: boolean = useSelector(

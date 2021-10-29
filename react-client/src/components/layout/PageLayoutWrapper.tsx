@@ -11,6 +11,9 @@ interface PageLayoutWrapperProps {
   children: React.ReactNode;
 }
 
+/**
+ * Wrapper for including sidebar and topbar in page.
+ */
 const PageLayoutWrapper = ({ children }: PageLayoutWrapperProps) => {
   // Hook for fetching categories and adding to redux. Only on initial page load
   useStaticContent();

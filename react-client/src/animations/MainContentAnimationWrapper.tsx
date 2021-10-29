@@ -6,6 +6,9 @@ interface MainContentAnimationWrapperProps {
   children: React.ReactNode;
 }
 
+/**
+ * Wrapper for animating opacity of content.
+ */
 const MainContentAnimationWrapper = ({
   condition,
   children,

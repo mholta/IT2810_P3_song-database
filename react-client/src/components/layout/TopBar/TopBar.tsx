@@ -11,6 +11,10 @@ import FilterCategoryList from '../../SearchFilter/SearchOptions.FilterCategoryL
 import { QueryParam } from '../../../hooks/useQueryParams';
 import { useClickOutside } from '../../../hooks/useClickOutside';
 
+/**
+ * The top of the page with searchbar and sidebar button.
+ * Will also display filtering options when the searchbar is selected.
+ */
 const TopBar = () => {
   // Store
   const topBarOpen: boolean = useSelector(

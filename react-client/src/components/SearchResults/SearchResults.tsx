@@ -19,6 +19,9 @@ interface SearchResultsProps {
   page?: number;
 }
 
+/**
+ * Displays the results of a search.
+ */
 const SearchResults = ({
   query,
   options,

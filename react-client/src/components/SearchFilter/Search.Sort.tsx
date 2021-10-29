@@ -25,6 +25,9 @@ export enum SortOrder {
   DESC = 'desc',
 }
 
+/**
+ * Dropdown menu to choose how to sort song list.
+ */
 const SearchSort = () => {
   const queryParams = useQueryParams();
 

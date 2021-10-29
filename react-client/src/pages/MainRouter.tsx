@@ -22,6 +22,9 @@ export enum RouteFolders {
   SEARCH = '/search',
 }
 
+/**
+ * Includes all pages we can visit in the application.
+ */
 const MainRouter = () => {
   // location holds state of what route is active
   const location = useLocation();

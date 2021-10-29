@@ -8,6 +8,9 @@ interface ResetButtonProps {
   type: ButtonType;
 }
 
+/**
+ * Button to reset filters.
+ */
 const ResetButton = ({ type }: ResetButtonProps) => {
   const queryParams = useQueryParams();
 

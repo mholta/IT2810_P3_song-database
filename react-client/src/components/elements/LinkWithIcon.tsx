@@ -7,6 +7,9 @@ interface LinkWithIconProps extends HTMLProps<HTMLLinkElement> {
   children: ReactNode;
 }
 
+/**
+ * Link with icon displayed on the left.
+ */
 const LinkWithIcon = ({ icon, href, children }: LinkWithIconProps) => {
   return (
     <div>

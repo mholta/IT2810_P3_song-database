@@ -9,6 +9,9 @@ const initialLayoutState: LayoutState = {
   topBarOpen: false,
 };
 
+/**
+ * A reducer for handling the state of the layout.
+ */
 export const layoutReducer = (
   state: LayoutState = initialLayoutState,
   action: any

@@ -3,6 +3,9 @@ import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import { setAllThemes } from '../store/filter/filter.actions';
 
+/**
+ * Custom hook for fetching categories from server.
+ */
 export const useStaticContent = () => {
   const dispatch = useDispatch();
   const { data: themesData, loading } = useQuery(GET_THEMES);

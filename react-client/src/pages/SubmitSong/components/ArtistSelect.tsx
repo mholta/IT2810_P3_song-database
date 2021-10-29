@@ -6,6 +6,9 @@ interface ArtistSearchProps {
   setValueCallback: (value: string) => void;
 }
 
+/**
+ * A dropdown with possibility to write and search for an existing artist.
+ */
 const ArtistSearch = ({ setValueCallback }: ArtistSearchProps) => {
   return (
     <DropdownSearch

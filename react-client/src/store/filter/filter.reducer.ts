@@ -8,6 +8,9 @@ const initialFilterState: FilterState = {
   allThemes: [],
 };
 
+/**
+ * A reducer for handling the state of the filter.
+ */
 export const filterReducer = (
   state: FilterState = initialFilterState,
   action: any

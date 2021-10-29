@@ -6,6 +6,9 @@ import { setMenuOpen } from '../../../store/layout/layout.actions';
 
 interface HamburgerProps {}
 
+/**
+ * Button for opening and closing the sidebar.
+ */
 const Hamburger = ({}: HamburgerProps) => {
   const dispatch = useDispatch();
   const menuOpen = useSelector(

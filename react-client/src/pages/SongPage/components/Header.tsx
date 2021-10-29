@@ -7,6 +7,9 @@ interface HeaderProps {
   song: Song;
 }
 
+/**
+ * Displays album cover, title and artist.
+ */
 const Header = ({ song }: HeaderProps) => {
   const albumString: string = [
     song.album.title,

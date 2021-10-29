@@ -11,6 +11,9 @@ interface FilterCategoryListProps {
   horizontalScroll?: boolean;
 }
 
+/**
+ * List of selectable buttons of categories.
+ */
 const FilterCategoryList = ({
   queryParam,
   categories: allCategories,

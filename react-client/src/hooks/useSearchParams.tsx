@@ -7,6 +7,9 @@ export interface FilterOptions {
   contributor: string | null;
 }
 
+/**
+ * Custom hook for getting filters from query parameters.
+ */
 export const useFilterParams = (): FilterOptions => {
   const params = useQueryParams();
 
@@ -27,6 +30,9 @@ export interface SortOptions {
   sortOrder: string;
 }
 
+/**
+ * Custom hook for getting sorting options from query parameters.
+ */
 export const useSortParams = (): SortOptions => {
   const params = useQueryParams();
 

@@ -1,3 +1,7 @@
+/**
+ * Interfaces of data types fetched from server.
+ */
+
 export interface Artist {
   _id: string;
   name: string;

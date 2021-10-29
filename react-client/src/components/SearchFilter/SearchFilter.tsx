@@ -8,6 +8,9 @@ interface SearchOptionsProps {
   inForm?: boolean;
 }
 
+/**
+ * Options for searching like categories, sorting and resetting of filter.
+ */
 const SearchOptions = ({ inForm }: SearchOptionsProps) => {
   return (
     <SearchOptionsWrapper>

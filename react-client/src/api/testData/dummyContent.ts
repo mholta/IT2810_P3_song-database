@@ -1,5 +1,9 @@
 import { Album, Artist, Song, FilterCategory } from '../types';
 
+/**
+ * Dummy data used in tests.
+ */
+
 export const dummyArtist: Artist = {
   _id: 'acta',
   name: 'Acta',

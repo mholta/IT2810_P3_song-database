@@ -7,6 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { setMenuOpen } from '../../../store/layout/layout.actions';
 
+/**
+ * The sidebar on the left side of the screen containing links for navigating the pages.
+ * Can be opened and closed when using narrow screen or window.
+ */
 const SideBar = () => {
   const dispatch = useDispatch();
   const menuOpen = useSelector(

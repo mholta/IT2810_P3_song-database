@@ -10,6 +10,9 @@ import {
 } from '../../hooks/useSearchParams';
 import SearchResults from '../../components/SearchResults/SearchResults';
 
+/**
+ * Page displaying the results of a search for songs.
+ */
 const SearchResultsPage = () => {
   const filterParams: FilterOptions = useFilterParams();
   const sortParams: SortOptions = useSortParams();

@@ -6,6 +6,9 @@ interface FilterTabProps {
   children: React.ReactChild;
 }
 
+/**
+ * Panel containing filters.
+ */
 const FilterTabPanel = ({ activeTab, index, children }: FilterTabProps) => {
   return (
     <div

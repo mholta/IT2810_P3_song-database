@@ -5,6 +5,9 @@ import SongPageTemplate from './SongPageTemplate';
 import MainContentAnimationWrapper from '../../animations/MainContentAnimationWrapper';
 import { Routes } from '../MainRouter';
 
+/**
+ * Page for displaying information about a song.
+ */
 const SongPage = () => {
   const { id } = useParams<{ id: string }>();
 

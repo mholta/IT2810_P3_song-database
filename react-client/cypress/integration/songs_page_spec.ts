@@ -14,7 +14,7 @@ describe('The Songs Page', () => {
     cy.wait('@gqlSongsQuery')
       .its('response.body.data.songs')
       .should((songs) => {
-        expect(songs.pages).to.be.equal(7);
+        expect(songs.pages).to.be.equal(5);
         expect(songs.songs.length).to.be.equal(20);
       });
   });
@@ -68,7 +68,7 @@ describe('The Songs Page', () => {
     cy.wait('@gqlSongsQuery')
       .its('response.body.data.songs')
       .should((songs) => {
-        expect(songs.pages).to.be.equal(7);
+        expect(songs.pages).to.be.equal(5);
         expect(songs.songs.length).to.be.equal(20);
         expect(songs.songs[0]._id).to.be.equal('all-pris-acta-lovsang');
         expect(songs.songs[1]._id).to.be.equal('alltid-god-david-andre-ostby');
@@ -81,7 +81,7 @@ describe('The Songs Page', () => {
     cy.wait('@gqlSongsQuery')
       .its('response.body.data.songs')
       .should((songs) => {
-        expect(songs.pages).to.be.equal(7);
+        expect(songs.pages).to.be.equal(5);
         expect(songs.songs.length).to.be.equal(20);
       });
   });

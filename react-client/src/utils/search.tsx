@@ -1,3 +1,6 @@
+/**
+ * Returns query parameters based on data from a form.
+ */
 export const getQueryStringFromFormSubmitEvent = (
   formData: FormData
 ): string => {

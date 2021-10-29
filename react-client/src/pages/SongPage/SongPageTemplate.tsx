@@ -7,6 +7,9 @@ interface SongPageTemplateProps {
   song: Song;
 }
 
+/**
+ * Includes the header of the song and the information about the song.
+ */
 const SongPageTemplate = ({ song }: SongPageTemplateProps) => {
   return (
     <div>
