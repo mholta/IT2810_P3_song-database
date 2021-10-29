@@ -18,9 +18,10 @@ import PageLayoutWrapper from './components/layout/PageLayoutWrapper';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { createUploadLink } from 'apollo-upload-client';
 
 const client = new ApolloClient({
-  uri: 'http://it2810-21.idi.ntnu.no:4000/graphql',
+  link: createUploadLink({ uri: 'http://it2810-21.idi.ntnu.no:4000/graphql' }),
   cache: new InMemoryCache(),
   headers: {
     mode: 'no-cors',

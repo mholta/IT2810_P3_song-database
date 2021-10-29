@@ -39,8 +39,10 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
   const allThemes = useSelector(
     (rootState: RootState) => rootState.filter.allThemes
   );
-  const [createNewAlbumModalOpen, setCreateNewAlbumModalOpen] =
-    useState<boolean>(true);
+  const [
+    createNewAlbumModalOpen,
+    setCreateNewAlbumModalOpen,
+  ] = useState<boolean>(false);
 
   // Mutation
   const [createSong, { loading, error }] = useMutation(CREATE_SONG_MUTATION);
@@ -97,7 +99,11 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
         {state.mainArtistId &&
           (createNewAlbumModalOpen ? (
             <ModalBox>
-              <CreateNewAlbum state={albumState} dispatch={albumDispatch} />
+              <CreateNewAlbum
+                state={albumState}
+                dispatch={albumDispatch}
+                setCreateNewAlbumModalOpen={setCreateNewAlbumModalOpen}
+              />
             </ModalBox>
           ) : (
             <AlbumSelect

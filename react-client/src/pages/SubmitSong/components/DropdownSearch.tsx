@@ -38,6 +38,8 @@ const DropdownSearch = ({
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<readonly Artist[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
+  const [previousInputValue, setPreviousInputValue] = useState<string>(' ');
+
   const { loading, error, refetch } = useQuery(query, {
     variables: variables,
   });
@@ -46,12 +48,14 @@ const DropdownSearch = ({
     let active = true;
 
     if (!open) return;
-
-    (async () => {
-      await refetch({ [searchKey]: inputValue }).then(({ data }) => {
-        setOptions(data[dataKey]);
-      });
-    })();
+    if (previousInputValue !== inputValue) {
+      (async () => {
+        setPreviousInputValue(inputValue);
+        await refetch({ [searchKey]: inputValue }).then(({ data }) => {
+          setOptions(data[dataKey]);
+        });
+      })();
+    }
 
     return () => {
       active = false;
@@ -74,6 +78,7 @@ const DropdownSearch = ({
       }}
       onClose={() => {
         setOpen(false);
+        setPreviousInputValue(' ');
       }}
       getOptionLabel={(option) => option[searchKey]}
       isOptionEqualToValue={(option, value) => option._id === value._id}

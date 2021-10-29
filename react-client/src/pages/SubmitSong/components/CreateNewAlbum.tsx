@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, IconButton, TextField } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
 import {
@@ -8,18 +8,28 @@ import {
 } from '../album/album.actions';
 import { AlbumState } from '../album/album.reducer';
 import DatePicker from '@mui/lab/DatePicker';
-
+import CloseIcon from '@mui/icons-material/Close';
 interface CreateNewAlbumProps {
   state: AlbumState;
   dispatch: React.Dispatch<any>;
+  setCreateNewAlbumModalOpen: React.Dispatch<boolean>;
 }
 
-const CreateNewAlbum = ({ state, dispatch }: CreateNewAlbumProps) => {
+const CreateNewAlbum = ({
+  state,
+  dispatch,
+  setCreateNewAlbumModalOpen,
+}: CreateNewAlbumProps) => {
   console.log(state.coverImage);
 
   return (
     <SubmitSongFormWrapper>
-      <Title>Opprett nytt album</Title>
+      <AlignClose>
+        <Title>Opprett nytt album</Title>
+        <IconButton onClick={() => setCreateNewAlbumModalOpen(false)}>
+          <CloseIcon />
+        </IconButton>
+      </AlignClose>
 
       {/* Title */}
       <TextField
@@ -79,6 +89,11 @@ const Title = styled('h2')`
 const SubmitSongFormWrapper = styled('div')`
   display: grid;
   gap: 1rem;
+`;
+
+const AlignClose = styled('div')`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export default CreateNewAlbum;
