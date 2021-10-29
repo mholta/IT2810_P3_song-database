@@ -39,10 +39,17 @@ const Header = ({ song }: HeaderProps) => {
   );
 };
 
-const SubtitleWrapper = styled('div')``;
+const SubtitleWrapper = styled('div')`
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    font-size: 0.9rem;
+  }
+`;
 
 const Title = styled('h1')`
   font-size: 4rem;
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    font-size: 2rem;
+  }
 `;
 
 const ImageWrapper = styled('div')`
@@ -57,6 +64,13 @@ const HeaderGrid = styled('div')`
 
   margin-top: 2rem;
   margin-bottom: 2rem;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    justify-content: center;
+  }
 `;
 
 export default Header;
