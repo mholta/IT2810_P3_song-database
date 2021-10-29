@@ -1,5 +1,8 @@
 import { Document, model, Model, Schema } from 'mongoose';
 
+/**
+ * Schemas for how we should fetch data from MongoDB database.
+ */
 const ArtistSchema = new Schema({
   _id: String,
   name: String,
@@ -50,6 +53,9 @@ const CategorySchema = new Schema({
   title: String,
 });
 
+/**
+ * Interfaces for what the documents look like in the MongoDB database.
+ */
 export interface Album extends Document {
   _id: string;
   title: string;

@@ -1,6 +1,9 @@
 import { Artists } from '../Music';
 import { ArtistsInput, ArtistsSearch } from './types';
 
+/**
+ * Resolver for artists query. Returns a list of artists.
+ */
 export const artistResolver = async (_, args: ArtistsInput) => {
   const limit = args.limit || Math.min(args.limit || 50, 50);
   let search: ArtistsSearch = {};

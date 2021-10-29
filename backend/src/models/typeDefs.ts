@@ -1,5 +1,8 @@
 import { gql } from 'apollo-server-core';
 
+/**
+ * Defines GraphQL queries, mutations and types.
+ */
 export const typeDefs = gql`
   scalar Date
 

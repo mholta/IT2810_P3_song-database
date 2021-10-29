@@ -1,3 +1,7 @@
+/**
+ * Dummy data used in tests.
+ */
+
 export const dummyArtist: any = [
   {
     _id: 'acta',

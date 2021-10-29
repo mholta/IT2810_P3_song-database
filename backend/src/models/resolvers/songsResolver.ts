@@ -10,6 +10,9 @@ import {
   SortType,
 } from './types';
 
+/**
+ * Resolver for songs query. Returns a list of songs.
+ */
 export const songsResolver = async (_, args: SongsInput) => {
   const limit = args.limit || Math.min(args.limit || 50, 50);
   const categories: string[] = (args.filter && args.filter.categories) || [];

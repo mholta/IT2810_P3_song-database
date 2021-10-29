@@ -1,5 +1,8 @@
 import { ReadStream } from 'fs';
 
+/**
+ * Generates a slug used for id of documents.
+ */
 export const makeSlug = (title: string): string => {
   return title
     .split(new RegExp('\\s+'))
@@ -9,6 +12,10 @@ export const makeSlug = (title: string): string => {
     .replace(/æ/g, 'ae')
     .replace(/ø/g, 'o');
 };
+
+/**
+ * Interfaces of parameters used in queries and mutations.
+ */
 
 export interface MutationSongsInput {
   _id?: string;

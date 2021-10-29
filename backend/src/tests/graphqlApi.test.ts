@@ -13,6 +13,10 @@ import {
 } from './data';
 import { SortOrder, SortType } from '../models/resolvers/types';
 
+/**
+ * Tests for the GraphQL API.
+ */
+
 const artistsSpy = jest
   .spyOn(resolvers.Query, 'artists')
   .mockReturnValue(dummyArtist);

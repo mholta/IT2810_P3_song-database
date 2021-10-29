@@ -6,6 +6,9 @@ import { app } from './app';
 
 require('dotenv').config();
 
+/**
+ * Starts Apollo Server and connects to MongoDB database.
+ */
 const startServer = async () => {
   const server = new ApolloServer({ typeDefs, resolvers });
 

@@ -1,6 +1,9 @@
 import { Albums } from '../Music';
 import { AlbumsInput, AlbumsSearch } from './types';
 
+/**
+ * Resolver for albums query. Returns a list of albums.
+ */
 export const albumsResolver = async (_, args: AlbumsInput) => {
   const limit = args.limit || Math.min(args.limit || 50, 50);
   let search: AlbumsSearch = {};

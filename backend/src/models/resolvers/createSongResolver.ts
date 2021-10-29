@@ -6,6 +6,9 @@ import sharp from 'sharp';
 import isImage from 'is-image';
 import { UserInputError } from 'apollo-server-errors';
 
+/**
+ * Resolver for createSong mutation. Returns id and title of created song.
+ */
 export const createSongResolver = async (_, args: MutationSongsInput) => {
   // to throw error if artist doesnt exist
   const releaseDate = new Date(args.releaseDate);
