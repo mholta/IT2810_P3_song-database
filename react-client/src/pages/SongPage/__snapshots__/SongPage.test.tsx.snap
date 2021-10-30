@@ -5,7 +5,7 @@ exports[`SongPage rendered successfully 1`] = `
   className="css-q8cb76"
 >
   <div
-    className="css-15uhz30"
+    className="css-144yc9n"
   >
     <nav
       className="css-ag1rcq"
@@ -14,16 +14,6 @@ exports[`SongPage rendered successfully 1`] = `
       <div
         className="css-ydsbw5"
       >
-        <a
-          className="css-136ox9k"
-          href="/"
-          onClick={[Function]}
-        >
-           
-          <span>
-            Hjem
-          </span>
-        </a>
         <a
           className="css-136ox9k"
           href="/search"
@@ -55,7 +45,7 @@ exports[`SongPage rendered successfully 1`] = `
     }
   >
     <div
-      className="css-keuofv"
+      className="css-kbek2b"
     >
       <div
         className="css-0"
@@ -130,7 +120,7 @@ exports[`SongPage should show "song not found" 1`] = `
   className="css-q8cb76"
 >
   <div
-    className="css-15uhz30"
+    className="css-144yc9n"
   >
     <nav
       className="css-ag1rcq"
@@ -139,16 +129,6 @@ exports[`SongPage should show "song not found" 1`] = `
       <div
         className="css-ydsbw5"
       >
-        <a
-          className="css-136ox9k"
-          href="/"
-          onClick={[Function]}
-        >
-           
-          <span>
-            Hjem
-          </span>
-        </a>
         <a
           className="css-136ox9k"
           href="/search"
@@ -180,7 +160,7 @@ exports[`SongPage should show "song not found" 1`] = `
     }
   >
     <div
-      className="css-keuofv"
+      className="css-kbek2b"
     >
       <div
         className="css-0"

@@ -5,7 +5,7 @@ exports[`SongsPage rendered successfully 1`] = `
   className="css-q8cb76"
 >
   <div
-    className="css-15uhz30"
+    className="css-144yc9n"
   >
     <nav
       className="css-ag1rcq"
@@ -14,16 +14,6 @@ exports[`SongsPage rendered successfully 1`] = `
       <div
         className="css-ydsbw5"
       >
-        <a
-          className="css-136ox9k"
-          href="/"
-          onClick={[Function]}
-        >
-           
-          <span>
-            Hjem
-          </span>
-        </a>
         <a
           className="css-136ox9k"
           href="/search"
@@ -55,7 +45,7 @@ exports[`SongsPage rendered successfully 1`] = `
     }
   >
     <div
-      className="css-keuofv"
+      className="css-kbek2b"
     >
       <div
         className="css-0"
@@ -250,7 +240,7 @@ exports[`SongsPage rendered successfully 1`] = `
                       aria-expanded="false"
                       aria-haspopup="listbox"
                       aria-labelledby="sort-select-label sort-select"
-                      className="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-1jz9ynx-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                      className="MuiSelect-select MuiSelect-outlined MuiOutlinedInput-input MuiInputBase-input css-78lcaz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
                       id="sort-select"
                       onBlur={[Function]}
                       onFocus={[Function]}
@@ -396,7 +386,7 @@ exports[`SongsPage rendered successfully with query 1`] = `
   className="css-q8cb76"
 >
   <div
-    className="css-15uhz30"
+    className="css-144yc9n"
   >
     <nav
       className="css-ag1rcq"
@@ -405,16 +395,6 @@ exports[`SongsPage rendered successfully with query 1`] = `
       <div
         className="css-ydsbw5"
       >
-        <a
-          className="css-136ox9k"
-          href="/"
-          onClick={[Function]}
-        >
-           
-          <span>
-            Hjem
-          </span>
-        </a>
         <a
           className="css-136ox9k"
           href="/search"
@@ -446,7 +426,7 @@ exports[`SongsPage rendered successfully with query 1`] = `
     }
   >
     <div
-      className="css-keuofv"
+      className="css-kbek2b"
     >
       <div
         className="css-0"
@@ -521,7 +501,7 @@ exports[`SongsPage rendered successfully without results 1`] = `
   className="css-q8cb76"
 >
   <div
-    className="css-15uhz30"
+    className="css-144yc9n"
   >
     <nav
       className="css-ag1rcq"
@@ -530,16 +510,6 @@ exports[`SongsPage rendered successfully without results 1`] = `
       <div
         className="css-ydsbw5"
       >
-        <a
-          className="css-136ox9k"
-          href="/"
-          onClick={[Function]}
-        >
-           
-          <span>
-            Hjem
-          </span>
-        </a>
         <a
           className="css-136ox9k"
           href="/search"
@@ -571,7 +541,7 @@ exports[`SongsPage rendered successfully without results 1`] = `
     }
   >
     <div
-      className="css-keuofv"
+      className="css-kbek2b"
     >
       <div
         className="css-0"
