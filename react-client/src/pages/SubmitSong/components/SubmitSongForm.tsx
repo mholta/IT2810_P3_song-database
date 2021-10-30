@@ -34,7 +34,18 @@ import ContributorsWithPreview from './ContributorsWithPreview';
 import CreateNewAlbum from './CreateNewAlbum';
 import DatePicker from '@mui/lab/DatePicker';
 import { setReleaseDate } from '../song/song.actions';
-import { isLegalTime, formatTime, formatKey, isKeyArt } from './inputCheck';
+import { formatTime, formatKey } from './inputCheck';
+import {
+  errorMessage,
+  ERROR_ALBUM,
+  ERROR_KEY,
+  ERROR_NETWORK,
+  ERROR_RELEASE_DATE,
+  ERROR_RELEASE_DATE_ALBUM,
+  ERROR_TIME,
+  ERROR_TITLE,
+  ERROR_UNKOWN,
+} from '../song/song.error';
 
 interface SubmitSongFormProps {}
 
@@ -45,7 +56,8 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
     initialAlbumState
   );
   const [inputError, setInputError] = useState('');
-
+  const [dateOpen, setDateOpen] = useState(false);
+  const [dateError, setDateError] = useState(false);
   const allThemes = useSelector(
     (rootState: RootState) => rootState.filter.allThemes
   );
@@ -55,22 +67,55 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
   ] = useState<boolean>(false);
 
   // Mutation
-  const [createSong, { data, loading, error }] = useMutation(
-    CREATE_SONG_MUTATION
-  );
+  const [createSong, { data, loading }] = useMutation(CREATE_SONG_MUTATION, {
+    onError: (err) => {
+      if (err.message.includes('E11000 duplicate key error')) {
+        if (err.message.includes('.songs')) {
+          setInputError(ERROR_TITLE);
+        } else if (err.message.includes('.albums')) {
+          setInputError(ERROR_ALBUM);
+        } else setInputError(ERROR_UNKOWN);
+      } else if (err.networkError) {
+        setInputError(ERROR_NETWORK);
+      } else {
+        setInputError(ERROR_UNKOWN);
+      }
+    },
+  });
   const history = useHistory();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
+    console.log({
+      album: createNewAlbumModalOpen ? albumState.title : state.albumId,
+      artists: state.artists,
+      categories: state.themes.map((theme) => theme._id),
+      contibutors: state.contributorsList,
+      iTunes: state.appleMusicLink,
+      key: state.key,
+      producers: state.producersList,
+      releaseDate: state.releaseDate, // TODO: Implement date picker in song
+      spotify: state.spotifyLink,
+      tempo: state.tempo,
+      time: state.time,
+      title: state.title,
+      writers: state.writersList,
+      file: albumState.coverImage,
+      albumReleaseDate: albumState.releaseDate,
+    });
+    console.log(inputError);
     try {
-      dispatch(setTempo(formatKey(state.key)));
-      dispatch(setTime(formatTime(state.time)));
+      if (state.key) dispatch(setKey(formatKey(state.key)));
+      if (state.time) dispatch(setTime(formatTime(state.time)));
+      if (createNewAlbumModalOpen && !albumState.releaseDate)
+        throw Error(ERROR_RELEASE_DATE_ALBUM);
+      if (!state.releaseDate) throw Error(ERROR_RELEASE_DATE);
+      if (dateError) throw Error(ERROR_RELEASE_DATE);
     } catch (err) {
       // console.log(err.message);
       if (err instanceof Error) setInputError(err.message);
       else {
-        setInputError('Unknown error');
+        setInputError(ERROR_UNKOWN);
       }
       return;
     }
@@ -85,25 +130,20 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
         iTunes: state.appleMusicLink,
         key: state.key,
         producers: state.producersList,
-        releaseDate: createNewAlbumModalOpen
-          ? albumState.releaseDate
-          : state.releaseDate, // TODO: Implement date picker in song
+        releaseDate: state.releaseDate, // TODO: Implement date picker in song
         spotify: state.spotifyLink,
         tempo: state.tempo,
         time: state.time,
         title: state.title,
         writers: state.writersList,
         file: albumState.coverImage,
+        albumReleaseDate: albumState.releaseDate,
       },
     });
   };
   if (data) {
-    console.log(data && data?.createSong && data?.createSong?._id);
-    console.log(RouteFolders.SONG + '/' + data.createSong._id);
     history.replace(RouteFolders.SONG + '/' + data.createSong._id);
   }
-  // if (loading) return <>'Submitting...'</>;
-  if (error) return <>`Submission error! ${error.message}`</>;
 
   return (
     <SubmitSongFormWrapper
@@ -129,13 +169,23 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
             <CreateNewAlbum
               state={albumState}
               dispatch={albumDispatch}
+              setDateCallback={(date: Date | null) => {
+                if (!state.releaseDate) {
+                  dispatch(setReleaseDate(date));
+                }
+              }}
               setCreateNewAlbumModalOpen={setCreateNewAlbumModalOpen}
             />
           </ModalBox>
         ) : (
           <AlbumSelect
             artistId={state.mainArtistId}
-            setValueCallback={(value: string) => dispatch(setAlbumId(value))}
+            setValueCallback={(value: string) => {
+              dispatch(setAlbumId(value));
+            }}
+            setDateCallback={(date: Date | null) => {
+              dispatch(setReleaseDate(date));
+            }}
             setNewAlbumModalOpenCallback={() =>
               setCreateNewAlbumModalOpen(true)
             }
@@ -147,6 +197,8 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
         required
         label="Tittel"
         id="song-title"
+        error={inputError === ERROR_TITLE}
+        helperText={inputError === ERROR_TITLE ? errorMessage(ERROR_TITLE) : ''}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           dispatch(setTitle(e.target.value))
         }
@@ -155,10 +207,18 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
 
       {/* Release date */}
       <DatePicker
+        open={dateOpen}
+        onClose={() => setDateOpen(false)}
         label="Utgivelsesdato"
         value={state.releaseDate}
+        maxDate={new Date()}
+        onError={(err) => {
+          setDateError(err !== null ? true : false);
+        }}
         onChange={(newValue) => dispatch(setReleaseDate(newValue))}
-        renderInput={(params) => <TextField {...params} />}
+        renderInput={(params) => (
+          <TextField {...params} onClick={() => setDateOpen(true)} />
+        )}
       />
 
       {/* Themes */}
@@ -200,8 +260,10 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
           required
           label="Toneart"
           id="key"
-          error={inputError === 'key'}
-          helperText={inputError === 'key' ? 'Feil format' : undefined}
+          error={inputError === ERROR_KEY}
+          helperText={
+            inputError === ERROR_KEY ? errorMessage(ERROR_KEY) : undefined
+          }
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             dispatch(setKey(e.target.value))
           }
@@ -215,12 +277,16 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
           }
           value={state.tempo}
           placeholder="120"
+          type="number"
+          inputProps={{ min: 1 }}
         />
         <TextField
           label="Time"
           id="time"
-          error={inputError === 'time'}
-          helperText={inputError === 'time' ? 'Feil format' : undefined}
+          error={inputError === ERROR_TIME}
+          helperText={
+            inputError === ERROR_TIME ? errorMessage(ERROR_TIME) : undefined
+          }
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             dispatch(setTime(e.target.value))
           }
@@ -290,6 +356,10 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
         }
         value={state.appleMusicLink}
       />
+      {inputError !== '' && (
+        <h2 style={{ color: 'red' }}>{errorMessage(inputError)}</h2>
+      )}
+
       {loading ? (
         <CircularProgress color="inherit" size={20} />
       ) : (
@@ -317,6 +387,7 @@ const CREATE_SONG_MUTATION = gql`
     $title: String!
     $writers: [String!]
     $file: Upload
+    $albumReleaseDate: Date
   ) {
     createSong(
       album: $album
@@ -333,6 +404,7 @@ const CREATE_SONG_MUTATION = gql`
       title: $title
       writers: $writers
       file: $file
+      albumReleaseDate: $albumReleaseDate
     ) {
       _id
       title

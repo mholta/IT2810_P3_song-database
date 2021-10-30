@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@apollo/link-error": "^2.0.0-beta.3",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -21,6 +22,7 @@
     "@types/react-redux": "^7.1.18",
     "@types/react-text-truncate": "^0.14.1",
     "@types/redux": "^3.6.0",
+    "apollo-link-error": "^1.1.13",
     "apollo-upload-client": "^16.0.0",
     "date-fns": "^2.25.0",
     "framer-motion": "^4.1.17",

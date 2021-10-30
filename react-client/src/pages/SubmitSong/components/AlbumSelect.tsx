@@ -5,12 +5,14 @@ import { Button } from '@mui/material';
 
 interface AlbumSelect {
   setValueCallback: (value: string) => void;
+  setDateCallback: (date: Date | null) => void;
   setNewAlbumModalOpenCallback: (value: boolean) => void;
   artistId: string;
 }
 
 const AlbumSelect = ({
   setValueCallback,
+  setDateCallback,
   setNewAlbumModalOpenCallback,
   artistId,
 }: AlbumSelect) => {
@@ -28,6 +30,7 @@ const AlbumSelect = ({
       }}
       searchKey="title"
       setValueCallback={setValueCallback}
+      setDateCallback={setDateCallback}
       noOptionsComponent={
         <div>
           Ingen resultat.
@@ -48,6 +51,7 @@ export const GET_ALBUM_QUERY = gql`
     albums(artist: $artist, title: $title, limit: $limit) {
       _id
       title
+      releaseDate
     }
   }
 `;

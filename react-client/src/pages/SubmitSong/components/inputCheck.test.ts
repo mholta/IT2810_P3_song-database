@@ -1,3 +1,4 @@
+import { ERROR_KEY, ERROR_TIME } from '../song/song.error';
 import { isKeyArt, isLegalTime, formatKey, formatTime } from './inputCheck';
 describe('isKeyArt', () => {
   test('correct simple input', () => {
@@ -53,7 +54,7 @@ describe('formatKey', () => {
     expect(formatKey('CBM')).toBe('Cbm');
   });
   test('incorrect input', () => {
-    expect(formatKey('CD')).toBe(null);
+    expect(() => formatKey('CD')).toThrow(Error(ERROR_KEY));
   });
 
   test('correct input whitespace and lowercase', () => {
@@ -66,7 +67,7 @@ describe('formatTime', () => {
     expect(formatTime('4/4')).toBe('4/4');
   });
   test('incorrect input', () => {
-    expect(formatTime('4/4+4')).toBe(null);
+    expect(() => formatTime('4/4+4')).toThrow(Error(ERROR_TIME));
   });
 
   test('correct input whitespace', () => {

@@ -8,6 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../store/index';
 import redux from 'react-redux';
 import { SET_ALL_THEMES } from '../store/filter/filter.actionTypes';
+import { act } from 'react-test-renderer';
 
 const mockData = [
   {
@@ -35,7 +36,9 @@ describe('useStaticContent', () => {
       ),
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await act(
+      async () => await new Promise((resolve) => setTimeout(resolve, 100))
+    );
 
     expect(result.current).toBeUndefined();
     expect(dispatchSpy).toHaveBeenCalledWith({

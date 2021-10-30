@@ -15,7 +15,6 @@ interface InfoColumnProps {
 
 const InfoColumn = ({ song }: InfoColumnProps) => {
   const history = useHistory();
-  console.log(song.categories);
   return (
     <Wrapper>
       <InfoSection>

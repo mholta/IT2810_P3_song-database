@@ -21,6 +21,7 @@ export interface MutationSongsInput {
   key?: string;
   producers?: string[];
   releaseDate: string;
+  albumReleaseDate?: string;
   spotify?: string;
   tempo?: string;
   time?: string;

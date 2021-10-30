@@ -10,10 +10,12 @@ type Artist = {
   [searchKey in SearchKey]: string;
 } & {
   _id: string;
+  releaseDate?: Date;
 };
 
 interface DropdownSearchProps {
   setValueCallback: (value: string) => void;
+  setDateCallback?: (date: Date | null) => void;
   query: DocumentNode;
   variables: { [key: string]: any };
   searchKey: SearchKey;
@@ -26,6 +28,8 @@ interface DropdownSearchProps {
 
 const DropdownSearch = ({
   setValueCallback,
+  setDateCallback,
+
   query,
   variables,
   searchKey,
@@ -86,7 +90,10 @@ const DropdownSearch = ({
       options={options}
       loading={loading}
       onInputChange={(e, newInputValue) => setInputValue(newInputValue)}
-      onChange={(e, newValue) => setValueCallback(newValue?._id ?? '')}
+      onChange={(e, newValue) => {
+        setValueCallback(newValue?._id ?? '');
+        if (setDateCallback) setDateCallback(newValue?.releaseDate ?? null);
+      }}
       noOptionsText={noOptionsComponent ?? 'Ingen resultat'}
       renderInput={(params) => (
         <TextField

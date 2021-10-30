@@ -1,6 +1,6 @@
 import { Button, IconButton, TextField } from '@mui/material';
 import { styled } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   setCoverImage,
   setReleaseDate,
@@ -13,15 +13,16 @@ interface CreateNewAlbumProps {
   state: AlbumState;
   dispatch: React.Dispatch<any>;
   setCreateNewAlbumModalOpen: React.Dispatch<boolean>;
+  setDateCallback: (date: Date | null) => void;
 }
 
 const CreateNewAlbum = ({
   state,
   dispatch,
   setCreateNewAlbumModalOpen,
+  setDateCallback,
 }: CreateNewAlbumProps) => {
-  console.log(state.coverImage);
-
+  const [dateOpen, setDateOpen] = useState(false);
   return (
     <SubmitSongFormWrapper>
       <AlignClose>
@@ -44,16 +45,38 @@ const CreateNewAlbum = ({
 
       {/* Release date */}
       <DatePicker
+        open={dateOpen}
+        onClose={() => setDateOpen(false)}
         label="Utgivelsesdato"
         value={state.releaseDate}
-        onChange={(newValue) => dispatch(setReleaseDate(newValue))}
-        renderInput={(params) => <TextField {...params} />}
+        onChange={(newValue) => {
+          dispatch(setReleaseDate(newValue));
+          setDateCallback(newValue);
+        }}
+        renderInput={(params) => (
+          <TextField {...params} onClick={() => setDateOpen(true)} />
+        )}
       />
 
       {/* Cover image upload */}
+      <label htmlFor="raised-button-file">
+        <Button variant="outlined" component="span">
+          Last opp coverbilde
+        </Button>
+      </label>
       <input
+        required
         accept="image/*"
-        style={{ display: 'none' }}
+        style={{
+          width: '1px',
+          height: '1px',
+          opacity: 0,
+          display: 'block',
+          marginLeft: '10%',
+          // overflow: "hidden",
+          position: 'relative',
+          zIndex: -1,
+        }}
         id="raised-button-file"
         type="file"
         onChange={({
@@ -62,11 +85,7 @@ const CreateNewAlbum = ({
           validity.valid && dispatch(setCoverImage(files?.length && files[0]));
         }}
       />
-      <label htmlFor="raised-button-file">
-        <Button variant="outlined" component="span">
-          Last opp coverbilde
-        </Button>
-      </label>
+
       <div>
         {state.coverImage ? (
           <img

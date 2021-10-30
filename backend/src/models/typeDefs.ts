@@ -27,6 +27,7 @@ export const typeDefs = gql`
       key: String
       producers: [String!]
       releaseDate: Date!
+      albumReleaseDate: Date
       spotify: String
       tempo: String
       time: String

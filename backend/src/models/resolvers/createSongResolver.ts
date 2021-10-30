@@ -25,7 +25,7 @@ export const createSongResolver = async (_, args: MutationSongsInput) => {
       'Some or one of the categories not referencing a category'
     );
   }
-  const albumSlug = makeSlug(args.album);
+  const albumSlug = makeSlug(args.album + '-' + args.artists[0]);
   let stream: fs.ReadStream,
     pathNameBig: string,
     pathNameSmall: string,
@@ -54,12 +54,14 @@ export const createSongResolver = async (_, args: MutationSongsInput) => {
     }`;
     smallImg = sharp().resize({ width: 200, height: 200, fit: 'cover' });
     biggerImg = sharp().resize({ width: 600, height: 600, fit: 'cover' });
-
+    if (!args.albumReleaseDate) {
+      throw new UserInputError('Album must have an releaseDate');
+    }
     const album = new Albums({
       _id: albumSlug,
       title: args.album,
       artists: args.artists,
-      releaseDate: args.releaseDate,
+      releaseDate: args.albumReleaseDate,
       picture:
         'http://it2810-21.idi.ntnu.no/project3/public/images/' +
         fileEndpointName +
@@ -67,6 +69,7 @@ export const createSongResolver = async (_, args: MutationSongsInput) => {
     });
     args.album = albumSlug;
     await album.save();
+    delete args.albumReleaseDate;
   } else if ((await Albums.findById(args.album)) === null) {
     throw new UserInputError('A new album must have an image');
   }

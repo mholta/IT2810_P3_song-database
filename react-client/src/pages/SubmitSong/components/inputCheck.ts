@@ -1,3 +1,5 @@
+import { ERROR_KEY, ERROR_TIME } from '../song/song.error';
+
 export const isKeyArt = (key: string): boolean => {
   return RegExp(/^[CDEFGABHcdefgahb][bB#]?[mM]?$/).test(key.replace(/ /g, ''));
 };
@@ -9,7 +11,7 @@ export const isLegalTime = (time: string): boolean => {
 };
 
 export const formatKey = (key: string): string => {
-  if (!isKeyArt(key)) throw Error('key');
+  if (!isKeyArt(key)) throw Error(ERROR_KEY);
   return key
     .replace(/ /g, '')
     .toLowerCase()
@@ -17,6 +19,6 @@ export const formatKey = (key: string): string => {
 };
 
 export const formatTime = (time: string): string => {
-  if (!isLegalTime(time)) throw Error('time');
+  if (!isLegalTime(time)) throw Error(ERROR_TIME);
   return time.replace(/ /g, '').replace(/\+/g, ' + ');
 };
