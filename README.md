@@ -32,7 +32,6 @@ react-client
     │   └───SearchResults
     ├───hooks
     ├───pages
-    │   ├───ContributorPage
     │   ├───HomePage
     │   ├───NotFoundPage
     │   ├───SongPage
@@ -84,19 +83,29 @@ Siden er testet i ulike nettlesere og bruker moderne teknologier for å være ru
 
 ## Tekniske valg
 
-Vi valgte å gå for MERN-stacken. Dette innebærer MongoDB, Express, React og Node.js. TODO: Skriv mer her
+Vi valgte å gå for MERN-stacken. Dette innebærer MongoDB, Express, React og Node.js.
+
+### MUI - tidligere Materials UI
+
+Vi har brukt [MUI-biblioteket](https://mui.com/getting-started/usage/) som basis for alle generelle komponenter som f. eks. knapper og input-felt. I forrige prosjekt brukte vi [styled-components](https://styled-components.com/docs) i tillegg for ryddig styling av komponenter, men tilsvarende funksjonalitet er nå inkludert i MUI.
 
 ### GraphQL
 
-Vi bruker GraphQL i spørringer og mutasjoner mellom klient og server. GraphQL gjør det mulig for klient å kun hente ønsket data. Dette hindrer/reduserer sending av unødvendig data og bidrar både til effektivitet og databruk. Typer brukt i spørringene er definert i backend i fila `typeDefs.ts`.
+For å unngå store resultatsett, er det benyttet pagination ved at man begrenser antall resultater som sendes, og at bruker kan be om neste side i datasettet. Det er benyttet `page` og `limit` for blaing og begrensing av datasettet. Her kunne man nok med fordel valgt å benytte `offset` i stedet for `page`, da `offset` er det som vanligvis benyttes i offset-basert pagination. Det ble benyttet `page` før vi hadde lest oss opp på best-practice og valgte vi valgte å ikke bruke tid på å endre det til `offset` da det fungerte.
+
+For bildeopplasting er pakken [apollo-upload-client](https://www.npmjs.com/package/apollo-upload-client) brukt for å muliggjøre filopplasting via GraphQL fra klienten.
 
 ### MongoDB og Mongoose
 
 For valg av database, kunne de aller fleste databaser gjort jobben med håndtering av data. Vi valgte å gå for MongoDB med Mongoose ettersom MongoDB er en del av MERN-stacken, samt at det finnes mye dokumentasjon rundt problematikk som kan oppstå. Underveis benyttet vi oss aktivt av dokumentasjonen til [MongoDB](https://docs.mongodb.com/) og [Mongoose](https://mongoosejs.com/docs/api.html). Mongoose ble benyttet da det tilbyr enkel sammenkobling av databasen og server, og forenkling av query.
 
-Databasen er satt opp med tre collections, _songs_, _albums_ og _artists_. Disse er koblet sammen ved at en sang har en eller flere artister og et album, og et album har en eller flere artister. Her hadde det vært gunstig å benytte en database med fremmednøkkelsjekk når vi oppretter nye sanger. For å bevare sikre at en sangs artister og album referer til en instans i databasen, sjekkes fremmednøkkel på serveren før de nye sangene settes inn i databasen.
+Databasen er satt opp med tre collections, _songs_, _albums_ og _artists_. Disse er koblet sammen ved at en sang har en eller flere artister og et album, og et album har en eller flere artister. Her hadde det vært gunstig å benytte en database med fremmednøkkelsjekk når vi oppretter nye sanger. For å sikre at en sangs artister og album referer til en instans i databasen, sjekkes fremmednøkkel på serveren før de nye sangene settes inn i databasen.
+
+For søk benyttes MongoDB sin [text-search](https://docs.mongodb.com/manual/text-search/). Det er lagt inn text-index på _sang-tittel_, _album-tittel_ og _artist-navn_, og ved søk i applikasjonen, utføres det er søk i alle disse collectionene. Resultatene slås deretter sammen slik at sanger som har _sang-tittel_, _album-tittel_ eller _artist-navn_ som søkt på returneres. Man trenger her ikke å ha fullt treff, og resultatet kan sorteres på beste match.
 
 ### Apollo Express Server
+
+Serveren er bygget i [Express](https://expressjs.com/). For enkel integrering av GraphQL ble [Apollo Server](https://www.apollographql.com/docs/apollo-server/) med pakken [apollo-server-express](https://www.npmjs.com/package/apollo-server-express) benyttet.
 
 ### Tilstandshåndtering og -lagring
 
@@ -112,9 +121,9 @@ Vi har laget en del forskjellige tester for å teste ulike deler av applikasjone
 
 Alle sidene i applikasjonen har en snapshottest. Her er det laget en egen TestProvider som er en wrapper som inkluderer alle de andre providerne som trengs for at sidene skal kunne kjøre. Dette inkluderer muligheter for å mocke routeren og GraphQL requests og responses. Snapshottestene henter da inn testdata gjennom mockene og sammenligner UI-et med det som er lagret i snapshottene for å sjekke om det har skjedd utilsiktede endringer.
 
-### Enhetstesting av custom hooks
+### Enhetstesting av komponenter og custom hooks
 
-Vi har også laget tester for noen av de custom hookene vi bruker i applikasjonen. For å teste disse har vi brukt et eget [bibliotek for testing av hooks](https://www.npmjs.com/package/@testing-library/react-hooks). Hookene sender forespørsler til serveren og leser av parametre fra URL-en, derfor har vi også her måttet mocke GraphQL forespørslene og routeren for å kunne sjekke at hookene fungerer og returnerer de forventede verdiene.
+Vi har også laget tester for flere av react-komponentene og custom hookene vi bruker i applikasjonen. Komponenttestene sjekker at de responderer korrekt til museklikk og annen interaksjon, samt at de rendres som forventet basert på ulike props og queryparametre. For å teste hookene har vi brukt et eget [bibliotek for testing av hooks](https://www.npmjs.com/package/@testing-library/react-hooks). Hookene sender forespørsler til serveren og leser av parametre fra URL-en, derfor har vi også her måttet mocke GraphQL forespørslene og routeren for å kunne sjekke at hookene fungerer og returnerer de forventede verdiene.
 
 ### Enhetstesting av validering av input
 
@@ -127,3 +136,7 @@ For end-2-end testing har vi brukt [Cypress](https://www.cypress.io/). Disse tes
 ### Testing av backend
 
 I backenden har vi laget tester som sjekker håndteringen av HTTP forespørsler med GraphQL queries. Vi sender forespørslene med _request_ fra [SuperTest](https://www.npmjs.com/package/supertest) og mocker resolverne til Apollo Serveren for å sjekke at de blir kalt med de forventede verdiene. Med disse mockene unngår vi også å skrive til databasen når vi kjører testene.
+
+## Git
+
+Vi har dekomponert prosjektet i issues og jobbet i separate brancher for hvert issue. Når en issue er ferdig har vi rebaset den på develop-branchen (master) og laget en merge request som et annet gruppemedlem må approve før det kan merges inn i develop.
