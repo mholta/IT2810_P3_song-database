@@ -49,11 +49,17 @@ react-client
 
 ## Tekniske valg
 
+Vi valgte å gå for MERN-stacken. Dette innebærer MongoDB, Express, React og Node.js. TODO: Skriv mer her
+
 ### GraphQL
 
 ### MongoDB og Mongoose
 
-### Apollo Server
+For valg av database, kunne de aller fleste databaser gjort jobben med håndtering av data. Vi valgte å gå for MongoDB med Mongoose ettersom MongoDB er en del av MERN-stacken, samt at det finnes mye dokumentasjon rundt problematikk som kan oppstå. Underveis benyttet vi oss aktivt av dokumentasjonen til [MongoDB](https://docs.mongodb.com/) og [Mongoose](https://mongoosejs.com/docs/api.html). Mongoose ble benyttet da det tilbyr enkel sammenkobling av databasen og server, og forenkling av query.
+
+Databasen er satt opp med tre collections, _songs_, _albums_ og _artists_. Disse er koblet sammen ved at en sang har en eller flere artister og et album, og et album har en eller flere artister. Her hadde det vært gunstig å benytte en database med fremmednøkkelsjekk når vi oppretter nye sanger. For å bevare sikre at en sangs artister og album referer til en instans i databasen, sjekkes fremmednøkkel på serveren før de nye sangene settes inn i databasen.
+
+### Apollo Express Server
 
 ## Testing
 
@@ -66,6 +72,10 @@ Alle sidene i applikasjonen har en snapshottest. Her er det laget en egen TestPr
 ### Enhetstesting av custom hooks
 
 Vi har også laget tester for noen av de custom hookene vi bruker i applikasjonen. For å teste disse har vi brukt et eget [bibliotek for testing av hooks](https://www.npmjs.com/package/@testing-library/react-hooks). Hookene sender forespørsler til serveren og leser av parametre fra URL-en, derfor har vi også her måttet mocke GraphQL forespørslene og routeren for å kunne sjekke at hookene fungerer og returnerer de forventede verdiene.
+
+### Enhetstesting av validering av input
+
+I opprettelse av nye sanger, finnes det felt som skal være på bestemte format. Det er laget validatorer-funksjoner som sjekker om input er på riktig format før data sendes til backend. For å være sikker på at validatoren fungerer korrekt for forskjellig input, er funksjonene testet for ulike tilfeller for å fange opp edge caser.
 
 ### End-2-end testing
 
