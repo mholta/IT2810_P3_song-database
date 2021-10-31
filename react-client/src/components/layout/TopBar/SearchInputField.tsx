@@ -83,6 +83,7 @@ const SearchInputField = () => {
       </SearchIconWrapper>
       <SearchInput
         placeholder="Søk på sang"
+        role="searchbox"
         name="query"
         type="search"
         autoComplete="off"

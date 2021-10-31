@@ -19,6 +19,13 @@ body {
   background-color: #151515;
 }
 
+a,
+a:hover,
+a:active,
+a:visited {
+  color: white;
+}
+
 * {
   box-sizing: border-box;
 }

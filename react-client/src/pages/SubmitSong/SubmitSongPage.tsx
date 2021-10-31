@@ -8,6 +8,7 @@ import SubmitSongForm from './components/SubmitSongForm';
 const SubmitSongPage = () => {
   return (
     <PageWrapper>
+      <h1>Send inn ny sang</h1>
       <SubmitSongForm />
     </PageWrapper>
   );

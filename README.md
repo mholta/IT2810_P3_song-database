@@ -47,11 +47,48 @@ react-client
 
 ## Universell utforming
 
+Gruppen har gjennomført en rekke tiltakt for å oppnå universell utforming. Vi oppsummerer i følgende punkt under:
+
+- Perceivable - mulig å oppfatte
+- Operable - mulig å betjene
+- Understandable - forståelig
+- Robust - robust
+
+I tillegg har vi benyttet oss av chrome-utvidelsen "axe DevTools" for å enklere identifisere brudd på WCAG-retningslinjer og -anbefalinger.
+
+### W3C WAI-ARIA - Accessible Rich Internet Applications
+
+Gjennom applikasjonen har vi etterstrebet bruk av beskrivende element-typer. Dette gjør det lettere for eksempelvis en skjermleser å forstå innholde og strukturen på nettsiden.
+
+### Perceivable - observerbar (mulig å oppfatte)
+
+- Alle font-størrelser baserer seg på body-tagens font size. Dette gjør at forstørrelsesprogrammer som baserer seg på dette vil kunne fungere bra. I tillegg fungerer vanlig zoom i nettlesere som forventet.
+- Ikke-tekstlige elementer, som bilder, er beskrevet med alt-tagger for å være mer tilgjengelige for skjermlesere.
+- `aria-label` attributtet er benyttet i enkelte tilfeller for å ytterligere beskrive elementer som tabs etc.
+- Vi har etterstrebet å bruke tilstrekkelig kontrast på tekst.
+
+### Operable - anvendelig (mulig å betjene)
+
+- Alle knapper og inputfelt har en naturlig flow ved bruk av tab-knappen på tastatur.
+- Det er statiske sider som ikke endres før brukeren trykker på noe, altså bestemmer brukeren selv tempoet på informasjonen og interaksjonen.
+- Siden er enkel å navigere med en sidebar, så fremt man er kjent med konseptet "hamburgermeny". Dette er mulig å anta da det brukes på flesteparten av webapplikasjoner og annet i dag.
+
+### Understandable - forståelig
+
+- Kontrast og relativ skriftstørrelse gjør innholdet forståelig og lestbart på ulike skjermstørrelser.
+- Siden henter opp flere konsepter fra musikktjenester som Spotify, noe som samsvarer med innholdet og dermed øker sjansen for at dette gir mening for brukeren.
+
+### Robust
+
+Siden er testet i ulike nettlesere og bruker moderne teknologier for å være rustet mot fremtidige endringer.
+
 ## Tekniske valg
 
 Vi valgte å gå for MERN-stacken. Dette innebærer MongoDB, Express, React og Node.js. TODO: Skriv mer her
 
 ### GraphQL
+
+Vi bruker GraphQL i spørringer og mutasjoner mellom klient og server. GraphQL gjør det mulig for klient å kun hente ønsket data. Dette hindrer/reduserer sending av unødvendig data og bidrar både til effektivitet og databruk. Typer brukt i spørringene er definert i backend i fila `typeDefs.ts`.
 
 ### MongoDB og Mongoose
 
@@ -60,6 +97,12 @@ For valg av database, kunne de aller fleste databaser gjort jobben med håndteri
 Databasen er satt opp med tre collections, _songs_, _albums_ og _artists_. Disse er koblet sammen ved at en sang har en eller flere artister og et album, og et album har en eller flere artister. Her hadde det vært gunstig å benytte en database med fremmednøkkelsjekk når vi oppretter nye sanger. For å bevare sikre at en sangs artister og album referer til en instans i databasen, sjekkes fremmednøkkel på serveren før de nye sangene settes inn i databasen.
 
 ### Apollo Express Server
+
+### Tilstandshåndtering og -lagring
+
+For håndtering av tilstand på søkesiden bruker vi query params. Dette er vanlig praksis på flere søkesider og muliggjør lagring og deling av søk/tilstand ved å kopiere url. Når man trykker på et filter eller skriver inn i søkefeltet legges det til et query parameter i url-en. Ved endring av url rerendres søkesiden og en ny graphql-spørring gjøres med parametre fra query parametrene.
+
+Åpning og lukking av meny og top-baren håndteres med redux. I tillegg lagres en liste med alle kategoriene i redux ved første sideinnlasting. Dette begrenser antall spørringer som kreves mot server.
 
 ## Testing
 
