@@ -46,6 +46,7 @@ import {
   ERROR_TITLE,
   ERROR_UNKOWN,
 } from '../song/song.error';
+import { useApolloClient } from '@apollo/client';
 
 interface SubmitSongFormProps {}
 
@@ -59,12 +60,15 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
   const [dateOpen, setDateOpen] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [dateAlbumError, setDateAlbumError] = useState(false);
+  const client = useApolloClient();
 
   const allThemes = useSelector(
     (rootState: RootState) => rootState.filter.allThemes
   );
-  const [createNewAlbumModalOpen, setCreateNewAlbumModalOpen] =
-    useState<boolean>(false);
+  const [
+    createNewAlbumModalOpen,
+    setCreateNewAlbumModalOpen,
+  ] = useState<boolean>(false);
 
   // Mutation
   const [createSong, { data, loading }] = useMutation(CREATE_SONG_MUTATION, {
@@ -143,6 +147,7 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
   };
   if (data && !loading) {
     setTimeout(() => {
+      client.clearStore();
       history.replace(RouteFolders.SONG + '/' + data.createSong._id);
     }, 500);
   }
@@ -363,7 +368,7 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
         <h2 style={{ color: 'red' }}>{errorMessage(inputError)}</h2>
       )}
 
-      {loading ? (
+      {loading || data ? (
         <CircularProgress color="inherit" size={20} />
       ) : (
         <Button type="submit" variant="contained" color="primary">
