@@ -63,10 +63,8 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
   const allThemes = useSelector(
     (rootState: RootState) => rootState.filter.allThemes
   );
-  const [
-    createNewAlbumModalOpen,
-    setCreateNewAlbumModalOpen,
-  ] = useState<boolean>(false);
+  const [createNewAlbumModalOpen, setCreateNewAlbumModalOpen] =
+    useState<boolean>(false);
 
   // Mutation
   const [createSong, { data, loading }] = useMutation(CREATE_SONG_MUTATION, {
@@ -143,8 +141,10 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
       },
     });
   };
-  if (data) {
-    history.replace(RouteFolders.SONG + '/' + data.createSong._id);
+  if (data && !loading) {
+    setTimeout(() => {
+      history.replace(RouteFolders.SONG + '/' + data.createSong._id);
+    }, 500);
   }
 
   return (

@@ -19,10 +19,10 @@ const SideBar = () => {
     <MainWrapper>
       <SideBarOuterWrapper open={menuOpen}>
         <SideBarInnerWrapper>
-          <LinkWithIconGridRouter to={RouteFolders.SEARCH}>
+          <LinkWithIconGridRouter to={RouteFolders.SEARCH} onClick={closeMenu}>
             <FontAwesomeIcon icon={['fas', 'music']} /> <span>Sanger</span>
           </LinkWithIconGridRouter>
-          <LinkWithIconGridRouter to={Routes.SUBMIT_SONG}>
+          <LinkWithIconGridRouter to={Routes.SUBMIT_SONG} onClick={closeMenu}>
             <FontAwesomeIcon icon={['fas', 'music']} />{' '}
             <span>Send inn sang</span>
           </LinkWithIconGridRouter>
