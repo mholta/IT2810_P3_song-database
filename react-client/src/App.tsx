@@ -1,6 +1,6 @@
 import React from 'react';
 import MainRouter from './pages/MainRouter';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './styles/theme';
 import { library } from '@fortawesome/fontawesome-svg-core';

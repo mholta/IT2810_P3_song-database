@@ -2,6 +2,7 @@
   "name": "react-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/project3",
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@apollo/link-error": "^2.0.0-beta.3",
