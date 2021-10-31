@@ -10,12 +10,18 @@ interface SongListItemProps {
   song: Song;
 }
 
+/**
+ * A link button to a song page.
+ */
 const SongListItem = ({ song }: SongListItemProps) => {
   return (
     <ListItemWrapper>
       <LinkWrapper to={RouteFolders.SONG + '/' + song._id}>
         <CoverImageWrapper>
-          <Image src={song.album.picture} />
+          <Image
+            src={song.album.picture}
+            alt={`Bilde av albumet til sangen ${song.title} `}
+          />
         </CoverImageWrapper>
         <div style={truncateParent}>
           <SongTitle style={truncate}>{song.title}</SongTitle>

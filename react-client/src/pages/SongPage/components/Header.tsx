@@ -21,6 +21,7 @@ const Header = ({ song }: HeaderProps) => {
           aspectratio="1:1"
           borderradius={3}
           borderradiusunit="%"
+          alt={`Bilde av albumet til sangen ${song.title} `}
         />
       </ImageWrapper>
       <div>
