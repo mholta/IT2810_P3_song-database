@@ -58,6 +58,8 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
   const [inputError, setInputError] = useState('');
   const [dateOpen, setDateOpen] = useState(false);
   const [dateError, setDateError] = useState(false);
+  const [dateAlbumError, setDateAlbumError] = useState(false);
+
   const allThemes = useSelector(
     (rootState: RootState) => rootState.filter.allThemes
   );
@@ -103,7 +105,6 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
       file: albumState.coverImage,
       albumReleaseDate: albumState.releaseDate,
     });
-    console.log(inputError);
     try {
       if (state.key) dispatch(setKey(formatKey(state.key)));
       if (state.time) dispatch(setTime(formatTime(state.time)));
@@ -111,6 +112,7 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
         throw Error(ERROR_RELEASE_DATE_ALBUM);
       if (!state.releaseDate) throw Error(ERROR_RELEASE_DATE);
       if (dateError) throw Error(ERROR_RELEASE_DATE);
+      if (dateAlbumError) throw Error(ERROR_RELEASE_DATE_ALBUM);
     } catch (err) {
       // console.log(err.message);
       if (err instanceof Error) setInputError(err.message);
@@ -169,6 +171,7 @@ const SubmitSongForm = ({}: SubmitSongFormProps) => {
             <CreateNewAlbum
               state={albumState}
               dispatch={albumDispatch}
+              setDateAlbumError={setDateAlbumError}
               setDateCallback={(date: Date | null) => {
                 if (!state.releaseDate) {
                   dispatch(setReleaseDate(date));

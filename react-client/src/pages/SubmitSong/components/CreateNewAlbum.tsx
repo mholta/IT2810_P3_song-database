@@ -14,6 +14,7 @@ interface CreateNewAlbumProps {
   dispatch: React.Dispatch<any>;
   setCreateNewAlbumModalOpen: React.Dispatch<boolean>;
   setDateCallback: (date: Date | null) => void;
+  setDateAlbumError: React.Dispatch<boolean>;
 }
 
 const CreateNewAlbum = ({
@@ -21,6 +22,7 @@ const CreateNewAlbum = ({
   dispatch,
   setCreateNewAlbumModalOpen,
   setDateCallback,
+  setDateAlbumError,
 }: CreateNewAlbumProps) => {
   const [dateOpen, setDateOpen] = useState(false);
   return (
@@ -52,6 +54,9 @@ const CreateNewAlbum = ({
         onChange={(newValue) => {
           dispatch(setReleaseDate(newValue));
           setDateCallback(newValue);
+        }}
+        onError={(err) => {
+          setDateAlbumError(err !== null ? true : false);
         }}
         renderInput={(params) => (
           <TextField {...params} onClick={() => setDateOpen(true)} />
