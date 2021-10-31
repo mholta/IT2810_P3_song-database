@@ -96,7 +96,7 @@ const InfoColumn = ({ song }: InfoColumnProps) => {
         )}
         <InfoListItem>
           <h3>Utgitt:</h3>
-          <div>{song.album.releaseDate.getFullYear()}</div>
+          <div>{song.releaseDate.getFullYear()}</div>
         </InfoListItem>
       </InfoSection>
 

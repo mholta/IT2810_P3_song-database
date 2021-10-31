@@ -21,6 +21,7 @@ const SongPage = () => {
         <SongPageTemplate
           song={{
             ...data.song,
+            releaseDate: new Date(data.song.releaseDate),
             album: {
               ...data.song.album,
               releaseDate: new Date(data.song.album.releaseDate),
@@ -39,6 +40,7 @@ export const GET_SONG_DATA = gql`
     song(id: $id) {
       _id
       title
+      releaseDate
       album {
         title
         picture
