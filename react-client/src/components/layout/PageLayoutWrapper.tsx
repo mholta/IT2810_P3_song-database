@@ -33,11 +33,11 @@ const PageLayoutWrapper = ({ children }: PageLayoutWrapperProps) => {
       <SideBar />
       <div style={{ flexGrow: 1 }}>
         <TopBar />
+        <Hamburger />
         <main>
           <ChildrenInnerWrapper>{children}</ChildrenInnerWrapper>
         </main>
       </div>
-      <Hamburger />
     </FullPageWrapper>
   );
 };

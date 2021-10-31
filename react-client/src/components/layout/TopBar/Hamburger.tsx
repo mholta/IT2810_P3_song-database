@@ -13,8 +13,12 @@ const Hamburger = ({}: HamburgerProps) => {
   );
   return (
     <HamburgerWrapper
+      tabIndex={0}
       open={menuOpen}
       onClick={() => dispatch(setMenuOpen(!menuOpen))}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') dispatch(setMenuOpen(!menuOpen));
+      }}
       aria-label="hamburger menu button"
       data-testid="hamburger-button"
     >
