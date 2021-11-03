@@ -40,6 +40,9 @@ const SearchResults = ({
   const [loadedPageNum, setLoadedPageNum] = useState<number>(page);
   const [lastPageNum, setLastPageNum] = useState<number>();
   const [songs, setSongs] = useState<Song[]>([]);
+  const [prevOptions, setPrevOptions] = useState<
+    QueryHookOptions<any, OperationVariables> | undefined
+  >();
 
   // Set initial songs fetched
   useEffect(() => {
@@ -60,6 +63,10 @@ const SearchResults = ({
 
   useEffect(() => {
     if (!inView) return;
+    if (options !== prevOptions) {
+      setPrevOptions(options);
+      return;
+    }
 
     const loadMore = () => {
       fetchMore({
@@ -77,7 +84,7 @@ const SearchResults = ({
 
     loadMore();
     // eslint-disable-next-line
-  }, [inView, fetchMore]);
+  }, [inView, fetchMore, options]);
 
   return (
     <>
